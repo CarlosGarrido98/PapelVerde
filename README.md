@@ -1,2 +1,2 @@
 # PapelVerde
-Papel Verde , tienda de libros ,Proyecto intermodular
+Papel Verde , tienda de libros , Proyecto intermodular.
