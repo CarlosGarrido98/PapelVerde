@@ -78,8 +78,13 @@ footer{
     color: white;
 }
 
+/* Estilos para los botones de redes sociales */
 .btn-social{
-    background-color: #198754;
+    background-color: #39614B;
+    border: none;
+    width: 3em;
+    height: 3em;
+    color:white;
 }
 
 /* 📱 RESPONSIVE  MOBILE */
