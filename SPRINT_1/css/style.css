@@ -74,17 +74,39 @@
 /* Estilos para el footer */
 
 footer{
-    background-image: url("../img/bg-footer.jpeg");
-    color: white;
+  background-image: url("../img/bg-footer.jpeg");
+  color: white;
 }
 
 /* Estilos para los botones de redes sociales */
 .btn-social{
-    background-color: #39614B;
-    border: none;
-    width: 3em;
-    height: 3em;
-    color:white;
+  background-color: #39614B;
+  border: none;
+  width: 3em;
+  height: 3em;
+  color:white;
+}
+
+.btn-unirse{
+  background-color: #235437;
+  color:white;
+  border: none;
+  padding: 0.3em;
+  border-radius: 15px;
+}
+
+.btn-añadir{
+  background-color: #235437;
+  color:white;
+  border:none;
+  border-radius: 10px;
+  width: 6em;
+  height: 2.4em;
+}
+.prize-text{
+  color:#235437;
+  font-weight: bold;
+  font-size: 1.3em;
 }
 
 /* 📱 RESPONSIVE  MOBILE */
