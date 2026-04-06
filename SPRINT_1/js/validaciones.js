@@ -44,6 +44,7 @@ form.addEventListener("submit", function(e) {
 });
 
 
+/* Funciones */
 
 // Validación del campo Nombre y Apellidos
 function validarNombre(){
@@ -136,10 +137,38 @@ function validarPassword() {
 
 }
 
+// Validación del campo Confirmar Contraseña
+function validarConfirmPassword() { 
+    //  1. No vacío
+    if (inpConfirmPassword.value === "") {
+        cajaConfirmPasswordError.innerHTML = '<i class="bi bi-x-circle"></i> Confirma tu contraseña!';
+        cajaConfirmPasswordError.classList.remove("text-success");
+        cajaConfirmPasswordError.classList.add("text-danger");
+        return false;
+    //  2. Coincidir con el campo Contraseña
+    } else if (inpConfirmPassword.value !== inpPassword.value) {
+        cajaConfirmPasswordError.innerHTML = '<i class="bi bi-x-circle"></i> Las contraseñas no coinciden!';
+        cajaConfirmPasswordError.classList.remove("text-success");
+        cajaConfirmPasswordError.classList.add("text-danger");
+        return false;
+    // Si todo es correcto
+    } else { cajaConfirmPasswordError.innerHTML = '<i class="bi bi-check-circle"></i> Contraseña coincide';
+        cajaConfirmPasswordError.classList.add("text-success");
+        cajaConfirmPasswordError.classList.remove("text-danger");
+        return true;
+    }    
+}
+
+
+
+
+/* Limpiar campo Confirmar Contraseña y Botón para mirar contraseña*/
+
 // Limpiar el campo Confirmar Contraseña si se modifica el campo Contraseña
 inpPassword.addEventListener("input", () => {
     inpConfirmPassword.value = "";
 });
+
 
 // Funcionalidad para mostrar/ocultar contraseña
 const togglePassword = document.getElementById("togglePassword");
@@ -175,24 +204,3 @@ togglePasswordConfirm.addEventListener("click", function () {
 });
 
 
-// Validación del campo Confirmar Contraseña
-function validarConfirmPassword() { 
-    //  1. No vacío
-    if (inpConfirmPassword.value === "") {
-        cajaConfirmPasswordError.innerHTML = '<i class="bi bi-x-circle"></i> Confirma tu contraseña!';
-        cajaConfirmPasswordError.classList.remove("text-success");
-        cajaConfirmPasswordError.classList.add("text-danger");
-        return false;
-    //  2. Coincidir con el campo Contraseña
-    } else if (inpConfirmPassword.value !== inpPassword.value) {
-        cajaConfirmPasswordError.innerHTML = '<i class="bi bi-x-circle"></i> Las contraseñas no coinciden!';
-        cajaConfirmPasswordError.classList.remove("text-success");
-        cajaConfirmPasswordError.classList.add("text-danger");
-        return false;
-    // Si todo es correcto
-    } else { cajaConfirmPasswordError.innerHTML = '<i class="bi bi-check-circle"></i> Contraseña coincide';
-        cajaConfirmPasswordError.classList.add("text-success");
-        cajaConfirmPasswordError.classList.remove("text-danger");
-        return true;
-    }    
-}
