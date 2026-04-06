@@ -105,3 +105,8 @@
 footer{
     color: white;
 }
+
+/* Ocultar el botón de revelar contraseña en Internet Explorer */
+input[type="password"]::-ms-reveal {
+    display: none;
+}

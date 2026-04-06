@@ -65,21 +65,27 @@
 
             <!-- Contraseña -->
             <label>Contraseña </label>
-
                 <div style="position: relative;">
                 <input type="password" id="password" required>
                 <i id="togglePassword" 
                 class="bi bi-eye" 
                 style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
                 </i>
-                </div>
-            
+                </div> 
             <span class="warn" id="passwordError"></span>
 
             <!-- Confirmar contraseña -->
             <label>Confirmar contraseña </label>
-            <input type="password" id="confirmPassword" required>
+            <div style="position: relative;">
+                 <input type="password" id="confirmPassword" required>
+                <i id="togglePasswordConfirm" 
+                class="bi bi-eye" 
+                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+                </i>
+                </div> 
             <span class="warn" id="confirmPasswordError"></span>
+
+
 
             <!-- Sexo -->
             <label>Sexo</label>
