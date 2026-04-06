@@ -29,7 +29,6 @@ inpConfirmPassword.addEventListener("blur",validarConfirmPassword);
 // Validar al enviar el formulario
 const form = document.getElementById("registroForm");
 
-
 // Validación al enviar el formulario
 form.addEventListener("submit", function(e) {
 
@@ -40,125 +39,117 @@ form.addEventListener("submit", function(e) {
 
     if (!nombreValido || !emailValido || !passwordValido || !confirmPasswordValido) {
         e.preventDefault(); //  bloquea envío
+    }else {
+        let miModal = new bootstrap.Modal(document.getElementById('registroModal'));
+        miModal.show();
+        e.preventDefault();
     }
 });
 
+function mostrarMensaje(elemento, mensaje, tipo, iconoClase) {
+    elemento.textContent = "";
+
+    let icono = document.createElement("i");
+    icono.classList.add("bi", iconoClase);
+
+    let texto = document.createTextNode(" " + mensaje);
+
+    elemento.appendChild(icono);
+    elemento.appendChild(texto);
+
+    elemento.classList.remove("text-danger", "text-success");
+
+    if (tipo === "error") {
+        elemento.classList.add("text-danger");
+    } else {
+        elemento.classList.add("text-success");
+    }
+}
 
 /* Funciones */
 
 // Validación del campo Nombre y Apellidos
 function validarNombre(){
-    // Elimina espacios al inicio y al final, y cuenta palabras
     let nombre = inpNombre.value.trim();
     let numPalabras = nombre.split(/\s+/).filter(p => p.length > 0).length;
 
-    // Regex para permitir solo letras (incluyendo acentos y ñ) y un espacio entre nombre y apellido
     let regex = /^[A-Za-zÁÉÍÓÚáéíóúñÑ]+\s[A-Za-zÁÉÍÓÚáéíóúñÑ]+$/;
 
-    // Validaciones
-    // 1. No vacío
     if (nombre === "") {
-       // cajaNombreError.innerHTML = "Introduce nombre y apellidos!";
-        cajaNombreError.innerHTML = '<i class="bi bi-x-circle"></i> Introduce nombre y apellidos!';
-        cajaNombreError.classList.remove("text-success");
-        cajaNombreError.classList.add("text-danger");
+        mostrarMensaje(cajaNombreError, "Introduce nombre y apellidos!", "error", "bi-x-circle");
         return false;
-    // 2. Exactamente 2 palabras (nombre y apellido)
+
     } else if (numPalabras !== 2) {
-        cajaNombreError.innerHTML = '<i class="bi bi-x-circle"></i> Debes introducir nombre y apellido ( Máximo 2 palabras)';
-        cajaNombreError.classList.remove("text-success");
-        cajaNombreError.classList.add("text-danger");
+        mostrarMensaje(cajaNombreError, "Debes introducir nombre y apellido (máx 2 palabras)", "error", "bi-x-circle");
         return false;
-    // 3. Solo letras y un espacio entre nombre y apellido
+
     } else if (!regex.test(nombre)) {
-        cajaNombreError.innerHTML = '<i class="bi bi-x-circle"></i> Solo letras, sin números ni símbolos';
-        cajaNombreError.classList.remove("text-success");
-        cajaNombreError.classList.add("text-danger");
+        mostrarMensaje(cajaNombreError, "Solo letras, sin números ni símbolos", "error", "bi-x-circle");
         return false;
-    // Si todo es correcto
+
     } else {
-        cajaNombreError.innerHTML = '<i class="bi bi-check-circle"></i> Nombre válido';
-        cajaNombreError.classList.add("text-success");
-        cajaNombreError.classList.remove("text-danger");
+        mostrarMensaje(cajaNombreError, "Nombre válido", "success", "bi-check-circle");
         return true;
     }
 }
-
 // Validación del campo Email
 function validarEmail() {
-    // Elimina espacios al inicio y al final
     let email = inpEmail.value.trim();
     let regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
-    //  Validaciones
-    //  1. No vacío
     if (email === "") {
-        cajaEmailError.innerHTML = '<i class="bi bi-x-circle"></i> Introduce tu email!'; 
-        cajaEmailError.classList.remove("text-success");
-        cajaEmailError.classList.add("text-danger");
+        mostrarMensaje(cajaEmailError, "Introduce tu email!", "error", "bi-x-circle");
         return false;
-    //  2. Formato de email válido
+
     } else if (!regexEmail.test(email)) {
-        cajaEmailError.innerHTML = '<i class="bi bi-x-circle"></i> Introduce un email válido!';
-        cajaEmailError.classList.remove("text-success");
-        cajaEmailError.classList.add("text-danger");
+        mostrarMensaje(cajaEmailError, "Introduce un email válido!", "error", "bi-x-circle");
         return false;
-    // Si todo es correcto
+
     } else {
-        cajaEmailError.innerHTML = '<i class="bi bi-check-circle"></i> Email válido';
-        cajaEmailError.classList.add("text-success");
-        cajaEmailError.classList.remove("text-danger");
+        mostrarMensaje(cajaEmailError, "Email válido", "success", "bi-check-circle");
         return true;
     }
 }
 
 function validarPassword() {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-    if (inpPassword.value === "") {
-        cajaPasswordError.innerHTML = '<i class="bi bi-x-circle"></i> Introduce tu contraseña!';
-        cajaPasswordError.classList.remove("text-success");
-        cajaPasswordError.classList.add("text-danger");
-        inpConfirmPassword.disabled = true; //  bloquear
+    let password = inpPassword.value;
+
+    if (password === "") {
+        mostrarMensaje(cajaPasswordError, "Introduce tu contraseña!", "error", "bi-x-circle");
+        inpConfirmPassword.disabled = true;
         return false;
-    }   else if (!regex.test(inpPassword.value)) { 
-        cajaPasswordError.innerHTML = '<i class="bi bi-x-circle"></i> La contraseña debe tener al menos 8 caracteres, incluyendo mayúsculas, minúsculas, números y símbolos.';
-        cajaPasswordError.classList.remove("text-success");
-        cajaPasswordError.classList.add("text-danger");
-        inpConfirmPassword.disabled = true; //  bloquear
+
+    } else if (!regex.test(password)) { 
+        mostrarMensaje(cajaPasswordError, "Debe tener 8 caracteres, mayúsculas, minúsculas, número y símbolo", "error", "bi-x-circle");
+        inpConfirmPassword.disabled = true;
         return false;
-    }   else {  
-        validarConfirmPassword();
-        cajaPasswordError.innerHTML = '<i class="bi bi-check-circle"></i> Contraseña válida';
-        cajaPasswordError.classList.add("text-success");
-        cajaPasswordError.classList.remove("text-danger");
-        inpConfirmPassword.disabled = false; //  desbloquear
+
+    } else {  
+        mostrarMensaje(cajaPasswordError, "Contraseña válida", "success", "bi-check-circle");
+        inpConfirmPassword.disabled = false;
+
+        validarConfirmPassword(); // 🔥 bien puesto aquí
+
         return true;
     }
-
 }
 
 // Validación del campo Confirmar Contraseña
 function validarConfirmPassword() { 
-    //  1. No vacío
     if (inpConfirmPassword.value === "") {
-        cajaConfirmPasswordError.innerHTML = '<i class="bi bi-x-circle"></i> Confirma tu contraseña!';
-        cajaConfirmPasswordError.classList.remove("text-success");
-        cajaConfirmPasswordError.classList.add("text-danger");
+        mostrarMensaje(cajaConfirmPasswordError, "Confirma tu contraseña!", "error", "bi-x-circle");
         return false;
-    //  2. Coincidir con el campo Contraseña
+
     } else if (inpConfirmPassword.value !== inpPassword.value) {
-        cajaConfirmPasswordError.innerHTML = '<i class="bi bi-x-circle"></i> Las contraseñas no coinciden!';
-        cajaConfirmPasswordError.classList.remove("text-success");
-        cajaConfirmPasswordError.classList.add("text-danger");
+        mostrarMensaje(cajaConfirmPasswordError, "Las contraseñas no coinciden!", "error", "bi-x-circle");
         return false;
-    // Si todo es correcto
-    } else { cajaConfirmPasswordError.innerHTML = '<i class="bi bi-check-circle"></i> Contraseña coincide';
-        cajaConfirmPasswordError.classList.add("text-success");
-        cajaConfirmPasswordError.classList.remove("text-danger");
+
+    } else {
+        mostrarMensaje(cajaConfirmPasswordError, "Contraseña coincide", "success", "bi-check-circle");
         return true;
     }    
 }
-
 
 
 
