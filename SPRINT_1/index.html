@@ -17,10 +17,16 @@
         <div class="container">
             <div class="row align-items-center">
                 
-                <div class="col-xl-3 col-4">
-                    <button class="btn bi bi-facebook"></button>
-                    <button class="btn bi bi-instagram"></button>
-                    <button class="btn bi bi-twitter-x"></button>
+                <div class="col-xl-3 col-4 d-xl-block d-none">
+                    <a href="https://www.facebook.com"> <button class="btn bi bi-facebook fs-5"></button></a>   
+                    <a href="https://www.instagram.com"> <button class="btn bi bi-instagram fs-5"></button></a>
+                    <a href="https://www.twitter.com"> <button class="btn bi bi-twitter-x fs-5"></button></a>
+                </div>
+
+                <div class="col-xl-3 col-4 d-xl-none d-flex justify-content-around">
+                    <a href="https://www.facebook.com" class="bi bi-facebook w-25 text-dark"></a>   
+                    <a href="https://www.instagram.com" class="bi bi-instagram w-25 text-dark"></a>
+                    <a href="https://www.twitter.com" class="bi bi-twitter-x w-25 text-dark"></a>
                 </div>
                 
                 <div class="col-xl-6 col-4 d-flex justify-content-center">
@@ -28,8 +34,8 @@
                 </div>
 
                 <div class="col-xl-3 col-4 d-flex justify-content-end">
-                    <button class="btn bi bi-person"></button>
-                    <button class="btn bi bi-cart"></button>
+                    <button class="btn bi bi-person fs-5"></button>
+                    <button class="btn bi bi-cart fs-5"></button>
                 </div>
                 
             </div>
@@ -48,7 +54,8 @@
                 <div class="m-4">
                     <h2 class="text-center mb-4" style="color: #254B36;">ÚNETE A NUESTRA COMUNIDAD</h2>
                     
-                    <p class="fs-5 text-center">Recibe las últimas noticias , ofertas, exclusivas , y recomendaciones personalizadas de libros sostenibles.</p>
+                    <p class="fw-italic d-block d-xl-none text-center">Recibe las últimas noticias , ofertas, exclusivas , y recomendaciones personalizadas de libros sostenibles.</p>
+                    <p class="d-xl-block d-none fs-5 text-center">Recibe las últimas noticias , ofertas, exclusivas , y recomendaciones personalizadas de libros sostenibles.</p>
                         <div class="mb-3 d-flex justify-content-center">
                             <a href="formulario.html"><button style="width: 12em;" class="btn-unirse fs-4">Únete gratis → </button></a>
                         </div>      
@@ -66,28 +73,28 @@
                     
                         <div class="Senna col-6">
                             <div class="card rounded-4 shadow">
-                                <div class="rounded-top-4" style="background-image: url(img/senna.webp); height: 400px; background-size: cover; background-position: center;"></div>
+                                <div class="rounded-top-4" style="background-image: url(img/senna.webp); height: 40vh; background-size: cover; background-position: center;"></div>
                                 <div class="card-body">
                                     <h5 class="card-title">La Última Noche de Ayrton Senna</h5>
                                     <p class="card-text">Giorgio Terruzzi</p>
                                     <div class="d-flex justify-content-between">
                                         <p class="prize-text">€29,99</p>
-                                        <button class="btn-añadir">Añadir +</button>
+                                        <button class="btn-añadir d-none d-xl-block">Añadir <i class="bi bi-plus"></i></button>
+                                        <button class="btn-añadir position-absolute bottom-0 end-0 bi bi-plus-lg d-xl-none d-block"></button>                                          
                                     </div>
-                                   
                                 </div>
                             </div>
                         </div>
 
                         <div class="Michael col-6">
                             <div class="card rounded-4 shadow">
-                                <div class="rounded-top-4" style="background-image: url(img/michael.webp); height: 400px; background-size: cover; background-position: center;"></div>                                <div class="card-body">
+                                <div class="rounded-top-4" style="background-image: url(img/michael.webp); height: 40vh; background-size: cover; background-position: center;"></div>                                <div class="card-body">
                                     <h5 class="card-title">¿Quien mató a Michael Jackson?</h5>
                                     <p class="card-text">Paul Morley</p>
                                     <div class="d-flex justify-content-between">
                                         <p class="prize-text">€19,99</p>
-                                        <button class="btn-añadir">Añadir +</button>
-                                    </div>
+                                        <button class="btn-añadir d-none d-xl-block">Añadir <i class="bi bi-plus"></i></button>
+                                        <button class="btn-añadir position-absolute bottom-0 end-0 bi bi-plus-lg d-xl-none d-block fw-1"></button>                                    </div>
                                     
                                 </div>
                             </div>

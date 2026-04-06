@@ -95,6 +95,8 @@ footer{
   border-radius: 15px;
 }
 
+
+
 .btn-añadir{
   background-color: #235437;
   color:white;
@@ -103,6 +105,7 @@ footer{
   width: 6em;
   height: 2.4em;
 }
+
 .prize-text{
   color:#235437;
   font-weight: bold;
@@ -119,4 +122,16 @@ footer{
   .book-card img {
     height: 100px;
   }
+  .prize-text{
+    color:#235437;
+    font-weight: bold;
+    font-size: 1em;
+  }
+  .btn-añadir{
+    border-radius: 0px;
+    width: 2.4em; 
+    font-weight: bolder;
+  }
+ 
+
 }
