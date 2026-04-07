@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Registro</title>
+    <title> Iniciar Sesión</title>
    <!-- Links a Bootstrap y css -->
     <link rel="icon"type="image/png" href="img/imgPapelVerde/Logoico.ico">
     <!-- Links a Bootstrap y css -->
@@ -13,7 +13,8 @@
 
 
 </head>
-<body class="bg-light">
+<!-- Cambié el body para que el footer se quede abajo aunque el contenido sea poco -->
+<body class="bg-light d-flex flex-column min-vh-100">
 
 <!-- Header  -->
     <header class="bg-light ">
@@ -37,7 +38,7 @@
                 </div>
 
                 <div class="col-xl-3 col-4 d-flex justify-content-end">
-                    <a href="login.html"><button class="btn bi bi-person fs-5"></button></a>
+                    <button class="btn bi bi-person fs-5"></button>
                     <button class="btn bi bi-cart fs-5"></button>
                 </div>
                 
@@ -45,24 +46,16 @@
         </div>
     </header>
 
-    
-    <!-- Section -->
-    <!-- Formulario de registro -->
-    <!-- Sección con fondo del formulario -->
-    <section class ="Formulario container-fluid bg-white">
-    
 
-    <h1 class="text-center" style="color: #254B36;"> Únete a Papel Verde </h1>
-        
-    <!-- Modal exitoso-->
-    <div class="modal fade" id="registroModal" tabindex="-1" aria-hidden="true">
+        <!-- Modal exitoso-->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">¡Éxito!</h5>
             </div>
             <div class="modal-body">
-                Tu registro se ha completado exitosamente!
+                Login exitoso! (prueba)
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
@@ -72,95 +65,32 @@
     </div>
 
 
+    <section class ="Formulario container-fluid bg-white flex-grow-1">
+        
+        <form id="LoginForm">
+            <h1 class="text-center" style="color: #254B36;"> Bienvenid@!</h1>
 
-    <form id="registroForm" >
-            <!-- Nombre -->
-            <label>Nombre y Apellidos</label>
-            <input type="text" id="nombre" required placeholder="Ej: Juan Garcia">
-            <span class="warn" id="nameError"></span>
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico</label>
+                <input type="email" class="form-control" id="email" placeholder="Ej: juan@gmail.com">
+                <span class="warn" id="emailError"></span>
+            </div>
             
-            <!-- Correo -->
-            <label>Correo electrónico </label>
-            <input type="email" id="email" required placeholder="Ej: juan@gmail.com">
-            <span class="warn" id="emailError"></span>
-
-            <!-- Contraseña -->
-            <label>Contraseña </label>
-                <div style="position: relative;">
-                <input type="password" id="password" required>
-                <i id="togglePassword" 
-                class="bi bi-eye" 
-                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
-                </i>
-                </div> 
-            <span class="warn" id="passwordError"></span>
-
-            <!-- Confirmar contraseña -->
-            <label>Confirmar contraseña </label>
-            <div style="position: relative;">
-                 <input type="password" id="confirmPassword" required>
-                <i id="togglePasswordConfirm" 
-                class="bi bi-eye" 
-                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
-                </i>
-                </div> 
-            <span class="warn" id="confirmPasswordError"></span>
-
-            <!-- Sexo -->
-            <label>Sexo</label>
-            <select>
-                <option value="">Seleccionar</option>
-                <option>Masculino</option>
-                <option>Femenino</option>
-                <option>Otro</option>
-            </select>
-
-            <!-- Fecha -->
-            <label>Fecha de nacimiento</label>
-            <input type="date">
-
-            <!-- Dirección -->
-            <label>Dirección</label>
-            <input type="text" id="direccion">
-
-            <!-- País -->
-            <label>País</label>
-            <select id="pais">
-                <option value="">Seleccionar</option>
-                <option>España</option>
-                <option>México</option>
-                <option>Argentina</option>
-                <option>Colombia</option>
-            </select>
-
-            <!-- Tarjeta (oculta  hasta que se seleccione una dirección y  un país) -->
-            <div id="tarjetaContainer" style="display: none;" >
-                <label>Tarjeta de crédito</label>
-                <input type="text" id="tarjeta" placeholder="1234 5678 9012 3456">
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="password" placeholder="Tu contraseña">
             </div>
 
-            <!-- Cajitas Checkboxes -->
-            <label>
-                <input type="checkbox"> Activar notificaciones
-            </label>
+            <button type="submit" class="btn btn-success w-100" style="background-color: #254B36; border-color: #254B36;">Iniciar Sesión</button>
 
-            <label>
-                <input type="checkbox"> Recibir revista digital
-            </label>
+        </form>
 
-            <br><br>
-            <button type="submit">Registrarse</button>
 
-            </form>
 
     </section>
 
 
-
-
-    <!-- FOOTER  -->
-
-<footer class="container-fluid p-2" style='background-image: url("img/bg-footer.jpeg")'>
+    <footer class="container-fluid p-2" style='background-image: url("img/bg-footer.jpeg")'>
     
     <div class="row m-2">
         <div class="col-xl-6 col-12">
@@ -204,7 +134,7 @@
 </footer>
 
 <!-- Scripts  -->
-<script src="js/validaciones.js">
+<script src="js/login.js">
 </script>
 
 
