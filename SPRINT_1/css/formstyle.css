@@ -1,6 +1,6 @@
-/* =========================
-   FORMULARIO (NO rompe header)
-========================= */
+/* 
+  FORMULARIO 
+ */
 
 .Formulario {
   padding: 40px 0;
@@ -33,7 +33,7 @@
   font-size: 14px;
 }
 
-/* ✨ efecto focus */
+/*  efecto focus */
 .Formulario input:focus,
 .Formulario select:focus {
   border-color: #235437;

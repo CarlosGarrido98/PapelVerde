@@ -112,7 +112,7 @@ footer{
   font-size: 1.3em;
 }
 
-/* 📱 RESPONSIVE  MOBILE */
+/*  RESPONSIVE  PARA EL MÓVIL */
 @media (max-width: 768px) {
   .book-card {
     min-width: 150px;
