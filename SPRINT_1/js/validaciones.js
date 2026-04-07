@@ -15,6 +15,14 @@ const cajaPasswordError = document.getElementById("passwordError");
 const inpConfirmPassword = document.getElementById("confirmPassword");
 const cajaConfirmPasswordError = document.getElementById("confirmPasswordError"); 
 
+// Campos Dirección, País y contenedor de Tarjeta
+const inpDireccion = document.getElementById("direccion");
+const inpPais = document.getElementById("pais");
+const tarjetaContainer = document.getElementById("tarjetaContainer");
+
+// Campo Tarjeta
+const inpTarjeta = document.getElementById("tarjeta");
+
 
 // Validar al perder el foco del campo Nombre
 inpNombre.addEventListener("blur", validarNombre);
@@ -25,6 +33,12 @@ inpPassword.addEventListener("blur", validarPassword);
 
 // Validar que las contraseña
 inpConfirmPassword.addEventListener("blur",validarConfirmPassword);
+
+// Mostrar u ocultar el campo Tarjeta al modificar Dirección o País
+inpDireccion.addEventListener("input", comprobarMostrarTarjeta);
+inpPais.addEventListener("change", comprobarMostrarTarjeta);
+
+
 
 // Validar al enviar el formulario
 const form = document.getElementById("registroForm");
@@ -37,14 +51,19 @@ form.addEventListener("submit", function(e) {
     let passwordValido = validarPassword();
     let confirmPasswordValido = validarConfirmPassword();
 
-    if (!nombreValido || !emailValido || !passwordValido || !confirmPasswordValido) {
+
+    // Si alguna validación falla, bloquea el envío del formulario
+    if (!nombreValido || !emailValido || !passwordValido || !confirmPasswordValido ) {
         e.preventDefault(); //  bloquea envío
     }else {
+
+        // Si todo es válido, muestra el modal de registro exitoso
         let miModal = new bootstrap.Modal(document.getElementById('registroModal'));
         miModal.show();
         e.preventDefault();
     }
 });
+
 
 function mostrarMensaje(elemento, mensaje, tipo, iconoClase) {
     elemento.textContent = "";
@@ -150,6 +169,20 @@ function validarConfirmPassword() {
         return true;
     }    
 }
+
+
+function comprobarMostrarTarjeta() {
+    if (inpDireccion.value.trim() !== "" && inpPais.value !== "") {
+        tarjetaContainer.style.display = "block";
+    } else {
+        tarjetaContainer.style.display = "none";
+        document.getElementById("tarjeta").value = ""; // limpiar
+    }
+}
+
+
+
+
 
 
 
