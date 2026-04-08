@@ -1,49 +1,54 @@
-// Obtener referencias a elementos del DOM
-// Campo Nombre y su caja de error
+// ===== REFERENCIAS =====
 const inpNombre = document.getElementById("nombre");
 const cajaNombreError = document.getElementById("nameError");
 
-// Campo Email y su caja de error
 const inpEmail = document.getElementById("email");
 const cajaEmailError = document.getElementById("emailError");
 
-// Campo Contraseña y su caja de error
 const inpPassword = document.getElementById("password");
-const cajaPasswordError = document.getElementById("passwordError"); 
+const cajaPasswordError = document.getElementById("passwordError");
 
-// Campo Confirmar Contraseña y su caja de error
 const inpConfirmPassword = document.getElementById("confirmPassword");
-const cajaConfirmPasswordError = document.getElementById("confirmPasswordError"); 
+const cajaConfirmPasswordError = document.getElementById("confirmPasswordError");
 
-// Campos Dirección, País y contenedor de Tarjeta
 const inpDireccion = document.getElementById("direccion");
 const inpPais = document.getElementById("pais");
 const tarjetaContainer = document.getElementById("tarjetaContainer");
-
-// Campo Tarjeta
 const inpTarjeta = document.getElementById("tarjeta");
 
+const form = document.getElementById("registroForm");
 
-// Validar al perder el foco del campo Nombre
+
+// ===== BLOQUEAR CAMPOS DESDE DESPUÉS DE LA CONTRASEÑA =====
+function bloquearCamposInferiores() {
+    document.querySelectorAll(
+        "#registroForm select, #registroForm input[type='date'], #registroForm #direccion, #registroForm #pais, #registroForm #tarjeta, #registroForm input[type='checkbox']"
+    ).forEach(el => el.disabled = true);
+}
+
+// Ejecutar al inicio
+bloquearCamposInferiores();
+
+
+// ===== DESBLOQUEAR CAMPOS =====
+function desbloquearCamposInferiores() {
+    document.querySelectorAll(
+        "#registroForm select, #registroForm input[type='date'], #registroForm #direccion, #registroForm #pais, #registroForm #tarjeta, #registroForm input[type='checkbox']"
+    ).forEach(el => el.disabled = false);
+}
+
+
+// ===== EVENTOS =====
 inpNombre.addEventListener("blur", validarNombre);
 inpEmail.addEventListener("blur", validarEmail);
-
-// Validar al perder el foco del campo Contraseña
 inpPassword.addEventListener("blur", validarPassword);
+inpConfirmPassword.addEventListener("blur", validarConfirmPassword);
 
-// Validar que las contraseña
-inpConfirmPassword.addEventListener("blur",validarConfirmPassword);
-
-// Mostrar u ocultar el campo Tarjeta al modificar Dirección o País
 inpDireccion.addEventListener("input", comprobarMostrarTarjeta);
 inpPais.addEventListener("change", comprobarMostrarTarjeta);
 
 
-
-// Validar al enviar el formulario
-const form = document.getElementById("registroForm");
-
-// Validación al enviar el formulario
+// ===== SUBMIT =====
 form.addEventListener("submit", function(e) {
 
     let nombreValido = validarNombre();
@@ -51,13 +56,10 @@ form.addEventListener("submit", function(e) {
     let passwordValido = validarPassword();
     let confirmPasswordValido = validarConfirmPassword();
 
-
-    // Si alguna validación falla, bloquea el envío del formulario
-    if (!nombreValido || !emailValido || !passwordValido || !confirmPasswordValido ) {
-        e.preventDefault(); //  bloquea envío
-    }else {
-
-        // Si todo es válido, muestra el modal de registro exitoso
+    if (!nombreValido || !emailValido || !passwordValido || !confirmPasswordValido) {
+        e.preventDefault();
+    } else {
+        // AQUI PARA QUE SALTE EL MODAL DE REGISTRO EXITOSO
         let miModal = new bootstrap.Modal(document.getElementById('registroModal'));
         miModal.show();
         e.preventDefault();
@@ -65,6 +67,7 @@ form.addEventListener("submit", function(e) {
 });
 
 
+// ===== MENSAJES =====
 function mostrarMensaje(elemento, mensaje, tipo, iconoClase) {
     elemento.textContent = "";
 
@@ -78,18 +81,15 @@ function mostrarMensaje(elemento, mensaje, tipo, iconoClase) {
 
     elemento.classList.remove("text-danger", "text-success");
 
-    if (tipo === "error") {
-        elemento.classList.add("text-danger");
-    } else {
-        elemento.classList.add("text-success");
-    }
+    elemento.classList.add(tipo === "error" ? "text-danger" : "text-success");
 }
 
-/* Funciones */
 
-// Validación del campo Nombre y Apellidos
+// ===== VALIDACIONES =====
+
+// Nombre
 function validarNombre(){
-    let nombre = inpNombre.value.trim();
+      let nombre = inpNombre.value.trim();
     let numPalabras = nombre.split(/\s+/).filter(p => p.length > 0).length;
 
     let regex = /^[A-Za-zÁÉÍÓÚáéíóúñÑ]+\s[A-Za-zÁÉÍÓÚáéíóúñÑ]+$/;
@@ -111,7 +111,8 @@ function validarNombre(){
         return true;
     }
 }
-// Validación del campo Email
+
+// Email
 function validarEmail() {
     let email = inpEmail.value.trim();
     let regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -121,7 +122,7 @@ function validarEmail() {
         return false;
 
     } else if (!regexEmail.test(email)) {
-        mostrarMensaje(cajaEmailError, "Introduce un email válido!", "error", "bi-x-circle");
+        mostrarMensaje(cajaEmailError, "Email no válido!", "error", "bi-x-circle");
         return false;
 
     } else {
@@ -130,68 +131,66 @@ function validarEmail() {
     }
 }
 
+// Password
 function validarPassword() {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     let password = inpPassword.value;
 
     if (password === "") {
-        mostrarMensaje(cajaPasswordError, "Introduce tu contraseña!", "error", "bi-x-circle");
-        inpConfirmPassword.disabled = true;
+        mostrarMensaje(cajaPasswordError, "Introduce contraseña!", "error", "bi-x-circle");
         return false;
 
     } else if (!regex.test(password)) { 
         mostrarMensaje(cajaPasswordError, "Debe tener 8 caracteres, mayúsculas, minúsculas, número y símbolo", "error", "bi-x-circle");
-        inpConfirmPassword.disabled = true;
         return false;
 
     } else {  
         mostrarMensaje(cajaPasswordError, "Contraseña válida", "success", "bi-check-circle");
-        inpConfirmPassword.disabled = false;
-
-        validarConfirmPassword(); // 🔥 bien puesto aquí
-
         return true;
     }
 }
 
-// Validación del campo Confirmar Contraseña
+// Confirm password
 function validarConfirmPassword() { 
     if (inpConfirmPassword.value === "") {
-        mostrarMensaje(cajaConfirmPasswordError, "Confirma tu contraseña!", "error", "bi-x-circle");
+        mostrarMensaje(cajaConfirmPasswordError, "Confirma contraseña!", "error", "bi-x-circle");
         return false;
 
     } else if (inpConfirmPassword.value !== inpPassword.value) {
         mostrarMensaje(cajaConfirmPasswordError, "Las contraseñas no coinciden!", "error", "bi-x-circle");
+
+        bloquearCamposInferiores(); //  si no coinciden, volvemos a bloquear
+
         return false;
 
     } else {
-        mostrarMensaje(cajaConfirmPasswordError, "Contraseña coincide", "success", "bi-check-circle");
+        mostrarMensaje(cajaConfirmPasswordError, "Las contraseñas coinciden", "success", "bi-check-circle");
+
+        desbloquearCamposInferiores(); // si coinciden, desbloqueamos los campos inferiores
+
         return true;
     }    
 }
 
 
+// ===== TARJETA =====
 function comprobarMostrarTarjeta() {
     if (inpDireccion.value.trim() !== "" && inpPais.value !== "") {
         tarjetaContainer.style.display = "block";
     } else {
         tarjetaContainer.style.display = "none";
-        document.getElementById("tarjeta").value = ""; // limpiar
+        inpTarjeta.value = "";
     }
 }
 
 
-
-
-
-
-
-/* Limpiar campo Confirmar Contraseña y Botón para mirar contraseña*/
-
-// Limpiar el campo Confirmar Contraseña si se modifica el campo Contraseña
+// ===== RESET SI CAMBIA PASSWORD =====
 inpPassword.addEventListener("input", () => {
     inpConfirmPassword.value = "";
+
+    bloquearCamposInferiores(); // Se vuelve a bloquear
 });
+
 
 
 // Funcionalidad para mostrar/ocultar contraseña
@@ -226,5 +225,3 @@ togglePasswordConfirm.addEventListener("click", function () {
     }
 
 });
-
-
