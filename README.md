@@ -17,5 +17,7 @@ Papel Verde es una librería dedicada a la venta de libros de segunda mano y pub
 
 ---
 **Demo del proyecto:**  
-(Aún en Pruebas)
+> .[!NOTE].
+> Aún en Pruebas
+
 👉 https://eclectic-muffin-afb028.netlify.app/
