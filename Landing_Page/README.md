@@ -1,75 +1,20 @@
-# 🧩 Historia de Usuario — Accesibilidad
+<p align="center">
+  <img src="SPRINT_1/img/imgPapelVerde/Logotipo.png" alt="Papel Verde Logo" width="108">
+</p>
 
-## 📌 Información General
+<p align="center">
+  <img src="https://img.shields.io/badge/HTML-5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML 5">
+  <img src="https://img.shields.io/badge/CSS-3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS 3">
+  <img src="https://img.shields.io/badge/JavaScript-ES6-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript ES6">
+  <img src="https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.4">
+  <img src="https://img.shields.io/badge/MySQL-8-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL 8">
+  <img src="https://img.shields.io/badge/Bootstrap-5-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap 5">
+</p>
 
-- **ID:** HU-ACC-01  
-- **Título:** Mejora de accesibilidad de la landing page  
+<h1 align="center">Papel Verde - Libreria </h1>
 
----
+Papel Verde es una librería dedicada a la venta de libros de segunda mano y publicaciones elaboradas con materiales reciclados. Nuestro proyecto nace con el objetivo de fomentar un modelo de negocio ecosostenible, promoviendo la reutilización de recursos y el consumo responsable dentro del mundo de la lectura.
 
-## 👤 Historia de Usuario
+## Landing Page +
 
-**Como** desarrollador/a web  
-**Quiero** revisar y mejorar la accesibilidad de la landing page ya entregada  
-**Para** que cumpla el nivel WCAG 2.1 nivel A y pueda ser utilizada correctamente por personas con distintas capacidades  
-
----
-
-## 🎯 Descripción
-
-Se ha realizado una revisión completa de la landing page desarrollada previamente con el objetivo de mejorar su accesibilidad.
-
-El propósito principal es garantizar que la página cumpla con el nivel de adecuación WCAG 2.1 nivel A, asegurando una experiencia accesible para todos los usuarios, incluyendo personas con discapacidad visual o motora.
-
-Para ello, se han aplicado mejoras en la estructura del código, el uso de etiquetas semánticas y la incorporación de atributos de accesibilidad.
-
----
-
-## ⚙️ Tareas realizadas
-
-- Revisión del código HTML y CSS  
-- Uso de etiquetas semánticas (`header`, `main`, `section`, `footer`)  
-- Inclusión de atributos `aria-label` en botones con iconos  
-- Uso de `aria-hidden` en iconos decorativos  
-- Asociación correcta entre `label` e inputs de formulario  
-- Implementación de validación con `required` en formularios  
-- Mejora de accesibilidad en mensajes de error mediante `aria-describedby`  
-- Revisión del contraste de colores  
-- Pruebas de navegación mediante teclado (TAB)  
-
----
-
-## 🛠️ Herramientas utilizadas
-
-- Lighthouse (Chrome DevTools)  
-- Navegador web (Chrome)  
-- Bootstrap (componentes accesibles)  
-
----
-
-## 📋 Criterios de aceptación
-
-- La página obtiene una puntuación alta en accesibilidad mediante Lighthouse  
-- Todas las imágenes contienen atributo `alt`  
-- Los botones son accesibles mediante lector de pantalla  
-- El formulario es navegable y usable con teclado  
-- La estructura HTML es semántica y ordenada  
-- No existen errores críticos de accesibilidad  
-
----
-
-## ✅ Resultado
-
-Tras la implementación de las mejoras, la landing page cumple con el nivel WCAG 2.1 nivel A.
-
-La aplicación ahora es:
-
-- Accesible mediante teclado  
-- Compatible con lectores de pantalla  
-- Más clara, estructurada y usable  
-
----
-
-## 💡 Observaciones
-
-Se han seguido las recomendaciones oficiales de accesibilidad web para garantizar una experiencia inclusiva y profesional.
+La landing page ha sido diseñada siguiendo un enfoque responsive, adaptándose tanto a dispositivos móviles como a escritorio para ofrecer la mejor experiencia de usuario en cada caso. En móvil, se ha optado por una estructura en una sola columna, priorizando la simplicidad, la lectura vertical y la navegación cómoda con el dedo. En cambio, en escritorio, se aprovecha el mayor espacio disponible organizando el contenido en varias columnas, lo que permite mostrar más información a la vez y facilitar la comparación de productos. De esta forma, se consigue una interfaz clara, intuitiva y accesible independientemente del dispositivo desde el que se acceda.
