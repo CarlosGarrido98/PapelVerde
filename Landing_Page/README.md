@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="SPRINT_1/img/imgPapelVerde/Logotipo.png" alt="Papel Verde Logo" width="108">
+  <img src="img/imgPapelVerde/Logotipo.png" alt="Papel Verde Logo" width="108">
 </p>
 
 <p align="center">
@@ -15,6 +15,6 @@
 
 Papel Verde es una librería dedicada a la venta de libros de segunda mano y publicaciones elaboradas con materiales reciclados. Nuestro proyecto nace con el objetivo de fomentar un modelo de negocio ecosostenible, promoviendo la reutilización de recursos y el consumo responsable dentro del mundo de la lectura.
 
-## Landing Page +
+## Landing Page
 
 La landing page ha sido diseñada siguiendo un enfoque responsive, adaptándose tanto a dispositivos móviles como a escritorio para ofrecer la mejor experiencia de usuario en cada caso. En móvil, se ha optado por una estructura en una sola columna, priorizando la simplicidad, la lectura vertical y la navegación cómoda con el dedo. En cambio, en escritorio, se aprovecha el mayor espacio disponible organizando el contenido en varias columnas, lo que permite mostrar más información a la vez y facilitar la comparación de productos. De esta forma, se consigue una interfaz clara, intuitiva y accesible independientemente del dispositivo desde el que se acceda.
