@@ -7,7 +7,7 @@
     <!-- Links a Bootstrap y css -->
     <link rel="icon"type="image/png" href="img/imgPapelVerde/Logoico.ico">
     <!-- Links a Bootstrap y css -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
@@ -109,81 +109,45 @@
 
 <section class="container my-5">
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="fw-bold " style="color: #254B36;">Colección de Libros</h3>
+    <h3 class="fw-bold" style="color: #254B36;">Colección de Libros</h3>
     <a href="#" class="text-success text-decoration-none">Ver todos →</a>
   </div>
 
   <div class="carousel-container position-relative">
-    
+
     <button class="carousel-btn left" id="prevBtn">
       <i class="bi bi-chevron-left"></i>
     </button>
 
     <div class="carousel-track" id="carouselTrack">
-      
-      <!-- CARD -->
-      <div class="book-card">
-        <img src="img/kafka.webp" alt="">
-        <h6>La Metamorfosis</h6>
-        <p>Franz Kafka</p>
-        <span>12.99€</span>
-      </div>
 
-      <div class="book-card">
-        <img src="img/ws1.jpg" alt="">
-        <h6>Hamlet</h6>
-        <p>William Shakespeare</p>
-        <span>14.50€</span>
-      </div>
+      <?php if (!empty($productos)): ?>
 
-        <div class="book-card">
-        <img src="img/kentaro.jpg" alt="">
-        <h6>Mario Bros</h6>
-        <p>Kentaro Miura</p>
-        <span>14.50€</span>
-      </div>
+        <?php foreach ($productos as $producto): ?>
 
-      
-        <div class="book-card">
-        <img src="img/cnada.jpg" alt="">
-        <h6>Nada</h6>
-        <p>Carmen Laforet</p>
-        <span>9.50€</span>
-      </div>
+          <div class="book-card">
 
-      
-        <div class="book-card">
-        <img src="img/gabo1.jpg" alt="">
-        <h6>Amor en los tiempos del colera</h6>
-        <p>Gabriel García Márquez</p>
-        <span>10.50€</span>
-      </div>
+            <img
+              src="<?= htmlspecialchars($producto['imagen_url']) ?>"
+              alt="<?= htmlspecialchars($producto['nombre']) ?>"
+            >
 
+            <h6><?= htmlspecialchars($producto['nombre']) ?></h6>
 
-        <div class="book-card">
-        <img src="img/jv1.jpg" alt="">
-        <h6>Viaje al centro de la Tierra</h6>
-        <p>Jules Verne</p>
-        <span>24.50€</span>
-      </div>
+            <p><?= htmlspecialchars(ucfirst($producto['tipo'])) ?></p>
 
-      
-        <div class="book-card">
-        <img src="img/marpz.jpg" alt="">
-        <h6>Der pate </h6>
-        <p>Mario</p>
-        <span>4.50€</span>
-      </div>
+            <span><?= number_format($producto['precio'], 2) ?> €</span>
 
-      
-        <div class="book-card">
-        <img src="img/hailmarry.webp" alt="">
-        <h6>Proyecto Salvación </h6>
-        <p>Andy Weir</p>
-        <span>10.50€</span>
-      </div>
+          </div>
 
-      
+        <?php endforeach; ?>
+
+      <?php else: ?>
+
+        <p>No hay productos disponibles.</p>
+
+      <?php endif; ?>
+
     </div>
 
     <button class="carousel-btn right" id="nextBtn">
@@ -255,9 +219,3 @@
 
 <?php
 
-require_once "config/database.php";
-require_once "controllers/HomeController.php";
-
-$controller = new HomeController($conexion);
-
-$controller->index();

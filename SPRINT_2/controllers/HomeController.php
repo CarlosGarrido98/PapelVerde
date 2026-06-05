@@ -17,6 +17,6 @@ class HomeController
 
         $productos = $productoModel->obtenerProductos();
 
-        require "views/home/index.php";
+        require "views/index.php";
     }
 }
