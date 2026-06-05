@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>
-        <!-- Enlace al CSS -->
-        <link rel="stylesheet" href="css/styles.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papel Verde</title>
+    <!-- Links a Bootstrap y css -->
+    <link rel="icon"type="image/png" href="img/imgPapelVerde/Logoico.ico">
+    <!-- Links a Bootstrap y css -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
 
-        <link rel="icon"  type="image/png" href="images/dog.ico">
 
-    </head>
 <body>
 
     <!-- Header  -->
@@ -42,3 +44,5 @@
             </div>
         </div>
     </header>
+    </body>
+</html>
