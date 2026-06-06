@@ -20,6 +20,9 @@ switch ($request) {
     require_once 'controllers/HomeController.php';
      break;
 
+    case '/galeria.php':
+        require_once 'views/galeria.php';
+        break;
     default:
         echo "Página no encontrada";
         break;
