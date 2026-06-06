@@ -22,7 +22,7 @@
 
     <div
         style="
-            width: 1000px;
+            width: auto;
             height: 3px;
             background-color: #254B36;
             margin: 10px auto 0;
@@ -54,7 +54,7 @@
 
             <?php while($libro = mysqli_fetch_assoc($librosCarrusel)): ?>
  
-                <div class="book-card">
+                <div class="book-card position-relative pb-5">
 
                     <img
                         src="<?= $libro['imagen_url'] ?>"
@@ -73,6 +73,13 @@
                         €<?= number_format($libro['precio'],2,',','.') ?>
                     </span>
 
+                    
+                    <button class="btn-añadir position-absolute bottom-0 end-0 m-2 d-none d-xl-block" 
+                            data-id="<?= $libro['id_producto'] ?>">
+                        <i class="bi bi-plus"></i>
+                    </button>
+
+                    <button class="btn-añadir position-absolute bottom-0 end-0 bi bi-plus-lg d-xl-none d-block" data-id="<?= $libro['id_producto'] ?>"></button>
                 </div>
 
             <?php endwhile; ?>
@@ -107,7 +114,7 @@
 
             <?php while($manga = mysqli_fetch_assoc($mangasCarrusel)): ?>
  
-                <div class="book-card">
+                <div class="book-card position-relative pb-5">
 
                     <img
                         src="<?= $manga['imagen_url'] ?>"
@@ -125,6 +132,13 @@
                     <span>
                         €<?= number_format($manga['precio'],2,',','.') ?>
                     </span>
+
+                     <button class="btn-añadir position-absolute bottom-0 end-0 m-2 d-none d-xl-block" 
+                            data-id="<?= $manga['id_producto'] ?>">
+                        <i class="bi bi-plus"></i>
+                    </button>
+
+                    <button class="btn-añadir position-absolute bottom-0 end-0 bi bi-plus-lg d-xl-none d-block" data-id="<?= $manga['id_producto'] ?>"></button>
 
                 </div>
 
@@ -160,7 +174,7 @@
 
             <?php while($comic = mysqli_fetch_assoc($comicsCarrusel)): ?>
  
-                <div class="book-card">
+                <div class="book-card position-relative pb-5">
 
                     <img
                         src="<?= $comic['imagen_url'] ?>"
@@ -178,7 +192,12 @@
                     <span>
                         €<?= number_format($comic['precio'],2,',','.') ?>
                     </span>
-
+                    
+                     <button class="btn-añadir position-absolute bottom-0 end-0 m-2 d-none d-xl-block" 
+                            data-id="<?= $comic['id_producto'] ?>">
+                        <i class="bi bi-plus"></i>
+                    </button>
+                    <button class="btn-añadir position-absolute bottom-0 end-0  bi bi-plus-lg d-xl-none d-block" data-id="<?= $comic['id_producto'] ?>"></button>
                 </div>
 
             <?php endwhile; ?>

@@ -101,7 +101,7 @@
 
                <?php while($libro = mysqli_fetch_assoc($librosCarrusel)): ?>
 
-                    <div class="book-card position-relative pb-4"> 
+                    <div class="book-card position-relative pb-5"> 
 
                         <img src="<?= $libro['imagen_url'] ?>" alt="<?= $libro['nombre'] ?>">
                         <h6><?= $libro['nombre'] ?></h6>
@@ -113,7 +113,13 @@
                             <i class="bi bi-plus"></i>
                         </button>
 
+                        <button class="btn-añadir position-absolute bottom-0 end-0  bi bi-plus-lg d-xl-none d-block" data-id="<?= $libro['id_producto'] ?>"></button>
+
                     </div>
+
+                    
+
+
 
                 <?php endwhile; ?>
 
