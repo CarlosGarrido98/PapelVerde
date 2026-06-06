@@ -26,9 +26,9 @@ class Usuario {
         $this->esAdministrador = $esAdministrador;
     }
 
-    // ==========================================
+
     // GETTERS (Para obtener los valores)
-    // ==========================================
+
 
     public function getIdUsuario(): ?int {
         return $this->idUsuario;

@@ -35,19 +35,24 @@
 
     <section class ="Formulario container-fluid bg-white flex-grow-1">
         
-        <form id="LoginForm">
+        <form id="LoginForm" action="/login" method="POST">
             <h1 class="text-center" style="color: #254B36;"> Bienvenid@!</h1>
 
             <div class="mb-3">
                 <label for="email" class="form-label">Correo Electrónico</label>
-                <input type="email" class="form-control" id="email" placeholder="Ej: juan@gmail.com">
+                <input name = "email" type="email" class="form-control" id="email" placeholder="Ej: juan@gmail.com">
                 <span class="warn" id="emailError"></span>
             </div>
             
-            <div class="mb-3">
+            <div class="mb-3" style="position: relative;">
                 <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="password" placeholder="Tu contraseña">
+                <input name = "password" type="password" class="form-control" id="password" placeholder="Tu contraseña">
+                <i id="togglePassword" class="bi bi-eye" 
+                style="position: absolute; right: 15px; top: 70%; transform: translateY(-50%); cursor: pointer;">
+                </i>
+                 
             </div>
+            
 
             <button type="submit" class="btn btn-success w-100" style="background-color: #254B36; border-color: #254B36;">Iniciar Sesión</button>
 
@@ -63,8 +68,8 @@
 <?php include 'views/footer.php'; ?>
 
 <!-- Scripts  -->
-<script src="js/login.js">
-</script>
+<script src="js/login.js"> </script>
+<script src="js/validaciones.js"></script>
 
 
 <!-- Bootstrap JS -->

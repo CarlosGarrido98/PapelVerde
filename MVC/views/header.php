@@ -14,7 +14,7 @@
 
 
 <body>
-
+<?php session_start(); ?>
     <!-- Header  -->
     <header class="bg-light">
         <div class="container">
@@ -37,7 +37,22 @@
                 </div>
 
                 <div class="col-xl-3 col-4 d-flex justify-content-end">
-                    <a href="login"><button class="btn bi bi-person fs-5"></button></a>
+                    <?php
+                    $ret = '<a href="login"><button class="btn bi bi-person fs-5"></button></a>';
+                        if(isset($_SESSION["usuario"])){
+                  
+                            $ret = '<a href="perfil">
+                                        <img
+                                            src="'.$_SESSION["usuario"]->getImagenUrl().'"
+                                            alt="Foto de perfil"
+                                            class="rounded-circle img-fluid mb-3"
+                                            style="width: 50px; height: 50px; object-fit: cover;"
+                                        >
+                                    </a>';
+                        }
+                        echo $ret;
+                    ?>
+                    
                     <button class="btn bi bi-cart fs-5"></button>
                 </div>
                 
@@ -58,11 +73,18 @@
             <li class="nav-item">
                 <a class="link-n" href="about">About</a>
             </li>
-            <li class="nav-item">
-                <a class="link-n" href="gestion">Gestión</a>
-            </li>
+            <?php
+            if(isset($_SESSION["usuario"])){
+                if($_SESSION["usuario"]->isAdministrador() == 1){
+                    echo '<li class="nav-item">
+                            <a class="link-n" href="gestion">Gestión</a>
+                          </li>';
+                }
+                
+            }
+            ?>
         </ul>
-
+        
         <form action="/buscar" method="GET" class="d-flex nav-search ">
             <input class = "input-buscador" type="search" name="q" placeholder="Buscar..." required>
             <button class="bi bi-search mx-2 btn-buscar" type="submit"></button>

@@ -1,7 +1,85 @@
 <?php
 
-class Producto
-{
+class Producto{
+
+private $id_producto;
+private $nombre;
+private $precio;
+private $stock;
+private $tipo;
+private $imagen_url;
+private $sinopsis;
+
+public function __construct($id_producto, $nombre, $precio, $stock, $tipo, $imagen_url, $sinopsis) {
+    $this->id_producto = $id_producto;
+    $this->nombre = $nombre;
+    $this->precio = $precio;
+    $this->stock = $stock;
+    $this->tipo = $tipo;
+    $this->imagen_url = $imagen_url;
+    $this->sinopsis = $sinopsis;
+}
+
+public function getIdProducto() {
+    return $this->id_producto; 
+}
+
+public function getNombre() {
+    return $this->nombre;  
+}
+
+public function getPrecio() {
+    return $this->precio;
+}
+
+public function getStock() {
+    return $this->stock;
+}
+
+public function getTipo() {
+    return $this->tipo;
+} 
+
+public function getImagenUrl() {
+    return $this->imagen_url;
+}
+
+public function getSinopsis() {
+    return $this->sinopsis;
+}
+
+public function setIdProducto($id_producto) {
+    $this->id_producto = $id_producto;
+}
+
+public function setNombre($nombre) {
+    $this->nombre = $nombre;
+}
+
+public function setPrecio($precio) {
+    $this->precio = $precio;
+}
+
+public function setStock($stock) {
+    $this->stock = $stock;
+}
+
+public function setTipo($tipo) {
+    $this->tipo = $tipo;
+}
+
+public function setImagenUrl($imagen_url) {
+    $this->imagen_url = $imagen_url;
+}
+
+public function setSinopsis($sinopsis) {
+    $this->sinopsis = $sinopsis;
+}
+
+
+
+
+
     // Método para obtener las ofertas (libros con id_producto 7 y 9)
     public static function obtenerOfertas($conexion)
     {

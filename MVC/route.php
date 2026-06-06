@@ -1,4 +1,6 @@
 <?php
+require_once ("controllers/LoginController.php");
+require_once ("models/UsuarioModel.php");
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -50,20 +52,31 @@ switch ($method) {
                 require_once 'views/login.php';
                 break;
 
-                case '/about':
+            case '/about':
                     require_once 'views/about.php';
                     break;
+
+            case '/perfil':
+                    require_once 'views/perfil.php';
+                    break;
+            
+            case '/logout':
+                LoginController::logout();
+                break;
 
             default:
                 require_once 'views/404.php';
                 break;
+            
         }
+        
     break;
     
     case 'POST':
         switch ($request) {
 
-           
+            case '/login':
+                LoginController::procesarLogin();
             default:
             echo "Error, método no permitido";
             break;
