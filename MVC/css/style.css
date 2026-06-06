@@ -133,17 +133,19 @@ footer{
 }
 
 .input-buscador{
-  background-color: rgb(223, 222, 222);
+  background-color: rgb(255, 255, 255);
   width: 30rem;
+  border-radius: 5px;
   padding: 0.35rem;
   color:black;
-  border: none;
+  border: white;
+  margin-left: 7rem;
 }
 
 .btn-buscar{
   width: 2.5rem;
   border: none;
-  background-color: #6ae99d;
+  background-color: #235437;
   color: white;
 }
 
@@ -159,8 +161,67 @@ footer{
   color: white;
 }
 
+.link-n{
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.link-n:hover{
+    color: rgba(68, 237, 2, 0.8);
+    transition: 0.2s ease-in-out;
+}
+
+nav{
+    display: flex;
+    justify-content: center;
+}
+
 /*  RESPONSIVE  PARA EL MÓVIL */
 @media (max-width: 768px) {
+
+  nav{
+    margin: 0;
+  }
+
+  .nav-box{
+    flex-direction: column;
+  }
+
+  .input-buscador{
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    border-radius: 5px;
+    padding-bottom: 0.35rem;
+    color:black;
+    border: white;
+    margin-left: 0;
+  }
+
+  .btn-buscar{
+ 
+    border: none;
+    background-color: #235437;
+    color: white;
+  }
+  
+  .link-n{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .list-nav{
+    display: flex;
+    align-items: center;
+    margin-right: 2rem;
+    list-style: none;
+    margin-bottom: 1rem;
+  }
+
+  .list-nav li a{
+    text-decoration: none;
+    color: white;
+  }
+  
   .book-card {
     min-width: 150px;
     max-width: 150px;

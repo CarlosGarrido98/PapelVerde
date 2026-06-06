@@ -31,7 +31,7 @@
                     <p class="fw-italic d-block d-xl-none text-center">Recibe las últimas noticias , ofertas, exclusivas , y recomendaciones personalizadas de libros sostenibles.</p>
                     <p class="d-xl-block d-none fs-5 text-center">Recibe las últimas noticias , ofertas, exclusivas , y recomendaciones personalizadas de libros sostenibles.</p>
                         <div class="mb-3 d-flex justify-content-center">
-                            <a href="formulario.html"><button style="width: 12em;" class="btn-unirse fs-4">Únete gratis → </button></a>
+                            <a href="formulario"><button style="width: 12em;" class="btn-unirse fs-4">Únete gratis → </button></a>
                         </div>      
                 </div>
                 <p class="text-center"><i style="color: green;" class="bi bi-patch-check-fill"></i> Sin spam. Cancela cuando quieras</p>
@@ -108,7 +108,7 @@
             Colección de Libros
         </h3>
 
-        <a href="#" class="text-success text-decoration-none">
+        <a href="galeria" class="text-success text-decoration-none">
             Ver todos →
         </a>
     </div>

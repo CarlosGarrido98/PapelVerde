@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="col-xl-3 col-4 d-flex justify-content-end">
-                    <a href="login.html"><button class="btn bi bi-person fs-5"></button></a>
+                    <a href="login"><button class="btn bi bi-person fs-5"></button></a>
                     <button class="btn bi bi-cart fs-5"></button>
                 </div>
                 
@@ -45,22 +45,25 @@
         </div>
     </header>
 
-    <nav class="nav d-flex border border-1 justify-content-center" style='background-image: url("img/bg-footer.jpeg")'>
+    <nav class="nav  border border-1" style='background-image: url("img/bg-footer.jpeg")'>
 
-    <div class="d-flex justify-content-center m-3">
+    <div class="nav-box d-flex justify-content-center m-3">
         <ul class="list-nav">
             <li class="nav-item">
-                <a class="nav-link mx-2" href="galeria">Galería</a>
+                <a class="link-n" href="home">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link mx-2" href="about">About</a>
+                <a class="link-n" href="galeria">Galería</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link mx-2" href="gestion">Gestión</a>
+                <a class="link-n" href="about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="link-n" href="gestion">Gestión</a>
             </li>
         </ul>
 
-        <form action="/buscar" method="GET" class="d-flex nav-search  mx-5">
+        <form action="/buscar" method="GET" class="d-flex nav-search ">
             <input class = "input-buscador" type="search" name="q" placeholder="Buscar..." required>
             <button class="bi bi-search mx-2 btn-buscar" type="submit"></button>
         </form>

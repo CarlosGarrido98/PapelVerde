@@ -42,8 +42,20 @@ switch ($method) {
                 require_once 'controllers/GaleriaController.php';
                 break;
 
+            case '/formulario':
+                require_once 'views/formulario.php';
+                break;
+
+            case '/login':
+                require_once 'views/login.php';
+                break;
+
+                case '/about':
+                    require_once 'views/about.php';
+                    break;
+
             default:
-                echo "Página no encontrada";
+                require_once 'views/404.php';
                 break;
         }
     break;
