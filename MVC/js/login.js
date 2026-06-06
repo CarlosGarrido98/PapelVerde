@@ -67,18 +67,18 @@ function validarEmail() {
 }
 
 const togglePassword = document.getElementById("togglePassword");
-const password = document.getElementById("password");
 
-togglePassword.addEventListener("click", () => {
+togglePassword.addEventListener("click", function () {
 
-    const type =
-        password.getAttribute("type") === "password"
-        ? "text"
-        : "password";
-
-    password.setAttribute("type", type);
-
-    togglePassword.classList.toggle("bi-eye");
-    togglePassword.classList.toggle("bi-eye-slash");
+    if (inpPassword.type === "password") {
+        inpPassword.type = "text";
+        togglePassword.classList.remove("bi-eye");
+        togglePassword.classList.add("bi-eye-slash");
+    } else {
+        inpPassword.type = "password";
+        togglePassword.classList.remove("bi-eye-slash");
+        togglePassword.classList.add("bi-eye");
+    }
 
 });
+

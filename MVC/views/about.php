@@ -20,7 +20,7 @@
     <!--Título-->
 <section class="hero text-center">
     <div class="container">
-        <h1 class="display-3 fw-bold">Papel Verde</h1>
+        <h1 class="display-3 fw-bold" style="color: #254B36; ">Papel Verde</h1>
         <p class="lead">
             Tu rincón favorito para descubrir libros, mangas y cómics.
         </p>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="col-md-6">
-            <h2 class="fw-bold mb-3">Nuestra Historia</h2>
+            <h2 class="fw-bold mb-3" style="color: #254B36;">Nuestra Historia</h2>
 
             <p>
                 Papel Verde nació de la pasión por la lectura y el deseo
@@ -61,7 +61,7 @@
 
         <div class="col-md-6">
             <div class="p-4 border rounded shadow-sm h-100">
-                <h3 class="fw-bold text-success">
+                <h3 class="fw-bold text-success" style="color: #254B36;">
                     <i class="bi bi-bullseye"></i> Misión
                 </h3>
 
@@ -75,7 +75,7 @@
 
         <div class="col-md-6">
             <div class="p-4 border rounded shadow-sm h-100">
-                <h3 class="fw-bold text-success">
+                <h3 class="fw-bold text-success mb-3" style="color: #254B36;">
                     <i class="bi bi-eye"></i> Visión
                 </h3>
 
@@ -92,7 +92,7 @@
 <!-- VALORES -->
 <section class="container py-5">
 
-    <h2 class="text-center fw-bold mb-5">
+    <h2 class="text-center fw-bold mb-5" style="color: #254B36;">
         Nuestros Valores
     </h2>
 
@@ -135,7 +135,7 @@
 <!-- EQUIPO -->
 <section class="container py-5">
 
-    <h2 class="text-center fw-bold mb-5">
+    <h2 class="text-center fw-bold mb-5 " style="color: #254B36;">
         Nuestro Equipo
     </h2>
 
@@ -172,7 +172,7 @@
 
     <div class="text-center">
 
-        <h2 class="fw-bold mb-4">
+        <h2 class="fw-bold mb-4" style="color: #254B36;">
             Contacto
         </h2>
 

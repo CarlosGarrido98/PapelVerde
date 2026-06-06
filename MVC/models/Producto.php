@@ -117,7 +117,7 @@ public function setSinopsis($sinopsis) {
 
     return mysqli_query($conexion, $sql);
 }
-
+// Método para obtener los mangas para el carrusel
 public static function obtenerMangasCarrusel($conexion)
 {
     $sql = "
@@ -139,7 +139,7 @@ public static function obtenerMangasCarrusel($conexion)
 
 
 }
-
+// Método para obtener los cómics para el carrusel
 public static function obtenerComicsCarrusel($conexion)
 {
     $sql = "
@@ -162,4 +162,17 @@ public static function obtenerComicsCarrusel($conexion)
 
 }
 
+
+public static function agregarProducto($id, $conexion){
+
+    $stmt = mysqli_prepare($conexion, "SELECT * FROM productos WHERE id_producto = ?");
+
+    mysqli_stmt_bind_param($stmt, "i", $id);
+
+    mysqli_stmt_execute($stmt);
+    $resultado = mysqli_stmt_get_result($stmt);
+    mysqli_stmt_close($stmt);
+    $producto = mysqli_fetch_assoc($resultado);
+    return $producto;
+}
 }

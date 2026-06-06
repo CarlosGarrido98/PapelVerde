@@ -63,6 +63,11 @@ switch ($method) {
             case '/logout':
                 LoginController::logout();
                 break;
+            
+            case '/carrito/agregar':
+                require_once 'controllers/CarritoController.php';
+                CarritoController::agregar();
+                break;  
 
             default:
                 require_once 'views/404.php';

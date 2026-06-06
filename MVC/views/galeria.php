@@ -16,6 +16,20 @@
 <?php include 'views/header.php'; ?>
 
 <main>
+
+<section class="container my-5 text-center" style="color: #254B36;">
+    <h1>Galería</h1>
+
+    <div
+        style="
+            width: 1000px;
+            height: 3px;
+            background-color: #254B36;
+            margin: 10px auto 0;
+            border-radius: 10px;
+        ">
+    </div>
+</section>
 <!-- Galería de libros -->
 <section class="container my-5">
 

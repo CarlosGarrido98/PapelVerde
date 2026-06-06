@@ -69,7 +69,7 @@
 
 <!-- Scripts  -->
 <script src="js/login.js"> </script>
-<script src="js/validaciones.js"></script>
+
 
 
 <!-- Bootstrap JS -->

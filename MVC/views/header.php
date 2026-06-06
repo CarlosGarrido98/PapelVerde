@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Papel Verde</title>
-    <!-- Links a Bootstrap y css -->
-    <link rel="icon"type="image/png" href="img/imgPapelVerde/Logoico.ico">
-    <!-- Links a Bootstrap y css -->
+    <link rel="icon" type="image/png" href="img/imgPapelVerde/Logoico.ico">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
-
 <body>
-<?php session_start(); ?>
-    <!-- Header  -->
+<?php 
+// 1. Aseguramos que la sesión está activa para leer el carrito real
+if (session_status() === PHP_SESSION_NONE) {
+    session_start(); 
+}
+
+// 2. Contamos cuántos elementos reales hay en la sesión (si no existe, el total es 0)
+$totalProductos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
+?>
+
     <header class="bg-light">
         <div class="container">
             <div class="row align-items-center">
@@ -36,63 +41,103 @@
                     <a href="home"><img src="img/imgPapelVerde/Logotipo1.png" class="img-fluid" style="max-width: 150px;" alt="Logo de Papel Verde"></a>
                 </div>
 
-                <div class="col-xl-3 col-4 d-flex justify-content-end">
+                <div class="col-xl-3 col-4 d-flex justify-content-end align-items-center">
                     <?php
                     $ret = '<a href="login"><button class="btn bi bi-person fs-5"></button></a>';
-                        if(isset($_SESSION["usuario"])){
-                  
-                            $ret = '<a href="perfil">
-                                        <img
-                                            src="'.$_SESSION["usuario"]->getImagenUrl().'"
-                                            alt="Foto de perfil"
-                                            class="rounded-circle img-fluid mb-3"
-                                            style="width: 50px; height: 50px; object-fit: cover;"
-                                        >
-                                    </a>';
-                        }
-                        echo $ret;
+                    if(isset($_SESSION["usuario"])){
+                        $ret = '<a href="perfil" class="me-2">
+                                    <img src="'.$_SESSION["usuario"]->getImagenUrl().'"
+                                         alt="Foto de perfil"
+                                         class="rounded-circle img-fluid"
+                                         style="width: 40px; height: 40px; object-fit: cover;"
+                                    >
+                                </a>';
+                    }
+                    echo $ret;
                     ?>
                     
-                    <button class="btn bi bi-cart fs-5"></button>
+                    <button class="btn bi bi-cart fs-5 position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#carritoLateral" aria-controls="carritoLateral">
+                        <?php if($totalProductos > 0): ?>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
+                                <?= $totalProductos; ?>
+                            </span>
+                        <?php endif; ?>
+                    </button>
                 </div>
                 
             </div>
         </div>
     </header>
 
-    <nav class="nav  border border-1" style='background-image: url("img/bg-footer.jpeg")'>
-
-    <div class="nav-box d-flex justify-content-center m-3">
-        <ul class="list-nav">
-            <li class="nav-item">
-                <a class="link-n" href="home">Home</a>
-            </li>
-            <li class="nav-item">
-                <a class="link-n" href="galeria">Galería</a>
-            </li>
-            <li class="nav-item">
-                <a class="link-n" href="about">About</a>
-            </li>
-            <?php
-            if(isset($_SESSION["usuario"])){
-                if($_SESSION["usuario"]->isAdministrador() == 1){
-                    echo '<li class="nav-item">
-                            <a class="link-n" href="gestion">Gestión</a>
-                          </li>';
+    <nav class="nav border border-1" style='background-image: url("img/bg-footer.jpeg")'>
+        <div class="nav-box d-flex justify-content-center m-3">
+            <ul class="list-nav">
+                <li class="nav-item"><a class="link-n" href="home">Home</a></li>
+                <li class="nav-item"><a class="link-n" href="galeria">Galería</a></li>
+                <li class="nav-item"><a class="link-n" href="about">About</a></li>
+                <?php
+                if(isset($_SESSION["usuario"])){
+                    if($_SESSION["usuario"]->isAdministrador() == 1){
+                        echo '<li class="nav-item"><a class="link-n" href="gestion">Gestión</a></li>';
+                    }
                 }
-                
-            }
-            ?>
-        </ul>
-        
-        <form action="/buscar" method="GET" class="d-flex nav-search ">
-            <input class = "input-buscador" type="search" name="q" placeholder="Buscar..." required>
-            <button class="bi bi-search mx-2 btn-buscar" type="submit"></button>
-        </form>
-    </div>
-        
-    
+                ?>
+            </ul>
+            
+            <form action="/buscar" method="GET" class="d-flex nav-search">
+                <input class="input-buscador" type="search" name="q" placeholder="Buscar..." required>
+                <button class="bi bi-search mx-2 btn-buscar" type="submit"></button>
+            </form>
+        </div>
     </nav>
 
-    </body>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="carritoLateral" aria-labelledby="carritoLateralLabel">
+        <div class="offcanvas-header bg-light border-bottom">
+            <h5 class="offcanvas-title" id="carritoLateralLabel"><i class="bi bi-cart3 me-2"></i>Tu Carrito</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        
+        <div class="offcanvas-body d-flex flex-column justify-content-between">
+            
+            <div class="productos-carrito-wrapper">
+                <?php if($totalProductos === 0): ?>
+                    <div class="text-center my-5 text-muted">
+                        <i class="bi bi-cart-x fs-1"></i>
+                        <p class="mt-2">El carrito está vacío.</p>
+                    </div>
+                <?php else: ?>
+                    <div class="card mb-3 border-0 border-bottom pb-2">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-3">
+                                <img src="img/imgPapelVerde/Logotipo1.png" class="img-fluid rounded" alt="Producto de muestra">
+                            </div>
+                            <div class="col-7 ps-2">
+                                <h6 class="card-title mb-0" style="font-size: 0.9rem;">Producto en Carrito</h6>
+                                <p class="card-text text-muted mb-0" style="font-size: 0.8rem;">Añadido correctamente</p>
+                            </div>
+                            <div class="col-2 text-end">
+                                <button class="btn text-danger bi bi-trash3 p-1"></button>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+
+            <?php if($totalProductos > 0): ?>
+                <div class="border-top pt-3 bg-white">
+                    <div class="d-flex justify-content-between mb-3 fw-bold">
+                        <span>Total estimado:</span>
+                        <span class="text-success">Calculando...</span>
+                    </div>
+                    <a href="/checkout" class="btn btn-success w-100 py-2 mb-2">Procesar Pedido</a>
+                    <button class="btn btn-outline-secondary btn-sm w-100" data-bs-dismiss="offcanvas">Seguir comprando</button>
+                </div>
+            <?php endif; ?>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bundle.min.js"></script>
+    <script src="js/carrito.js"></script> 
+</body>
 </html>
