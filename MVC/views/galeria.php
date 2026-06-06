@@ -16,6 +16,178 @@
 <?php include 'views/header.php'; ?>
 
 <main>
-    <h1> Con dioggito haciendo el ultimo esfuerzo para el milagro de DAW </h1>
+<!-- Galería de libros -->
+<section class="container my-5">
+
+    <div class="d-flex justify-content-center align-items-center mb-3 text-center">
+        <h3 class="fw-bold" style="color: #254B36; ">
+            Colección de Libros
+        </h3>
+
+        <a href="#" class="text-success text-decoration-none">
+            
+        </a>
+    </div>
+
+    <div class="carousel-container position-relative">
+
+        <button class="carousel-btn left" id="prevBtnLibros">
+            <i class="bi bi-chevron-left"></i>
+        </button>
+
+       <div class="carousel-track" id="carouselTrackLibros">
+
+
+            <?php while($libro = mysqli_fetch_assoc($librosCarrusel)): ?>
+ 
+                <div class="book-card">
+
+                    <img
+                        src="<?= $libro['imagen_url'] ?>"
+                        alt="<?= $libro['nombre'] ?>"
+                    >
+
+                    <h6>
+                        <?= $libro['nombre'] ?>
+                    </h6>
+
+                    <p>
+                        <?= $libro['autor'] ?>
+                    </p>
+
+                    <span>
+                        €<?= number_format($libro['precio'],2,',','.') ?>
+                    </span>
+
+                </div>
+
+            <?php endwhile; ?>
+
+        </div>
+
+        <button class="carousel-btn right" id="nextBtnLibros">
+            <i class="bi bi-chevron-right"></i>
+        </button>
+
+    </div>
+
+<!-- Galería de mangas -->
+<section class="container my-5"> 
+    <div class="d-flex justify-content-center align-items-center mb-3 text-center">
+        <h3 class="fw-bold" style="color: #254B36; ">
+            Colección de Mangas
+        </h3>
+
+        <a href="#" class="text-success text-decoration-none">
+            
+        </a>
+    </div>
+
+    <div class="carousel-container position-relative">
+
+        <button class="carousel-btn left" id="prevBtnMangas">
+            <i class="bi bi-chevron-left"></i>
+        </button>
+
+        <div class="carousel-track" id="carouselTrackMangas">
+
+            <?php while($manga = mysqli_fetch_assoc($mangasCarrusel)): ?>
+ 
+                <div class="book-card">
+
+                    <img
+                        src="<?= $manga['imagen_url'] ?>"
+                        alt="<?= $manga['nombre'] ?>"
+                    >
+
+                    <h6>
+                        <?= $manga['nombre'] ?>
+                    </h6>
+
+                    <p>
+                        <?= $manga['autor'] ?>
+                    </p>
+
+                    <span>
+                        €<?= number_format($manga['precio'],2,',','.') ?>
+                    </span>
+
+                </div>
+
+            <?php endwhile; ?>
+
+        </div>
+
+        <button class="carousel-btn right" id="nextBtnMangas">
+            <i class="bi bi-chevron-right"></i>
+        </button>
+
+    </div>
+
+<!-- Galería de comics -->
+<section class="container my-5"> 
+    <div class="d-flex justify-content-center align-items-center mb-3 text-center">
+        <h3 class="fw-bold" style="color: #254B36; ">
+            Colección de Comics
+        </h3>
+
+        <a href="#" class="text-success text-decoration-none">
+            
+        </a>
+    </div>
+
+    <div class="carousel-container position-relative">
+
+        <button class="carousel-btn left" id="prevBtnComics">
+            <i class="bi bi-chevron-left"></i>
+        </button>
+
+        <div class="carousel-track" id="carouselTrackComics">
+
+            <?php while($comic = mysqli_fetch_assoc($comicsCarrusel)): ?>
+ 
+                <div class="book-card">
+
+                    <img
+                        src="<?= $comic['imagen_url'] ?>"
+                        alt="<?= $comic['nombre'] ?>"
+                    >
+
+                    <h6>
+                        <?= $comic['nombre'] ?>
+                    </h6>
+
+                    <p>
+                        <?= $comic['autor'] ?>
+                    </p>
+
+                    <span>
+                        €<?= number_format($comic['precio'],2,',','.') ?>
+                    </span>
+
+                </div>
+
+            <?php endwhile; ?>
+
+        </div>
+
+        <button class="carousel-btn right" id="nextBtnComics">
+            <i class="bi bi-chevron-right"></i>
+        </button>
+
+    </div>
+
+
+</section>
+
 </main>
+
+
 <?php include 'views/footer.php'; ?>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<script src="js/carruselgaleria.js"></script>
+</body>    
+
+</html>

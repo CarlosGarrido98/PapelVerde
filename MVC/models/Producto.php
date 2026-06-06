@@ -32,11 +32,56 @@ class Producto
         p.imagen_url,
         l.autor
     FROM productos p
-    LEFT JOIN libros l ON p.id_producto = l.id_producto
+    RIGHT JOIN libros l ON p.id_producto = l.id_producto
     LIMIT 10
 
     ";
 
     return mysqli_query($conexion, $sql);
 }
+
+public static function obtenerMangasCarrusel($conexion)
+{
+    $sql = "
+            SELECT
+        p.id_producto,
+        p.nombre,
+        p.precio,
+        p.imagen_url,
+        m.autor
+    FROM productos p
+    RIGHT JOIN mangas m ON p.id_producto = m.id_producto
+    
+
+    ";
+
+    return mysqli_query($conexion, $sql);   
+
+
+
+
+}
+
+public static function obtenerComicsCarrusel($conexion)
+{
+    $sql = "
+            SELECT
+        p.id_producto,
+        p.nombre,
+        p.precio,
+        p.imagen_url,
+        c.autor
+    FROM productos p
+    RIGHT JOIN comics c ON p.id_producto = c.id_producto
+    
+
+    ";
+
+    return mysqli_query($conexion, $sql);   
+
+
+
+
+}
+
 }

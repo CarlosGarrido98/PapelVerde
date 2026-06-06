@@ -9,6 +9,10 @@ body {
     flex-direction: column;
 }
 
+nav{
+  background-color: #14532D
+}
+
 main {
     flex: 1;
 }
@@ -126,6 +130,33 @@ footer{
   color:#235437;
   font-weight: bold;
   font-size: 1.3em;
+}
+
+.input-buscador{
+  background-color: rgb(223, 222, 222);
+  width: 30rem;
+  padding: 0.35rem;
+  color:black;
+  border: none;
+}
+
+.btn-buscar{
+  width: 2.5rem;
+  border: none;
+  background-color: #6ae99d;
+  color: white;
+}
+
+.list-nav{
+  display: flex;
+  align-items: center;
+  margin: auto;
+  list-style: none;
+}
+
+.list-nav li a{
+  text-decoration: none;
+  color: white;
 }
 
 /*  RESPONSIVE  PARA EL MÓVIL */
