@@ -33,7 +33,7 @@ class Producto
         l.autor
     FROM productos p
     LEFT JOIN libros l ON p.id_producto = l.id_producto
-    WHERE p.id_producto IN (1,2,3,4,5,6,7,8,9,10)
+    LIMIT 10
 
     ";
 
