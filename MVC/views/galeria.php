@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papel Verde</title>
+    <title>Nuestros Productos</title>
     <!-- Links a Bootstrap y css -->
     <link rel="icon"type="image/png" href="img/imgPapelVerde/Logoico.ico">
     <!-- Links a Bootstrap y css -->
