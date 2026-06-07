@@ -40,22 +40,22 @@
     </div>
 
 
-
-    <form id="registroForm" >
+    <!-- Formulario de registro -->
+    <form id="registroForm" method="POST" action="/registrarUsuario" >
             <!-- Nombre -->
             <label>Nombre y Apellidos</label>
-            <input type="text" id="nombre" required placeholder="Ej: Juan Garcia">
+            <input type="text" name="nombre" id="nombre" required placeholder="Ej: Juan Garcia">
             <span class="warn" id="nameError"></span>
             
             <!-- Correo -->
             <label>Correo electrónico </label>
-            <input type="email" id="email" required placeholder="Ej: juan@gmail.com">
+            <input type="email" name="email" id="email" required placeholder="Ej: juan@gmail.com">
             <span class="warn" id="emailError"></span>
 
             <!-- Contraseña -->
             <label>Contraseña </label>
                 <div style="position: relative;">
-                <input type="password" id="password" required>
+                <input type="password" name="password" id="password" required>
                 <i id="togglePassword" 
                 class="bi bi-eye" 
                 style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
@@ -66,7 +66,7 @@
             <!-- Confirmar contraseña -->
             <label>Confirmar contraseña </label>
             <div style="position: relative;">
-                 <input type="password" id="confirmPassword" required>
+                 <input type="password" name="confirmPassword" id="confirmPassword" required>
                 <i id="togglePasswordConfirm" 
                 class="bi bi-eye" 
                 style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
@@ -76,7 +76,7 @@
 
             <!-- Sexo -->
             <label>Sexo</label>
-            <select>
+            <select name="sexo">
                 <option value="">Seleccionar</option>
                 <option>Masculino</option>
                 <option>Femenino</option>
@@ -85,15 +85,15 @@
 
             <!-- Fecha -->
             <label>Fecha de nacimiento</label>
-            <input type="date">
+            <input type="date" name="fechaNacimiento">
 
             <!-- Dirección -->
             <label>Dirección</label>
-            <input type="text" id="direccion">
+            <input type="text" name="direccion" id="direccion">
 
             <!-- País -->
             <label>País</label>
-            <select id="pais">
+            <select name="pais" id="pais">
                 <option value="">Seleccionar</option>
                 <option>España</option>
                 <option>México</option>

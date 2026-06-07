@@ -63,7 +63,8 @@ switch ($method) {
             case '/logout':
                 LoginController::logout();
                 break;
-            
+
+
             case '/carrito/agregar':
                 require_once 'controllers/CarritoController.php';
                 CarritoController::agregar();
@@ -82,10 +83,18 @@ switch ($method) {
 
             case '/login':
                 LoginController::procesarLogin();
+                break;
+            
+            case '/registrarUsuario':
+                require_once 'controllers/RegistroController.php';  
+
+
             default:
             echo "Error, método no permitido";
             break;
+            
         }
+        
     break;
 
     default:

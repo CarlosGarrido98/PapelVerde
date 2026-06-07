@@ -9,6 +9,15 @@ class Usuario {
     private ?string $imagenUrl; // Puede ser null si el usuario no tiene foto de perfil
     private bool $esAdministrador;
 
+    private ?string $sexo;
+    private ?string $fechaNacimiento;
+    private ?string $direccion;
+    private ?string $pais;
+    private ?string $tarjetaCredito;
+
+    private bool $activarNotificaciones;
+    private bool $recibirRevistaDigital;
+
     // Constructor para inicializar el objeto
     public function __construct(
         ?int $idUsuario, 
@@ -16,7 +25,17 @@ class Usuario {
         string $email, 
         string $contrasena, 
         ?string $imagenUrl = null, 
-        bool $esAdministrador = false // Por defecto los usuarios creados no son admin
+        bool $esAdministrador = false,// Por defecto los usuarios creados no son admin
+
+        ?string $sexo = null,
+        ?string $fechaNacimiento = null,
+        ?string $direccion = null,
+        ?string $pais = null,
+        ?string $tarjetaCredito = null,
+
+        bool $activarNotificaciones = false,
+        bool $recibirRevistaDigital = false
+
     ) {
         $this->idUsuario = $idUsuario;
         $this->nombre = $nombre;
@@ -24,6 +43,14 @@ class Usuario {
         $this->contrasena = $contrasena;
         $this->imagenUrl = $imagenUrl;
         $this->esAdministrador = $esAdministrador;
+
+        $this->sexo = $sexo;
+        $this->fechaNacimiento = $fechaNacimiento;
+        $this->direccion = $direccion;
+        $this->pais = $pais;
+        $this->tarjetaCredito = $tarjetaCredito;
+        $this->activarNotificaciones = $activarNotificaciones;
+        $this->recibirRevistaDigital = $recibirRevistaDigital;
     }
 
 
@@ -54,6 +81,43 @@ class Usuario {
     public function isAdministrador(): bool {
         return $this->esAdministrador;
     }
+
+        public function getSexo(): ?string
+    {
+        return $this->sexo;
+    }
+
+    public function getFechaNacimiento(): ?string
+    {
+        return $this->fechaNacimiento;
+    }
+
+    public function getDireccion(): ?string
+    {
+        return $this->direccion;
+    }
+
+    public function getPais(): ?string
+    {
+        return $this->pais;
+    }
+
+    public function getTarjetaCredito(): ?string
+    {
+        return $this->tarjetaCredito;
+    }
+
+    public function isActivarNotificaciones(): bool
+    {
+        return $this->activarNotificaciones;
+    }
+
+    public function isRecibirRevistaDigital(): bool
+    {
+        return $this->recibirRevistaDigital;
+    }
+
+
 
     // ==========================================
     // SETTERS (Para modificar los valores)
@@ -86,4 +150,83 @@ class Usuario {
     public function setEsAdministrador(bool $esAdministrador): void {
         $this->esAdministrador = $esAdministrador;
     }
+
+        public function setSexo(?string $sexo): void
+    {
+        $this->sexo = $sexo;
+    }
+
+    public function setFechaNacimiento(?string $fechaNacimiento): void
+    {
+        $this->fechaNacimiento = $fechaNacimiento;
+    }
+
+    public function setDireccion(?string $direccion): void
+    {
+        $this->direccion = $direccion;
+    }
+
+    public function setPais(?string $pais): void
+    {
+        $this->pais = $pais;
+    }
+
+    public function setTarjetaCredito(?string $tarjetaCredito): void
+    {
+        $this->tarjetaCredito = $tarjetaCredito;
+    }
+
+    public function setActivarNotificaciones(bool $activarNotificaciones): void
+    {
+        $this->activarNotificaciones = $activarNotificaciones;
+    }
+
+    public function setRecibirRevistaDigital(bool $recibirRevistaDigital): void
+    {
+        $this->recibirRevistaDigital = $recibirRevistaDigital;
+}
+
+
+// Método para registrar un nuevo usuario en la BDD
+public static function registrar(
+    mysqli $conexion,
+    Usuario $usuario
+): bool
+{
+    $sql = "
+        INSERT INTO usuarios
+        (
+            nombre,
+            email,
+            contrasena,
+            sexo,
+            fecha_nacimiento,
+            direccion,
+            pais,
+            tarjeta_credito,
+            activar_notificaciones,
+            recibir_revista_digital,
+            imagenUrl,
+            esAdministrador
+        )
+        VALUES
+        (
+            '{$usuario->getNombre()}',
+            '{$usuario->getEmail()}',
+            '{$usuario->getContrasena()}',
+            '{$usuario->getSexo()}',
+            '{$usuario->getFechaNacimiento()}',
+            '{$usuario->getDireccion()}',
+            '{$usuario->getPais()}',
+            '{$usuario->getTarjetaCredito()}',
+            " . ($usuario->isActivarNotificaciones() ? 1 : 0) . ",
+            " . ($usuario->isRecibirRevistaDigital() ? 1 : 0) . ",
+            NULL,
+            0
+        )
+    ";
+
+    return mysqli_query($conexion, $sql);
+}
+
 }
