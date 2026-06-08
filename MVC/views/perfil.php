@@ -15,8 +15,7 @@
 
 <?php 
 include 'views/header.php'; 
-    
-
+// Sacar el usuario de la sesion
     $us = $_SESSION["usuario"];
 ?>
 

@@ -15,24 +15,28 @@
 
 <?php include 'views/header.php'; ?>
 
+// Contenido de la página 404
 <main class="container text-center py-5">
 
+    // Imagen de error 404
     <img 
         src="img/imgPapelVerde/404.webp" 
         alt="Página no encontrada"
         class="img-fluid mb-4"
         style="max-width: 320px;"
     >
-
+    // Título de error
     <h1 class="fw-bold mb-3" style="color: #254B36;">
         404 - Página no encontrada
     </h1>
 
+    // Botón para volver al inicio
     <a href="/" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
         Volver al inicio
     </a>
 
 </main>
+
 
 <?php include 'views/footer.php'; ?>
 
