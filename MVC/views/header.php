@@ -11,6 +11,7 @@
 </head>
 
 <body>
+
 <?php 
 // 1. Aseguramos que la sesión está activa para leer el carrito real
 if (session_status() === PHP_SESSION_NONE) {
@@ -38,7 +39,7 @@ $totalProductos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
                 </div>
                 
                 <div class="col-xl-6 col-4 d-flex justify-content-center">
-                    <a href="home"><img src="img/imgPapelVerde/Logotipo1.png" class="img-fluid" style="max-width: 150px;" alt="Logo de Papel Verde"></a>
+                    <a href="home"><img src="img/imgPapelVerde/Logotipo1.webp" class="img-fluid" style="max-width: 150px;" alt="Logo de Papel Verde"></a>
                 </div>
 
                 <div class="col-xl-3 col-4 d-flex justify-content-end align-items-center">
@@ -55,7 +56,7 @@ $totalProductos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
                     }
                     echo $ret;
                     ?>
-                    
+                    <!-- Botón del carrito con contador -->
                     <button class="btn bi bi-cart fs-5 position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#carritoLateral" aria-controls="carritoLateral">
                         <?php if($totalProductos > 0): ?>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
@@ -69,7 +70,7 @@ $totalProductos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
         </div>
     </header>
 
-    <nav class="nav border border-1" style='background-image: url("img/bg-footer.jpeg")'>
+    <nav class="nav border border-1" style='background-image: url("img/imgPapelVerde/bg-footer.webp")'>
         <div class="nav-box d-flex justify-content-center m-3">
             <ul class="list-nav">
                 <li class="nav-item"><a class="link-n" href="home">Home</a></li>
@@ -109,7 +110,7 @@ $totalProductos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
                     <div class="card mb-3 border-0 border-bottom pb-2">
                         <div class="row g-0 align-items-center">
                             <div class="col-3">
-                                <img src="img/imgPapelVerde/Logotipo1.png" class="img-fluid rounded" alt="Producto de muestra">
+                                <img src="img/imgPapelVerde/Logotipo1.webp" class="img-fluid rounded" alt="Producto de muestra">
                             </div>
                             <div class="col-7 ps-2">
                                 <h6 class="card-title mb-0" style="font-size: 0.9rem;">Producto en Carrito</h6>

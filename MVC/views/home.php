@@ -18,7 +18,7 @@
         
        <div class="row justify-content-center"> 
 
-            <div class="col-12 col-xl-6 Formulario justify-content-center align-content-center" style="background-image: url(img/fondoFormu.jpg); background-size: cover;">
+            <div class="col-12 col-xl-6 Formulario justify-content-center align-content-center" style="background-image: url(img/imgPapelVerde/fondoFormu.webp); background-size: cover;">
                 <div class="m-4">
                     <h2 class="text-center mb-4" style="color: #254B36;">ÚNETE A NUESTRA COMUNIDAD</h2>
                     

@@ -15,7 +15,7 @@
 
 <!-- FOOTER  -->
 
-<footer class="container-fluid p-2" style='background-image: url("img/bg-footer.jpeg")'>
+<footer class="container-fluid p-2" style='background-image: url("img/imgPapelVerde/bg-footer.webp")' >
     
     <div class="row m-2">
         <div class="col-xl-6 col-12">
