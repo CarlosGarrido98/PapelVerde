@@ -40,7 +40,7 @@ include 'views/header.php';
 
                     <!-- Nombre -->
                     <h2 class="fw-bold">
-                        Bienvenido,
+                        Bienvenido! 
                         <?php echo $us->getNombre() ?? 'Usuario'; ?>
                     </h2>
 
