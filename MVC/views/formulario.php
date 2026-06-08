@@ -85,7 +85,7 @@
 
             <!-- Fecha -->
             <label>Fecha de nacimiento</label>
-            <input type="date" name="fechaNacimiento">
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento">
 
             <!-- Dirección -->
             <label>Dirección</label>
@@ -104,16 +104,16 @@
             <!-- Tarjeta (oculta  hasta que se seleccione una dirección y  un país) -->
             <div id="tarjetaContainer" style="display: none;" >
                 <label>Tarjeta de crédito</label>
-                <input type="text" id="tarjeta" placeholder="1234 5678 9012 3456">
+                <input type="text" id="tarjeta"  name="tarjeta" placeholder="1234 5678 9012 3456">
             </div>
 
             <!-- Cajitas Checkboxes -->
             <label>
-                <input type="checkbox"> Activar notificaciones
+                <input type="checkbox" name="activar_notificaciones"> Activar notificaciones
             </label>
 
             <label>
-                <input type="checkbox"> Recibir revista digital
+                <input type="checkbox" name="recibir_revista_digital"> Recibir revista digital
             </label>
 
             <br><br>

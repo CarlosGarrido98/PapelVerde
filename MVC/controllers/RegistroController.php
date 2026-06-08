@@ -16,7 +16,8 @@ $usuario = new Usuario(
         PASSWORD_DEFAULT
     ),
 
-    null,
+    'img/imgUsuarios/default.webp', // <- Imagen pordefecto
+
     false,
 
     $_POST['sexo'] ?? null,
@@ -41,14 +42,6 @@ Usuario::registrar(
 );
 
 
-
-echo "<pre>";
-print_r($_POST);
-echo "</pre>";
-
-die();
-
-
-header("Location: /");
+header("Location: /login");
 exit;
 

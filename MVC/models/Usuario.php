@@ -184,7 +184,7 @@ class Usuario {
     public function setRecibirRevistaDigital(bool $recibirRevistaDigital): void
     {
         $this->recibirRevistaDigital = $recibirRevistaDigital;
-}
+    }
 
 
 // Método para registrar un nuevo usuario en la BDD
@@ -207,7 +207,7 @@ public static function registrar(
             activar_notificaciones,
             recibir_revista_digital,
             imagenUrl,
-            esAdministrador
+            admin
         )
         VALUES
         (
@@ -221,11 +221,13 @@ public static function registrar(
             '{$usuario->getTarjetaCredito()}',
             " . ($usuario->isActivarNotificaciones() ? 1 : 0) . ",
             " . ($usuario->isRecibirRevistaDigital() ? 1 : 0) . ",
-            NULL,
+            '{$usuario->getImagenUrl()}',
             0
         )
     ";
 
+        
+    
     return mysqli_query($conexion, $sql);
 }
 

@@ -88,7 +88,7 @@ switch ($method) {
             
             case '/registrarUsuario':
                 require_once 'controllers/RegistroController.php';  
-
+                break;
 
             default:
             echo "Error, método no permitido";
