@@ -69,6 +69,10 @@ switch ($method) {
                 require_once 'controllers/CarritoController.php';
                 CarritoController::agregar();
                 break;  
+            
+            case 'nath':
+                require_once 'views/nath.php';
+                break;
 
             default:
                 require_once 'views/404.php';
