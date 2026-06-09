@@ -60,6 +60,11 @@ switch ($method) {
                     require_once 'views/perfil.php';
                     break;
             
+            case '/editPerfil':
+                    require_once 'views/editPerfil.php';
+                    break;
+
+
             case '/logout':
                 LoginController::logout();
                 break;

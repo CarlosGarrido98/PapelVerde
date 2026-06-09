@@ -53,7 +53,7 @@ include 'views/header.php';
                     <!-- Botones -->
                     <div class="d-flex justify-content-center gap-2 flex-wrap">
 
-                        <a href="/editar" class="btn btn-success">
+                        <a href="/editPerfil" class="btn btn-success">
                             Editar Perfil
                         </a>
 

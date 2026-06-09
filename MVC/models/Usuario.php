@@ -242,6 +242,38 @@ class Usuario {
         );
     }
 
+    // Método para actualizar el perfil del usuario
+    public static function actualizarPerfil(
+    mysqli $conexion,
+    int $idUsuario,
+    string $nombre,
+    string $email,
+    ?string $sexo,
+    ?string $fechaNacimiento,
+    ?string $direccion,
+    ?string $pais,
+    ?string $tarjetaCredito,
+    bool $notificaciones,
+    bool $revista
+): bool {
+
+    $sql = "
+        UPDATE usuarios
+        SET
+            nombre = '$nombre',
+            email = '$email',
+            sexo = '$sexo',
+            fecha_nacimiento = '$fechaNacimiento',
+            direccion = '$direccion',
+            pais = '$pais',
+            tarjeta_credito = '$tarjetaCredito',
+            activar_notificaciones = " . ($notificaciones ? 1 : 0) . ",
+            recibir_revista_digital = " . ($revista ? 1 : 0) . "
+        WHERE idUsuarios = $idUsuario
+    ";
+
+    return mysqli_query($conexion, $sql);
+}
 
 
 }
