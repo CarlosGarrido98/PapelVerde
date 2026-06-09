@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-06-2026 a las 15:47:31
+-- Tiempo de generación: 09-06-2026 a las 14:04:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.5.1
 
@@ -32,24 +32,25 @@ CREATE TABLE `comics` (
   `autor` varchar(255) DEFAULT NULL,
   `ilustrador` varchar(255) DEFAULT NULL,
   `editorial` varchar(255) DEFAULT NULL,
-  `numero` int(11) DEFAULT NULL
+  `numero` int(11) DEFAULT NULL,
+  `isbn` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `comics`
 --
 
-INSERT INTO `comics` (`id_producto`, `autor`, `ilustrador`, `editorial`, `numero`) VALUES
-(11, 'Jeph Loeb', 'Jim Lee', 'DC Comics', 1),
-(12, 'Dan Jurgens', 'Bernard Chang', 'DC Comics', 1),
-(13, 'Joshua Williamson', 'Carmine Di Giandomenico', 'DC Comics', 1),
-(14, 'Robert Kirkman', 'Cory Walker', 'Image Comics', 1),
-(15, 'Kentaro Takekuma', 'Charlie Nozawa', 'Nintendo Comics System', 1),
-(16, 'Francisco Ibáñez', 'Francisco Ibáñez', 'Bruguera', 1),
-(17, 'Brian Michael Bendis', 'Ivan Reis', 'DC Comics', 1),
-(18, 'Hergé', 'Hergé', 'Casterman', 1),
-(19, 'José Escobar', 'José Escobar', 'Bruguera', 1),
-(20, 'Stan Lee', 'Steve Ditko', 'Marvel Comics', 1);
+INSERT INTO `comics` (`id_producto`, `autor`, `ilustrador`, `editorial`, `numero`, `isbn`) VALUES
+(11, 'Jeph Loeb', 'Jim Lee', 'DC Comics', 1, '9789876543210'),
+(12, 'Dan Jurgens', 'Bernard Chang', 'DC Comics', 1, '9789876543211'),
+(13, 'Joshua Williamson', 'Carmine Di Giandomenico', 'DC Comics', 1, '9789876543212'),
+(14, 'Robert Kirkman', 'Cory Walker', 'Image Comics', 1, '9789876543213'),
+(15, 'Kentaro Takekuma', 'Charlie Nozawa', 'Nintendo Comics System', 1, '9789876543214'),
+(16, 'Francisco Ibáñez', 'Francisco Ibáñez', 'Bruguera', 1, '9789876543215'),
+(17, 'Brian Michael Bendis', 'Ivan Reis', 'DC Comics', 1, '9789876543216'),
+(18, 'Hergé', 'Hergé', 'Casterman', 1, '9789876543217'),
+(19, 'José Escobar', 'José Escobar', 'Bruguera', 1, '9789876543218'),
+(20, 'Stan Lee', 'Steve Ditko', 'Marvel Comics', 1, '9789876543219');
 
 -- --------------------------------------------------------
 
@@ -92,24 +93,25 @@ CREATE TABLE `mangas` (
   `autor` varchar(255) DEFAULT NULL,
   `editorial` varchar(255) DEFAULT NULL,
   `volumen` int(11) DEFAULT NULL,
-  `coleccion` varchar(255) DEFAULT NULL
+  `coleccion` varchar(255) DEFAULT NULL,
+  `isbn` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `mangas`
 --
 
-INSERT INTO `mangas` (`id_producto`, `autor`, `editorial`, `volumen`, `coleccion`) VALUES
-(21, 'Hajime Isayama', 'Norma Editorial', 1, 'Shingeki no Kyojin'),
-(22, 'Shinichi Sakamoto', 'Milky Way Ediciones', 1, 'The Climber'),
-(23, 'Yoshiyuki Sadamoto', 'Norma Editorial', 1, 'Evangelion'),
-(24, 'Riichiro Inagaki', 'Ivrea', 1, 'Eyeshield 21'),
-(25, 'Gege Akutami', 'Norma Editorial', 1, 'Jujutsu Kaisen'),
-(26, 'Takeru Hokazono', 'Shueisha', 1, 'Kagurabachi'),
-(27, 'Masashi Kishimoto', 'Planeta Cómic', 1, 'Naruto'),
-(28, 'Eiichiro Oda', 'Planeta Cómic', 1, 'One Piece'),
-(29, 'Yoichi Takahashi', 'Ivrea', 1, 'Captain Tsubasa'),
-(30, 'Tatsuki Fujimoto', 'Norma Editorial', 1, 'Chainsaw Man');
+INSERT INTO `mangas` (`id_producto`, `autor`, `editorial`, `volumen`, `coleccion`, `isbn`) VALUES
+(21, 'Hajime Isayama', 'Norma Editorial', 1, 'Shingeki no Kyojin', '9781234567890'),
+(22, 'Shinichi Sakamoto', 'Milky Way Ediciones', 1, 'The Climber', '9781234567891'),
+(23, 'Yoshiyuki Sadamoto', 'Norma Editorial', 1, 'Evangelion', '9781234567892'),
+(24, 'Riichiro Inagaki', 'Ivrea', 1, 'Eyeshield 21', '9781234567893'),
+(25, 'Gege Akutami', 'Norma Editorial', 1, 'Jujutsu Kaisen', '9781234567894'),
+(26, 'Takeru Hokazono', 'Shueisha', 1, 'Kagurabachi', '9781234567895'),
+(27, 'Masashi Kishimoto', 'Planeta Cómic', 1, 'Naruto', '9781234567896'),
+(28, 'Eiichiro Oda', 'Planeta Cómic', 1, 'One Piece', '9781234567897'),
+(29, 'Yoichi Takahashi', 'Ivrea', 1, 'Captain Tsubasa', '9781234567898'),
+(30, 'Tatsuki Fujimoto', 'Norma Editorial', 1, 'Chainsaw Man', '9781234567899');
 
 -- --------------------------------------------------------
 
@@ -133,14 +135,14 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `precio`, `stock`, `tipo`, `imagen_url`, `sinopsis`) VALUES
 (1, 'El amor en los tiempos del cólera', 9.99, 10, 'libro', 'img/Libros/amor_colera.webp', 'Una historia de amor que atraviesa décadas, marcada por la paciencia y la fidelidad de sus protagonistas.'),
-(2, 'Der Pate', 15.50, 8, 'libro', 'img/Libros/DerPate.webp', 'Relato sobre el poder, la familia y el crimen organizado a través de la vida de la familia Corleone.'),
-(3, 'Project Hail Mary', 19.00, 6, 'libro', 'img/Libros/hailmarry.webp', 'Un astronauta despierta solo en el espacio con la misión de salvar a la humanidad.'),
+(2, 'Der Pate', 5.50, 8, 'libro', 'img/Libros/DerPate.webp', 'Relato sobre el poder, la familia y el crimen organizado a través de la vida de la familia Corleone.'),
+(3, 'Project Hail Mary', 9.99, 6, 'libro', 'img/Libros/hailmarry.webp', 'Un astronauta despierta solo en el espacio con la misión de salvar a la humanidad.'),
 (4, 'Hamlet', 12.50, 5, 'libro', 'img/Libros/Hamlet.webp', 'Tragedia sobre la venganza, la locura y la duda existencial del príncipe de Dinamarca.'),
 (5, 'Hacia rutas salvajes', 18.00, 7, 'comic', 'img/Libros/rutas_salvajes.webp', 'Historia real de un joven que abandona todo para buscar libertad en la naturaleza.'),
 (6, 'La metamorfosis', 14.00, 9, 'libro', 'img/Libros/metamorfosis.webp', 'Un hombre despierta convertido en insecto, explorando el aislamiento y la incomprensión.'),
-(7, '¿Quién mató a Michael Jackson?', 20.00, 4, 'libro', 'img/Libros/michael.webp', 'Investigación sobre la vida, fama y circunstancias que rodearon la muerte del artista.'),
+(7, '¿Quién mató a Michael Jackson?', 14.99, 4, 'libro', 'img/Libros/michael.webp', 'Investigación sobre la vida, fama y circunstancias que rodearon la muerte del artista.'),
 (8, 'Nada', 13.50, 6, 'libro', 'img/Libros/nada.webp', 'Retrato de la posguerra española a través de la mirada de una joven en Barcelona.'),
-(9, 'La última noche de Ayrton Senna', 21.00, 3, 'libro', 'img/Libros/senna.webp', 'Crónica de la vida y legado del legendario piloto de Fórmula 1.'),
+(9, 'La última noche de Ayrton Senna', 16.65, 3, 'libro', 'img/Libros/senna.webp', 'Crónica de la vida y legado del legendario piloto de Fórmula 1.'),
 (10, 'Viaje al centro de la Tierra', 16.00, 8, 'libro', 'img/Libros/viaje_tierra.webp', 'Aventura clásica sobre una expedición al interior del planeta llena de descubrimientos.'),
 (11, 'Batman: Hush', 17.99, 6, 'comic', 'img/Comics/batman.webp', 'Batman se enfrenta a un misterioso enemigo mientras investiga una compleja conspiración.'),
 (12, 'Batman Beyond', 15.00, 5, 'comic', 'img/Comics/beyond.webp', 'Un nuevo Batman surge en el futuro para proteger Gotham con tecnología avanzada.'),
@@ -170,12 +172,29 @@ INSERT INTO `productos` (`id_producto`, `nombre`, `precio`, `stock`, `tipo`, `im
 --
 
 CREATE TABLE `usuarios` (
-  `id_usuario` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
-  `email` varchar(150) NOT NULL,
+  `idUsuarios` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `contrasena` varchar(255) NOT NULL,
-  `imagen_url` varchar(500) DEFAULT NULL
+  `imagenURL` varchar(255) NOT NULL,
+  `admin` tinyint(1) NOT NULL,
+  `sexo` enum('Hombre','Mujer','Otro') DEFAULT NULL,
+  `fecha_nacimiento` date DEFAULT NULL,
+  `direccion` varchar(255) DEFAULT NULL,
+  `pais` varchar(100) DEFAULT NULL,
+  `tarjeta_credito` varchar(50) DEFAULT NULL,
+  `activar_notificaciones` tinyint(1) DEFAULT 0,
+  `recibir_revista_digital` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`idUsuarios`, `nombre`, `email`, `contrasena`, `imagenURL`, `admin`, `sexo`, `fecha_nacimiento`, `direccion`, `pais`, `tarjeta_credito`, `activar_notificaciones`, `recibir_revista_digital`) VALUES
+(1, 'Admin', 'admin@papelverde.com', 'admin1234', '/img/imgUsuarios/admin.jpg', 1, NULL, NULL, NULL, NULL, NULL, 0, 0),
+(2, 'Dioggito', 'dgt@gmail.com', 'dgt123', '/img/imgUsuarios/dgt.jpg', 0, NULL, NULL, NULL, NULL, NULL, 0, 0),
+(3, 'Nath', 'nath@gmail.com', 'nath123', 'img/imgUsuarios/nath.jpg', 0, 'Mujer', '2005-10-12', 'Calle La chopera,14', 'Colombia', NULL, 0, 0);
 
 --
 -- Índices para tablas volcadas
@@ -209,8 +228,7 @@ ALTER TABLE `productos`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id_usuario`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`idUsuarios`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -226,7 +244,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idUsuarios` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
