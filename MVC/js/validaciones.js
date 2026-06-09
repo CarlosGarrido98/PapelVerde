@@ -60,12 +60,12 @@ form.addEventListener("submit", function(e) {
         e.preventDefault();
     } 
     
-   // else {
+   else {
         // AQUI PARA QUE SALTE EL MODAL DE REGISTRO EXITOSO
-    //    let miModal = new bootstrap.Modal(document.getElementById('registroModal'));
-      //  miModal.show();
-      //  e.preventDefault();
-   // }
+       let miModal = new bootstrap.Modal(document.getElementById('registroModal'));
+      miModal.show();
+      e.preventDefault();
+    }
    
 });
 

@@ -187,48 +187,6 @@ class Usuario {
     }
 
 
-// Método para registrar un nuevo usuario en la BDD
-public static function registrar(
-    mysqli $conexion,
-    Usuario $usuario
-): bool
-{
-    $sql = "
-        INSERT INTO usuarios
-        (
-            nombre,
-            email,
-            contrasena,
-            sexo,
-            fecha_nacimiento,
-            direccion,
-            pais,
-            tarjeta_credito,
-            activar_notificaciones,
-            recibir_revista_digital,
-            imagenUrl,
-            admin
-        )
-        VALUES
-        (
-            '{$usuario->getNombre()}',
-            '{$usuario->getEmail()}',
-            '{$usuario->getContrasena()}',
-            '{$usuario->getSexo()}',
-            '{$usuario->getFechaNacimiento()}',
-            '{$usuario->getDireccion()}',
-            '{$usuario->getPais()}',
-            '{$usuario->getTarjetaCredito()}',
-            " . ($usuario->isActivarNotificaciones() ? 1 : 0) . ",
-            " . ($usuario->isRecibirRevistaDigital() ? 1 : 0) . ",
-            '{$usuario->getImagenUrl()}',
-            0
-        )
-    ";
 
-        
-    
-    return mysqli_query($conexion, $sql);
-}
 
 }
