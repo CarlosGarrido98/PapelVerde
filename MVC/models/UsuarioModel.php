@@ -3,8 +3,6 @@ require_once 'models/Usuario.php';
 require_once 'config/database.php';
 
 class UsuarioModel {
-    
-
     /**
      * Busca un usuario por email usando MySQLi Orientado a Objetos
      */
@@ -45,4 +43,5 @@ class UsuarioModel {
             (bool)$datos['admin']
         );
     }
+    
 }

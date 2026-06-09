@@ -64,7 +64,7 @@ form.addEventListener("submit", function(e) {
         // AQUI PARA QUE SALTE EL MODAL DE REGISTRO EXITOSO
        let miModal = new bootstrap.Modal(document.getElementById('registroModal'));
       miModal.show();
-      e.preventDefault();
+     // e.preventDefault();
     }
    
 });

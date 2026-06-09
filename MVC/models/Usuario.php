@@ -56,7 +56,6 @@ class Usuario {
 
     // GETTERS (Para obtener los valores)
 
-
     public function getIdUsuario(): ?int {
         return $this->idUsuario;
     }
@@ -118,10 +117,8 @@ class Usuario {
     }
 
 
-
-    // ==========================================
     // SETTERS (Para modificar los valores)
-    // ==========================================
+    
 
     public function setIdUsuario(int $idUsuario): void {
         $this->idUsuario = $idUsuario;
@@ -135,10 +132,7 @@ class Usuario {
         $this->email = $email;
     }
 
-    /**
-     * Setea la contraseña.
-     * NOTA: Es buena práctica encriptarla antes de guardarla (ej: password_hash)
-     */
+  
     public function setContrasena(string $contrasena): void {
         $this->contrasena = $contrasena;
     }
@@ -186,6 +180,67 @@ class Usuario {
         $this->recibirRevistaDigital = $recibirRevistaDigital;
     }
 
+
+     public static function registrar(
+        mysqli $conexion,
+        string $nombre,
+        string $email,
+        string $contrasena,
+        ?string $sexo,
+        ?string $fechaNacimiento,
+        ?string $direccion,
+        ?string $pais,
+        ?string $tarjetaCredito,
+        bool $notificaciones,
+        bool $revista
+    ): bool {
+
+        $passwordHash = password_hash(
+            $contrasena,
+            PASSWORD_DEFAULT
+        );
+
+        $imagenPorDefecto =
+            'img/imgUsuarios/default.webp';
+
+        $sql = "
+            INSERT INTO usuarios
+            (
+                nombre,
+                email,
+                contrasena,
+                sexo,
+                fecha_nacimiento,
+                direccion,
+                pais,
+                tarjeta_credito,
+                activar_notificaciones,
+                recibir_revista_digital,
+                imagenURL,
+                admin
+            )
+            VALUES
+            (
+                '$nombre',
+                '$email',
+                '$passwordHash',
+                '$sexo',
+                '$fechaNacimiento',
+                '$direccion',
+                '$pais',
+                '$tarjetaCredito',
+                " . ($notificaciones ? 1 : 0) . ",
+                " . ($revista ? 1 : 0) . ",
+                '$imagenPorDefecto',
+                0
+            )
+        ";
+
+        return mysqli_query(
+            $conexion,
+            $sql
+        );
+    }
 
 
 

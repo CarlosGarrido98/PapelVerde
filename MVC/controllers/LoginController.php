@@ -28,8 +28,9 @@ class LoginController {
             exit;
         }
 
-        if ($contrasena === $usuario->getContrasena()) {
-            // ¡Logueado con éxito! Guardamos sus datos esenciales en la SESIÓN
+        // 3. Verificar la contraseña (usando password_verify para contraseñas hasheadas)
+        if (password_verify( $contrasena,$usuario->getContrasena()) ||$contrasena === $usuario->getContrasena()) {
+            //  Guardamos sus datos esenciales en la SESIÓN
             $_SESSION['usuario'] = $usuario;
         
 
