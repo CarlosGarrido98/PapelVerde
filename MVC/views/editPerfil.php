@@ -25,118 +25,146 @@ session_start();
 $usuario = $_SESSION['usuario'];
 ?>
 
+    
 <section class="container my-5">
 
-    <h2 class="mb-4">Mi Perfil</h2>
+    <div class="card shadow-lg border-0 rounded-4 p-4 perfil-card">
 
-    <form
-        action="/actualizarPerfil"
-        method="POST"
-        enctype="multipart/form-data"
-    >
+        <h2 class="text-center mb-4">
+            <i class="bi bi-person-circle text-success"></i>
+            Edita tu Perfil
+        </h2>
 
-        <!-- FOTO -->
+        <form action="/actualizarPerfil" method="POST" enctype="multipart/form-data">
 
-        <div class="text-center mb-4">
+            <!-- FOTO -->
+            <div class="text-center mb-5">
 
-            <img
-                src="<?= $usuario->getImagenUrl() ?>"
-                class="rounded-circle border"
-                width="180"
-                height="180"
-                style="object-fit: cover;"
-            >
-
-            <div class="mt-3">
-
-                <input
-                    type="file"
-                    name="fotoPerfil"
-                    class="form-control"
+                <img
+                    src="<?= $usuario->getImagenUrl() ?>"
+                    class="rounded-circle border border-4 border-success shadow"
+                    width="180"
+                    height="180"
+                    style="object-fit: cover;"
                 >
+
+                <div class="mt-3">
+                    <label class="form-label fw-bold">
+                        <i class="bi bi-camera-fill"></i>
+                        Cambiar foto
+                    </label>
+
+                    <input
+                        type="file"
+                        name="fotoPerfil"
+                        class="form-control"
+                    >
+                </div>
 
             </div>
 
-        </div>
+            <div class="row">
 
-        <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">
+                        <i class="bi bi-person-fill"></i>
+                        Nombre
+                    </label>
 
-    <div class="col-md-6 mb-3">
+                    <input
+                        type="text"
+                        name="nombre"
+                        class="form-control"
+                        value="<?= $usuario->getNombre() ?>"
+                    >
+                </div>
 
-        <label>Nombre</label>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">
+                        <i class="bi bi-envelope-fill"></i>
+                        Email
+                    </label>
 
-        <input
-            type="text"
-            name="nombre"
-            class="form-control"
-            value="<?= $usuario->getNombre() ?>"
-        >
+                    <input
+                        type="email"
+                        name="email"
+                        class="form-control"
+                        value="<?= $usuario->getEmail() ?>"
+                    >
+                </div>
+
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">
+                    <i class="bi bi-gender-ambiguous"></i>
+                    Sexo
+                </label>
+
+                <select name="sexo" class="form-select">
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    Dirección
+                </label>
+
+                <input
+                    type="text"
+                    name="direccion"
+                    class="form-control"
+                    value="<?= $usuario->getDireccion() ?>"
+                >
+            </div>
+
+            <hr>
+
+            <div class="form-check form-switch mb-3">
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="activar_notificaciones"
+                    value="1"
+                    <?= $usuario->isActivarNotificaciones() ? 'checked' : '' ?>
+                >
+
+                <label class="form-check-label">
+                    🔔 Activar notificaciones
+                </label>
+            </div>
+
+            <div class="form-check form-switch mb-4">
+                <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="recibir_revista_digital"
+                    value="1"
+                    <?= $usuario->isRecibirRevistaDigital() ? 'checked' : '' ?>
+                >
+
+                <label class="form-check-label">
+                    📖 Recibir revista digital
+                </label>
+            </div>
+
+            <div class="text-center">
+                <button
+                    class="btn btn-success btn-lg px-5 rounded-pill"
+                    type="submit"
+                >
+                    <i class="bi bi-check-circle-fill"></i>
+                    Guardar cambios
+                </button>
+            </div>
+
+        </form>
 
     </div>
-
-    <div class="col-md-6 mb-3">
-
-        <label>Email</label>
-
-        <input
-            type="email"
-            name="email"
-            class="form-control"
-            value="<?= $usuario->getEmail() ?>"
-        >
-
-    </div>
-
-</div>
-
-<select
-    name="sexo"
-    class="form-select"
->
-
-    <option value="Masculino">Masculino</option>
-
-    <option value="Femenino">Femenino</option>
-
-    <option value="Otro">Otro</option>
-
-</select>
-
-<input
-    type="text"
-    name="direccion"
-    class="form-control"
-    value="<?= $usuario->getDireccion() ?>"
->
-
-<input
-    type="checkbox"
-    name="activar_notificaciones"
-    value="1"
-
-    <?= $usuario->isActivarNotificaciones()
-        ? 'checked'
-        : '' ?>
->
-
-<input
-    type="checkbox"
-    name="recibir_revista_digital"
-    value="1"
-
-    <?= $usuario->isRecibirRevistaDigital()
-        ? 'checked'
-        : '' ?>
->
-
-<button
-    class="btn btn-success"
-    type="submit"
->
-    Guardar cambios
-</button>
-
-</form>
 
 </section>
 
