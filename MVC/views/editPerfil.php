@@ -249,6 +249,7 @@ $us = $_SESSION["usuario"];
                                         type="checkbox"
                                         id="activarNotificaciones"
                                         name="activarNotificaciones"
+                                        value="1"
                                         <?= $us->isActivarNotificaciones() ? 'checked' : '' ?>>
 
                                     <label class="form-check-label" for="activarNotificaciones">
@@ -265,6 +266,7 @@ $us = $_SESSION["usuario"];
                                         type="checkbox"
                                         id="recibirRevistaDigital"
                                         name="recibirRevistaDigital"
+                                        value="1"
                                         <?= $us->isRecibirRevistaDigital() ? 'checked' : '' ?>>
 
                                     <label class="form-check-label" for="recibirRevistaDigital">
@@ -281,7 +283,7 @@ $us = $_SESSION["usuario"];
 
                             <a href="/" class="btn btn-outline-secondary">
                                 <i class="bi bi-x-circle"></i>
-                                Cancelar
+                                Volver al Home
                             </a>
 
                             <button type="submit" class="btn btn-success">

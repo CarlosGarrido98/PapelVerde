@@ -20,8 +20,8 @@ class PerfilController
         $usuario->setFechaNacimiento($_POST['fechaNacimiento']);
         $usuario->setSexo($_POST['sexo']);
         $usuario->setTarjetaCredito($_POST['tarjetaCredito']);
-        $usuario->setActivarNotificaciones(isset($_POST['activar_notificaciones']));
-        $usuario->setRecibirRevistaDigital(isset($_POST['recibir_revista_digital']));
+        $usuario->setActivarNotificaciones(isset($_POST['activarNotificaciones']));
+        $usuario->setRecibirRevistaDigital(isset($_POST['recibirRevistaDigital']));
         
 
 
@@ -48,8 +48,9 @@ class PerfilController
         $modelo->actualizarUsuario($usuario);
 
         $_SESSION['usuario'] = $usuario;
-
-        header("Location: /perfil");
+ 
+       
+         header("Location: /perfil");
         exit;
     }
 }
