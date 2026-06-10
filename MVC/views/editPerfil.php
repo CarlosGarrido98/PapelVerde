@@ -29,7 +29,7 @@ $us = $_SESSION["usuario"];
 
             <div class="card shadow h-100">
 
-                <div class="card-header bg-success text-white">
+                <div class="card-header bg-success text-white " style='background-image: url("img/imgPapelVerde/bg-footer.webp")'>
                     <h4 class="mb-0">
                         <i class="bi bi-person-circle"></i>
                         Mi Perfil
@@ -88,7 +88,7 @@ $us = $_SESSION["usuario"];
 
             <div class="card shadow">
 
-                <div class="card-header bg-success text-white">
+                <div class="card-header bg-success text-white" style='background-image: url("img/imgPapelVerde/bg-footer.webp")'>
                     <h4 class="mb-0">
                         <i class="bi bi-pencil-square"></i>
                         Editar Datos
