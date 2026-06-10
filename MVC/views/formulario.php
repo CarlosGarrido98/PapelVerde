@@ -99,6 +99,7 @@
                 <option>México</option>
                 <option>Argentina</option>
                 <option>Colombia</option>
+                <option>Otro</option>
             </select>
 
             <!-- Tarjeta (oculta  hasta que se seleccione una dirección y  un país) -->
