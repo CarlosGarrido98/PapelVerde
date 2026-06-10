@@ -25,10 +25,10 @@
                     <p class="fw-italic d-block d-xl-none text-center">Recibe las últimas noticias, ofertas exclusivas y recomendaciones personalizadas de libros sostenibles.</p>
                     <p class="d-xl-block d-none fs-5 text-center">Recibe las últimas noticias, ofertas exclusivas y recomendaciones personalizadas de libros sostenibles.</p>
                         <div class="mb-3 d-flex justify-content-center">
-                            <a href="formulario"><button style="width: 12em;" class="btn-unirse fs-4">Únete gratis → </button></a>
+                            <a href="formulario"><button style="width: 12em;" class="btn-unirse fs-4">Registrate Gratis → </button></a>
                         </div>      
                 </div>
-                <p class="text-center"><i style="color: green;" class="bi bi-patch-check-fill"></i> Sin spam. Cancela cuando quieras</p>
+                <!-- <p class="text-center"><i style="color: green;" class="bi bi-patch-check-fill"></i> Sin spam. Cancela cuando quieras</p> -->
             </div>
             
             <div class="Ofertas col-12 col-xl-6">
