@@ -20,9 +20,9 @@
 <main >
 
 <?php
-session_start();
 
 $usuario = $_SESSION['usuario'];
+var_dump($usuario);
 ?>
 
     
@@ -121,6 +121,50 @@ $usuario = $_SESSION['usuario'];
                     value="<?= $usuario->getDireccion() ?>"
                 >
             </div>
+
+            <div class="mb-4">
+                <label class="form-label">
+                    <i class="bi bi-calendar-event-fill"></i>
+                    Fecha de nacimiento
+                </label>
+
+                <input
+                    type="date"
+                    name="fecha_nacimiento"
+                    class="form-control"
+                    value="<?= $usuario->getFechaNacimiento() ?>"
+                >
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">
+                    <i class="bi bi-flag-fill"></i>
+                    País
+                </label>
+
+                <input
+                    type="text"
+                    name="pais"
+                    class="form-control"
+                    value="<?= $usuario->getPais() ?>"
+                >  
+            </div>
+
+        
+             <div class="mb-4">
+                <label class="form-label    ">
+                    <i class="bi bi-credit-card-2-front-fill"></i>
+                    Tarjeta de crédito (últimos 4 dígitos)
+                </label>   
+                <input
+                    type="text"
+                    name="tarjeta"
+                    class="form-control"
+                    value="<?= $usuario->getTarjetaCredito() ?>"    
+                    >
+            </div>
+            
+
 
             <hr>
 

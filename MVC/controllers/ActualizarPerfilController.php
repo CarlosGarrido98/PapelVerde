@@ -30,9 +30,12 @@ Usuario::actualizarPerfil(
 
     isset($_POST['activar_notificaciones']),
 
-    isset($_POST['recibir_revista_digital'])
+    isset($_POST['recibir_revista_digital']),
+
+    
 
 );
+
 
 header('Location: /perfil');
 exit;

@@ -9,9 +9,9 @@ class Usuario {
     private ?string $imagenUrl; // Puede ser null si el usuario no tiene foto de perfil
     private bool $esAdministrador;
 
-    private ?string $sexo;
+    public ?string $sexo;
     private ?string $fechaNacimiento;
-    private ?string $direccion;
+    public ?string $direccion;
     private ?string $pais;
     private ?string $tarjetaCredito;
 
@@ -244,18 +244,18 @@ class Usuario {
 
     // Método para actualizar el perfil del usuario
     public static function actualizarPerfil(
-    mysqli $conexion,
-    int $idUsuario,
-    string $nombre,
-    string $email,
-    ?string $sexo,
-    ?string $fechaNacimiento,
-    ?string $direccion,
-    ?string $pais,
-    ?string $tarjetaCredito,
-    bool $notificaciones,
-    bool $revista
-): bool {
+        mysqli $conexion,
+        int $idUsuarios,
+        string $nombre,
+        string $email,
+        ?string $sexo,
+        ?string $fechaNacimiento,
+        ?string $direccion,
+        ?string $pais,
+        ?string $tarjetaCredito,
+        bool $notificaciones,
+        bool $revista
+    ): bool {
 
     $sql = "
         UPDATE usuarios
@@ -269,7 +269,7 @@ class Usuario {
             tarjeta_credito = '$tarjetaCredito',
             activar_notificaciones = " . ($notificaciones ? 1 : 0) . ",
             recibir_revista_digital = " . ($revista ? 1 : 0) . "
-        WHERE idUsuarios = $idUsuario
+        WHERE idUsuarios = $idUsuarios
     ";
 
     return mysqli_query($conexion, $sql);

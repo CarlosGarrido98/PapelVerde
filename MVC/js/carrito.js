@@ -1,3 +1,6 @@
+const cajTotalProd = document.getElementById("total-prod");
+
+
 document.addEventListener('DOMContentLoaded', () => {
     
     const botonesAñadir = document.querySelectorAll('.btn-añadir');
@@ -8,11 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const idLibro = this.getAttribute('data-id');
 
 
-            const url = `/carrito/agregar?id=${idLibro}`;
-
+            const url = `carrito/agregar?id=${idLibro}`;
+            
         
             fetch(url)
                 .then(response => {
+                    console.log(response);
                     if (!response.ok) {
                         throw new Error('Error en la respuesta del servidor');
                     }
@@ -20,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .then(data => {
                     if (data.status === 'success') {
-                        
+                                    console.log(data);
                         let badge = document.querySelector('.badge.bg-danger');
                         
                         if (badge) {
@@ -36,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 `);
                             }
                         }
-                        
+                        cajTotalProd.
                         console.log(`Libro ${idLibro} añadido correctamente. Total: ${data.totalProductos}`);
                     }
                 })

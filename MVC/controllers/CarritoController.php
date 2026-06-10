@@ -13,7 +13,7 @@ class CarritoController {
             // [OPCIONAL] Conectas a la BBDD para validar que el libro existe de verdad
             global $conexion;
             require_once 'models/Producto.php';
-            $existe = ProductoModel::agregarProducto($conexion, $id_libro);
+            $existe = Producto::agregarProducto($id_libro,$conexion);
 
             if ($existe) { // Solo si existe en la BBDD lo guardamos
                 if (!isset($_SESSION['carrito'])) {

@@ -31,7 +31,7 @@
     </h1>
 
     <!-- Botón para volver al inicio -->
-    <a href="/" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
+    <a href="home" class="btn btn-success px-4 py-2 rounded-pill shadow-sm">
         Volver al inicio
     </a>
 

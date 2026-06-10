@@ -95,6 +95,12 @@ switch ($method) {
                 require_once 'controllers/RegistroController.php';  
                 break;
 
+            case '/actualizarPerfil':
+                require_once 'controllers/ActualizarPerfilController.php';
+                ActualizarPerfilController::actualizar();
+                break;
+
+                
             default:
             echo "Error, método no permitido";
             break;

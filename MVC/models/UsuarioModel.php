@@ -9,7 +9,7 @@ class UsuarioModel {
     public function buscarPorEmail(string $email): ?Usuario {
         global $conexion;
         // 1. Preparar la consulta (usamos el signo '?' como marcador de posición)
-        $stmt = mysqli_prepare($conexion, "SELECT idUsuarios, nombre, email, contrasena, imagenURL, admin FROM usuarios WHERE email = ? LIMIT 1");
+        $stmt = mysqli_prepare($conexion, "SELECT * FROM usuarios WHERE email = ? LIMIT 1");
 
         if (!$stmt) {
             return null;
@@ -35,12 +35,22 @@ class UsuarioModel {
 
         // 6. Retornamos tu clase Usuario con los datos inyectados
         return new Usuario(
-            $datos['idUsuario'],
+            $datos['idUsuarios'],
             $datos['nombre'],
             $datos['email'],
             $datos['contrasena'],
             $datos['imagenURL'],
-            (bool)$datos['admin']
+            (bool)$datos['admin'],
+
+            $datos['sexo'] ?? null,
+            $datos['fechaNacimiento'] ?? null,
+            $datos['direccion'] ?? null,
+            $datos['pais'] ?? null,
+            $datos['tarjetaCredito'] ?? null,
+            false, // Por defecto no activamos las notificaciones
+            false  // Por defecto no suscribimos a la revista digital
+
+
         );
     }
     
