@@ -1,6 +1,7 @@
 <?php
 require_once ("controllers/LoginController.php");
 require_once ("models/UsuarioModel.php");
+require_once("controllers/PerfilController.php");
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -61,10 +62,16 @@ switch ($method) {
                     break;
             
 
+            case '/editPerfil':
+                PerfilController::editar();
+                break;
+
+
             case '/logout':
                 LoginController::logout();
                 break;
 
+                
 
             case '/carrito/agregar':
                 require_once 'controllers/CarritoController.php';
@@ -91,6 +98,9 @@ switch ($method) {
                 require_once 'controllers/RegistroController.php';  
                 break;
 
+            case '/actualizarPerfil':
+            PerfilController::actualizar();
+            break;
             
 
 
@@ -100,9 +110,9 @@ switch ($method) {
             
         }
         
-    break;
+         break;
 
-    default:
-        echo "Error, método no permitido";
-        break;
-}
+        default:
+            echo "Error, método no permitido";
+            break;
+    }

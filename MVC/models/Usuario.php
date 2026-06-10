@@ -160,6 +160,7 @@ class Usuario {
         $this->direccion = $direccion;
     }
 
+
     public function setPais(?string $pais): void
     {
         $this->pais = $pais;

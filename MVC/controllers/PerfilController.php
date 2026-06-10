@@ -1,0 +1,55 @@
+<?php
+
+class PerfilController
+{
+    public static function editar()
+    {
+        require 'views/editPerfil.php';
+    }
+
+    public static function actualizar()
+    {
+        session_start();
+
+        $usuario = $_SESSION['usuario'];
+
+        $usuario->setNombre($_POST['nombre']);
+        $usuario->setEmail($_POST['email']);
+        $usuario->setDireccion($_POST['direccion']);
+        $usuario->setPais($_POST['pais']);
+        $usuario->setFechaNacimiento($_POST['fechaNacimiento']);
+        $usuario->setSexo($_POST['sexo']);
+        $usuario->setTarjetaCredito($_POST['tarjetaCredito']);
+        $usuario->setActivarNotificaciones(isset($_POST['activar_notificaciones']));
+        $usuario->setRecibirRevistaDigital(isset($_POST['recibir_revista_digital']));
+        
+
+
+        // FOTO
+        if (!empty($_FILES['foto']['name'])) {
+
+            $carpeta = "img/perfiles/";
+
+            if (!is_dir($carpeta)) {
+                mkdir($carpeta, 0777, true);
+            }
+
+            $nombreArchivo = time() . "_" . $_FILES['foto']['name'];
+
+            move_uploaded_file(
+                $_FILES['foto']['tmp_name'],
+                $carpeta . $nombreArchivo
+            );
+
+            $usuario->setImagenUrl($carpeta . $nombreArchivo);
+        }
+
+        $modelo = new UsuarioModel();
+        $modelo->actualizarUsuario($usuario);
+
+        $_SESSION['usuario'] = $usuario;
+
+        header("Location: /perfil");
+        exit;
+    }
+}

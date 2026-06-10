@@ -78,8 +78,8 @@
             <label>Sexo</label>
             <select name="sexo">
                 <option value="">Seleccionar</option>
-                <option>Masculino</option>
-                <option>Femenino</option>
+                <option>Hombre</option>
+                <option>Mujer</option>
                 <option>Otro</option>
             </select>
 
