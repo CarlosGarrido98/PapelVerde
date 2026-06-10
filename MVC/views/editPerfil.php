@@ -21,38 +21,90 @@ $us = $_SESSION["usuario"];
 ?>
 
 <main>
-<div class="container py-5">
-    <div class="row justify-content-center">
+<<div class="container py-5">
+    <div class="row g-4">
 
-        <div class="col-12 col-lg-8">
+        <!-- COLUMNA IZQUIERDA -->
+        <div class="col-lg-4">
 
-            <div class="card shadow border-0">
+            <div class="card shadow h-100">
 
-                <div class="card-header bg-success text-white py-3">
-                    <h3 class="mb-0">
-                        <i class="bi bi-person-gear me-2"></i>
-                        Editar Perfil
-                    </h3>
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-person-circle"></i>
+                        Mi Perfil
+                    </h4>
                 </div>
 
+                <div class="card-body text-center">
+
+                    <img
+                        src="<?= htmlspecialchars($us->getImagenUrl()) ?>"
+                        class="rounded-circle border shadow mb-3"
+                        width="180"
+                        height="180"
+                        style="object-fit:cover;">
+
+                    <h4><?= htmlspecialchars($us->getNombre()) ?></h4>
+
+                    <p class="text-muted">
+                        <?= htmlspecialchars($us->getEmail()) ?>
+                    </p>
+
+                    <hr>
+
+                    <div class="text-start">
+
+                        <p>
+                            <strong>País:</strong><br>
+                            <?= htmlspecialchars($us->getPais()) ?>
+                        </p>
+
+                        <p>
+                            <strong>Dirección:</strong><br>
+                            <?= htmlspecialchars($us->getDireccion()) ?>
+                        </p>
+
+                        <p>
+                            <strong>Fecha nacimiento:</strong><br>
+                            <?= htmlspecialchars($us->getFechaNacimiento()) ?>
+                        </p>
+
+                        <p>
+                            <strong>Sexo:</strong><br>
+                            <?= htmlspecialchars($us->getSexo()) ?>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- COLUMNA DERECHA -->
+        <div class="col-lg-8">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-pencil-square"></i>
+                        Editar Datos
+                    </h4>
+                </div>
+
+               
                 <div class="card-body p-4">
 
                     <form action="/actualizarPerfil" method="POST" enctype="multipart/form-data">
 
                         <!-- FOTO -->
                         <div class="text-center mb-4">
-
-                            <img
-                                src="<?= htmlspecialchars($us->getImagenUrl()) ?>"
-                                alt="Foto de perfil"
-                                class="rounded-circle border shadow-sm"
-                                width="150"
-                                height="150"
-                                style="object-fit: cover;">
-
                             <div class="mt-3">
                                 <label for="foto" class="form-label fw-semibold">
-                                    Cambiar foto de perfil
+                                    Cambia tu foto de perfil
                                 </label>
 
                                 <input
@@ -242,6 +294,7 @@ $us = $_SESSION["usuario"];
                     </form>
 
                 </div>
+
 
             </div>
 

@@ -43,10 +43,10 @@ class UsuarioModel {
             (bool)$datos['admin'],
 
             $datos['sexo'] ?? null,
-            $datos['fechaNacimiento'] ?? null,
+            $datos['fecha_nacimiento'] ?? null,
             $datos['direccion'] ?? null,
             $datos['pais'] ?? null,
-            $datos['tarjetaCredito'] ?? null,
+            $datos['tarjeta_credito'] ?? null,
             false, // Por defecto no activamos las notificaciones
             false  // Por defecto no suscribimos a la revista digital
 
@@ -88,28 +88,26 @@ public function actualizarUsuario(Usuario $usuario): bool
     $imagenURL = $usuario->getImagenUrl();
     $sexo = $usuario->getSexo();
     $tarjetaCredito = $usuario->getTarjetaCredito();
-    $activarNotificaciones = $usuario->ActivarNotificaciones() ? 1 : 0;
-    $recibirRevistaDigital = $usuario->RecibirRevistaDigital() ? 1 : 0;
+    $activarNotificaciones = $usuario->isActivarNotificaciones() ? 1 : 0;
+    $recibirRevistaDigital = $usuario->isRecibirRevistaDigital() ? 1 : 0;
 
     $idUsuario = $usuario->getIdUsuario();
 
 
     mysqli_stmt_bind_param(
-        $stmt,
-        "ssssssi",
-        $nombre,
-        $email,
-        $direccion,
-        $pais,
-        $fechaNacimiento,
-        $imagenURL,
-        $sexo,
-        $tarjetaCredito,
-        $activarNotificaciones,
-        $recibirRevistaDigital,
-        
-
-        $idUsuario
+    $stmt,
+    "ssssssssiii",
+    $nombre,
+    $email,
+    $direccion,
+    $pais,
+    $fechaNacimiento,
+    $imagenURL,
+    $sexo,
+    $tarjetaCredito,
+    $activarNotificaciones,
+    $recibirRevistaDigital,
+    $idUsuario
     );
 
     return mysqli_stmt_execute($stmt);
