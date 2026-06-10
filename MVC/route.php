@@ -77,6 +77,16 @@ switch ($method) {
                 require_once 'controllers/CarritoController.php';
                 CarritoController::agregar();
                 break;  
+
+             case '/carrito/borrarProducto':
+                require_once 'controllers/CarritoController.php';
+                CarritoController::borrarProducto();
+                break;
+
+            case '/carrito/borrarCarrito':
+                require_once 'controllers/CarritoController.php';
+                CarritoController::borrarCarrito();
+                break;  
             
 
             default:

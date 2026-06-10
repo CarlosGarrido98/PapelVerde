@@ -1,26 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papel Verde</title>
-    <link rel="icon" type="image/png" href="img/imgPapelVerde/Logoico.ico">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-</head>
-
-<body>
-
 <?php 
 // 1. Aseguramos que la sesión está activa para leer el carrito real
 if (session_status() === PHP_SESSION_NONE) {
     session_start(); 
 }
 
-// 2. Contamos cuántos elementos reales hay en la sesión (si no existe, el total es 0)
-$totalProductos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
+// 2. Contamos cuántas UNIDADES REALES hay en la sesión sumando sus cantidades
+$totalProductos = 0;
+if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
+    foreach ($_SESSION['carrito'] as $producto) {
+        if (is_object($producto)) {
+            $totalProductos += isset($producto->cantidad) ? $producto->cantidad : 1;
+        } else {
+            $totalProductos += isset($producto['cantidad']) ? $producto['cantidad'] : 1;
+        }
+    }
+}
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papel Verde</title>
+    <link class="icon" type="image/png" href="img/imgPapelVerde/Logoico.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
 
     <header class="bg-light">
         <div class="container">
@@ -39,7 +47,7 @@ $totalProductos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
                 </div>
                 
                 <div class="col-xl-6 col-4 d-flex justify-content-center">
-                    <a href="home"><img src="img/imgPapelVerde/Logotipo1.webp" class="img-fluid" style="max-width: 150px;" alt="Logo de Papel Verde"></a>
+                    <a href="home"><img src="img/imgPapelVerde/Logotipo1.png" class="img-fluid" style="max-width: 150px;" alt="Logo de Papel Verde"></a>
                 </div>
 
                 <div class="col-xl-3 col-4 d-flex justify-content-end align-items-center">
@@ -56,7 +64,7 @@ $totalProductos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
                     }
                     echo $ret;
                     ?>
-                    <!-- Botón del carrito con contador -->
+                    
                     <button class="btn bi bi-cart fs-5 position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#carritoLateral" aria-controls="carritoLateral">
                         <?php if($totalProductos > 0): ?>
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">
@@ -101,39 +109,60 @@ $totalProductos = isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
         <div class="offcanvas-body d-flex flex-column justify-content-between">
             
             <div class="productos-carrito-wrapper">
-                <?php if($totalProductos === 0): ?>
-                    <div class="text-center my-5 text-muted">
+                <?php if ($totalProductos > 0 && isset($_SESSION['carrito'])): ?>
+                    
+                    <?php foreach ($_SESSION['carrito'] as $idLibro => $producto): 
+                        $nombre = is_object($producto) ? $producto->getNombre() : $producto['nombre'];
+                        $precio = is_object($producto) ? $producto->getPrecio() : $producto['precio'];
+                        $imagen = is_object($producto) ? $producto->getImagenUrl() : $producto['imagen_url'];
+                        
+                        // Leemos la cantidad real que tu controlador ya calculó en la sesión
+                        $cantidad = is_object($producto) ? $producto->cantidad : $producto['cantidad'];
+                        $precioTotalProducto = $precio * $cantidad;
+                    ?>
+                        <div class="card mb-3 border-0 border-bottom pb-2 producto-item" data-id="<?= $idLibro; ?>">
+                            <div class="row g-0 align-items-center">
+                                <div class="col-3">
+                                    <img src="<?= $imagen; ?>" class="img-fluid rounded" alt="<?= htmlspecialchars($nombre); ?>">
+                                </div>
+                                <div class="col-7 ps-2">
+                                    <h6 class="card-title mb-0" style="font-size: 0.9rem;"><?= htmlspecialchars($nombre); ?></h6>
+                                    <p class="card-text text-muted mb-0" style="font-size: 0.8rem;">
+                                        Cantidad: <span class="producto-cantidad"><?= $cantidad; ?></span>
+                                    </p>
+                                    <small class="text-success fw-bold">
+                                        $<span class="producto-precio-total"><?= number_format($precioTotalProducto, 2); ?></span>
+                                    </small>
+                                </div>
+                                <div class="col-2 text-end">
+                                    <button class="btn text-danger bi bi-trash3 p-1 btn-eliminar-producto" data-id="<?= $idLibro; ?>"></button>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+
+                <?php else: ?>
+                    <div class="text-center my-5 text-muted carrito-vacio-estado">
                         <i class="bi bi-cart-x fs-1"></i>
                         <p class="mt-2">El carrito está vacío.</p>
                     </div>
-                <?php else: ?>
-                    <div class="card mb-3 border-0 border-bottom pb-2">
-                        <div class="row g-0 align-items-center">
-                            <div class="col-3">
-                                <img src="img/imgPapelVerde/Logotipo1.webp" class="img-fluid rounded" alt="Producto de muestra">
-                            </div>
-                            <div class="col-7 ps-2">
-                                <h6 class="card-title mb-0" style="font-size: 0.9rem;">Producto en Carrito</h6>
-                                <p class="card-text text-muted mb-0" style="font-size: 0.8rem;">Añadido correctamente</p>
-                            </div>
-                            <div class="col-2 text-end">
-                                <button class="btn text-danger bi bi-trash3 p-1"></button>
-                            </div>
-                        </div>
-                    </div>
                 <?php endif; ?>
-            </div>
-
-            <?php if($totalProductos > 0): ?>
-                <div class="border-top pt-3 bg-white">
-                    <div class="d-flex justify-content-between mb-3 fw-bold">
-                        <span>Total estimado:</span>
-                        <span class="text-success">Calculando...</span>
-                    </div>
-                    <a href="/checkout" class="btn btn-success w-100 py-2 mb-2">Procesar Pedido</a>
-                    <button class="btn btn-outline-secondary btn-sm w-100" data-bs-dismiss="offcanvas">Seguir comprando</button>
+            </div> <div class="border-top pt-3 bg-white">
+                <div class="d-flex justify-content-between mb-3 fw-bold">
+                    <span id="total-prod">Total de productos: <?= $totalProductos; ?></span> 
                 </div>
-            <?php endif; ?>
+                <div class="row">
+                    <div class="col-6 mb-2">
+                        <a href="carrito/checkout" class="btn btn-success w-100 py-2 <?= $totalProductos === 0 ? 'disabled' : ''; ?>">Procesar Pedido</a>
+                    </div>
+                    <div class="col-6 mb-2">
+                        <a id="borrar-carrito" class="btn btn-danger w-100 py-2 <?= $totalProductos === 0 ? 'd-none' : ''; ?>" href="#">Borrar Carrito</a>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-outline-secondary btn-sm w-100" data-bs-dismiss="offcanvas">Seguir comprando</button>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
