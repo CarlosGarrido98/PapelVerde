@@ -60,10 +60,6 @@ switch ($method) {
                     require_once 'views/perfil.php';
                     break;
             
-            case '/editPerfil':
-                    require_once 'views/editPerfil.php';
-                    break;
-
 
             case '/logout':
                 LoginController::logout();
@@ -95,12 +91,9 @@ switch ($method) {
                 require_once 'controllers/RegistroController.php';  
                 break;
 
-            case '/actualizarPerfil':
-                require_once 'controllers/ActualizarPerfilController.php';
-                ActualizarPerfilController::actualizar();
-                break;
+            
 
-                
+
             default:
             echo "Error, método no permitido";
             break;
