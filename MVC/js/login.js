@@ -17,12 +17,14 @@ form.addEventListener('submit', function (e) {
 
     if (!emailValido) {
         e.preventDefault(); // Evita el envío del formulario
-    } else {
+    } 
+    
+    //else {
         // Si todo es válido, muestra el modal de inicio de sesión exitoso
-        let miModal = new bootstrap.Modal(document.getElementById('loginModal'));
-        miModal.show();
+        //let miModal = new bootstrap.Modal(document.getElementById('loginModal'));
+        //miModal.show();
          // Evita el envío del formulario para mostrar el modal
-    }
+    //
     
 });
 

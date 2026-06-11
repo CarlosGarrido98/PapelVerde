@@ -38,6 +38,26 @@
         <form id="LoginForm" action="/login" method="POST">
             <h1 class="text-center" style="color: #254B36;"> Bienvenid@!</h1>
 
+
+
+            <?php
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
+
+                 if (isset($_SESSION['error'])):
+            ?>
+            
+            <div class="alert alert-danger">
+                 <?= $_SESSION['error']; ?>
+            </div>
+
+            <?php
+            
+                unset($_SESSION['error']);
+                endif;
+            ?>
+
             <div class="mb-3">
                 <label for="email" class="form-label">Correo Electrónico</label>
                 <input name = "email" type="email" class="form-control" id="email" placeholder="Ej: juan@gmail.com">
