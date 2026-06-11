@@ -33,7 +33,7 @@
                 Tu registro se ha completado exitosamente!
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+                <button type="button" id="btnConfirmarRegistro" class="btn btn-primary" >Entendido</button>
             </div>
             </div>
         </div>

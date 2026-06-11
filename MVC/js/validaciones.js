@@ -61,13 +61,17 @@ form.addEventListener("submit", function(e) {
     } 
     
    else {
-        // AQUI PARA QUE SALTE EL MODAL DE REGISTRO EXITOSO
+
+        e.preventDefault();
+
        let miModal = new bootstrap.Modal(document.getElementById('registroModal'));
-      miModal.show();
-     // e.preventDefault();
+
+        miModal.show();
+       
     }
    
 });
+
 
 
 // ===== MENSAJES =====
@@ -87,6 +91,15 @@ function mostrarMensaje(elemento, mensaje, tipo, iconoClase) {
     elemento.classList.add(tipo === "error" ? "text-danger" : "text-success");
 }
 
+
+// ===== CONFIRMAR REGISTRO =====
+const btnConfirmarRegistro = document.getElementById("btnConfirmarRegistro");
+
+btnConfirmarRegistro.addEventListener("click", function () {
+
+    document.getElementById("registroForm").submit();
+
+});
 
 // ===== VALIDACIONES =====
 
