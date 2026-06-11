@@ -81,10 +81,20 @@
                     <strong><?= $producto['stock'] ?></strong>
                 </div>
 
+            <!-- OJO TIENE QUE IR AL CARRITO TAMBIEN -->
+            <div class="d-flex gap-3 mt-4">
+
                 <button class="btn btn-success btn-lg px-4">
-                    <i class="bi bi-cart-plus-fill"></i>
+                    <i class="bi bi-cart-plus-fill me-2"></i>
                     Añadir al carrito
                 </button>
+
+                <button class="btn btn-outline-danger btn-lg px-4">
+                    <i class="bi bi-heart me-2"></i>
+                    Favoritos
+                </button>
+
+</div>
 
             </div>
 
@@ -93,8 +103,16 @@
     </div>
 
     <br>
+                
+        <div class="d-flex justify-content-center align-items- mb-3 text-center">
+        <h3 class="fw-bold" style="color: #254B36; ">
+            También te puede interesar...
+        </h3>
 
-    
+        <a href="#" class="text-success text-decoration-none">
+            
+        </a>
+    </div>
 
 
     <!-- CARROUSEL DE LAS VAINAS  -->
@@ -208,7 +226,6 @@
         
     <div class="carousel-container position-relative">
 
-
         <button class="carousel-btn left" id="prevBtnComics">
             <i class="bi bi-chevron-left"></i>
         </button>
@@ -248,15 +265,10 @@
             <?php endwhile; ?>
 
         </div>
-
          <button class="carousel-btn right" id="nextBtnComics">
             <i class="bi bi-chevron-right"></i>
         </button>
       <?php endif; ?>
-
-
-
-
 
 
 
