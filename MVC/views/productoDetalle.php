@@ -50,6 +50,30 @@
                     <?= $producto['sinopsis'] ?>
                 </p>
 
+                <?php if($producto['tipo'] == 'libro'): ?>
+
+                <p><strong>Autor:</strong> <?= $producto['libro_autor'] ?></p>
+                <p><strong>Editorial:</strong> <?= $producto['libro_editorial'] ?></p>
+                <p><strong>ISBN:</strong> <?= $producto['libro_isbn'] ?></p>
+                <p><strong>Páginas:</strong> <?= $producto['num_paginas'] ?></p>
+
+            <?php elseif($producto['tipo'] == 'comic'): ?>
+
+                <p><strong>Autor:</strong> <?= $producto['comic_autor'] ?></p>
+                <p><strong>Ilustrador:</strong> <?= $producto['ilustrador'] ?></p>
+                <p><strong>Editorial:</strong> <?= $producto['comic_editorial'] ?></p>
+                <p><strong>ISBN:</strong> <?= $producto['comic_isbn'] ?></p>
+
+            <?php elseif($producto['tipo'] == 'manga'): ?>
+
+                <p><strong>Autor:</strong> <?= $producto['manga_autor'] ?></p>
+                <p><strong>Editorial:</strong> <?= $producto['manga_editorial'] ?></p>
+                <p><strong>Volumen:</strong> <?= $producto['volumen'] ?></p>
+                <p><strong>Colección:</strong> <?= $producto['coleccion'] ?></p>
+                <p><strong>ISBN:</strong> <?= $producto['manga_isbn'] ?></p>
+
+            <?php endif; ?>
+
                 <div class="stock-box mb-4">
                     <i class="bi bi-box-seam"></i>
                     Stock disponible:

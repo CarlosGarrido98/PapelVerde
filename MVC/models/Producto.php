@@ -171,7 +171,38 @@ public static function obtenerProductoPorId($conexion, $id)
 {
     $stmt = mysqli_prepare(
         $conexion,
-        "SELECT * FROM productos WHERE id_producto = ?"
+
+                "SELECT  p.*,
+
+            l.autor      AS libro_autor,
+            l.editorial  AS libro_editorial,
+            l.isbn       AS libro_isbn,
+            l.num_paginas,
+
+            c.autor      AS comic_autor,
+            c.ilustrador,
+            c.editorial  AS comic_editorial,
+            c.numero,
+            c.isbn       AS comic_isbn,
+
+            m.autor      AS manga_autor,
+            m.editorial  AS manga_editorial,
+            m.volumen,
+            m.coleccion,
+            m.isbn       AS manga_isbn
+
+        FROM productos p
+
+        LEFT JOIN libros l
+            ON p.id_producto = l.id_producto
+
+        LEFT JOIN comics c
+            ON p.id_producto = c.id_producto
+
+        LEFT JOIN mangas m
+            ON p.id_producto = m.id_producto
+
+        WHERE p.id_producto = ?"
     );
 
     mysqli_stmt_bind_param($stmt, "i", $id);
