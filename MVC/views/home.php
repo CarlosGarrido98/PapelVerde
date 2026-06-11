@@ -43,6 +43,7 @@
 
                             <div class="card rounded-4 shadow h-100 position-relative">
 
+                             <a href="/producto?id=<?= $libro['id_producto'] ?>">
                                 <div class="rounded-top-4" style="
                                         background-image:url('<?= $libro['imagen_url'] ?>');
                                         height:40vh;
@@ -50,7 +51,7 @@
                                         background-position:center;
                                     ">
                                 </div>
-
+                    </a>
                                 <div class="card-body pb-5"> <h5 class="card-title"><?= $libro['nombre'] ?></h5>
 
                                     <p class="card-text"><?= $libro['autor'] ?></p>
@@ -102,8 +103,9 @@
                <?php while($libro = mysqli_fetch_assoc($librosCarrusel)): ?>
 
                     <div class="book-card position-relative pb-5"> 
-
+                         <a href="/producto?id=<?= $libro['id_producto'] ?>">
                         <img src="<?= $libro['imagen_url'] ?>" alt="<?= $libro['nombre'] ?>">
+                         </a>
                         <h6><?= $libro['nombre'] ?></h6>
                         <p><?= $libro['autor'] ?></p>
                         <span>€<?= number_format($libro['precio'], 2, ',', '.') ?></span>

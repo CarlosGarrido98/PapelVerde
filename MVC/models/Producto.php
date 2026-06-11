@@ -129,14 +129,9 @@ public static function obtenerMangasCarrusel($conexion)
         m.autor
     FROM productos p
     RIGHT JOIN mangas m ON p.id_producto = m.id_producto
-    
-
     ";
 
     return mysqli_query($conexion, $sql);   
-
-
-
 
 }
 // Método para obtener los cómics para el carrusel
@@ -151,14 +146,9 @@ public static function obtenerComicsCarrusel($conexion)
         c.autor
     FROM productos p
     RIGHT JOIN comics c ON p.id_producto = c.id_producto
-    
-
     ";
 
     return mysqli_query($conexion, $sql);   
-
-
-
 
 }
 
@@ -175,4 +165,29 @@ public static function agregarProducto($id, $conexion){
     $producto = mysqli_fetch_assoc($resultado);
     return $producto;
 }
+
+
+public static function obtenerProductoPorId($conexion, $id)
+{
+    $stmt = mysqli_prepare(
+        $conexion,
+        "SELECT * FROM productos WHERE id_producto = ?"
+    );
+
+    mysqli_stmt_bind_param($stmt, "i", $id);
+
+    mysqli_stmt_execute($stmt);
+
+    $resultado = mysqli_stmt_get_result($stmt);
+
+    return mysqli_fetch_assoc($resultado);
+}
+
+
+
+
+
+
+
+
 }

@@ -56,10 +56,12 @@
  
                 <div class="book-card position-relative pb-5">
 
-                    <img
+                <a href="/producto?id=<?= $libro['id_producto'] ?>">
+                    <img 
                         src="<?= $libro['imagen_url'] ?>"
                         alt="<?= $libro['nombre'] ?>"
                     >
+                </a>
 
                     <h6>
                         <?= $libro['nombre'] ?>
@@ -116,10 +118,12 @@
  
                 <div class="book-card position-relative pb-5">
 
+                    <a href="/producto?id=<?= $manga['id_producto'] ?>">
                     <img
                         src="<?= $manga['imagen_url'] ?>"
                         alt="<?= $manga['nombre'] ?>"
                     >
+                    </a>
 
                     <h6>
                         <?= $manga['nombre'] ?>
@@ -176,10 +180,12 @@
  
                 <div class="book-card position-relative pb-5">
 
+                    <a href="/producto?id=<?= $comic['id_producto'] ?>">
                     <img
                         src="<?= $comic['imagen_url'] ?>"
                         alt="<?= $comic['nombre'] ?>"
                     >
+                    </a>
 
                     <h6>
                         <?= $comic['nombre'] ?>

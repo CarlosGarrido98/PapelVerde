@@ -45,6 +45,11 @@ switch ($method) {
                 require_once 'controllers/GaleriaController.php';
                 break;
 
+            case '/producto':
+            require_once 'controllers/ProductoController.php';
+            ProductoController::mostrarProducto();
+            break;   
+
             case '/formulario':
                 require_once 'views/formulario.php';
                 break;
@@ -71,8 +76,6 @@ switch ($method) {
                 LoginController::logout();
                 break;
 
-                
-
             case '/carrito/agregar':
                 require_once 'controllers/CarritoController.php';
                 CarritoController::agregar();
@@ -87,6 +90,8 @@ switch ($method) {
                 require_once 'controllers/CarritoController.php';
                 CarritoController::borrarCarrito();
                 break;  
+
+
             
 
             default:
