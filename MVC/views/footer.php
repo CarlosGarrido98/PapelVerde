@@ -20,13 +20,13 @@
     <div class="row m-2">
         <div class="col-xl-6 col-12">
             <p class="text-bold text-light fs-5">Papel verde</p>
-            <span><i class="bi bi-geo-alt"></i>Calle Sostenible, 123, Madrid , España</span>
+            <span><i class="bi bi-geo-alt"></i>Calle de La Naturaleza, 14, Madrid, España.</span>
             <br>
             <span><i class="bi bi-telephone"></i>+34 123 456 789</span>
             <br>
             <span><i class="bi bi-envelope"></i>info@papelverde.com</span>
         
-            <p>Comprometidos con la lectura sostenible y el cuidado del medio ambiente.</p>
+            <p>¡Enfocados en llevar los mejores libros a todo el mundo!</p>
            
         </div>
 
