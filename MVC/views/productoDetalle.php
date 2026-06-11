@@ -20,6 +20,7 @@
 
 <main class="container py-5">
 
+    <!--Producto detalle etc -->
     <div class="card producto-card border-0 shadow-lg p-4">
 
         <div class="row align-items-center g-5">
@@ -91,13 +92,183 @@
 
     </div>
 
-</main>
+    <br>
+
+    
+
+
+    <!-- CARROUSEL DE LAS VAINAS  -->
+    <!--Libros  -->
+    <?php if($producto['tipo'] == 'libro'): ?>
+    <div class="carousel-container position-relative">
+
+        <button class="carousel-btn left" id="prevBtnLibros">
+            <i class="bi bi-chevron-left"></i>
+        </button>
+
+       <div class="carousel-track" id="carouselTrackLibros">
+
+
+            <?php while($libro = mysqli_fetch_assoc($librosCarrusel)): ?>
+ 
+                <div class="book-card position-relative pb-5">
+
+                <a href="/producto?id=<?= $libro['id_producto'] ?>">
+                    <img 
+                        src="<?= $libro['imagen_url'] ?>"
+                        alt="<?= $libro['nombre'] ?>"
+                    >
+                </a>
+                
+                    <h6>
+                        <?= $libro['nombre'] ?>
+                    </h6>
+
+                    <p>
+                        <?= $libro['autor'] ?>
+                    </p>
+
+                    <span>
+                        €<?= number_format($libro['precio'],2,',','.') ?>
+                    </span>
+
+                    
+                    <button class="btn-añadir position-absolute bottom-0 end-0 m-2 d-none d-xl-block" 
+                            data-id="<?= $libro['id_producto'] ?>">
+                        <i class="bi bi-plus"></i>
+                    </button>
+
+                    <button class="btn-añadir position-absolute bottom-0 end-0 bi bi-plus-lg d-xl-none d-block" data-id="<?= $libro['id_producto'] ?>"></button>
+                </div>
+
+            <?php endwhile; ?>
+
+        </div>
+
+        <button class="carousel-btn right" id="nextBtnLibros">
+            <i class="bi bi-chevron-right"></i>
+        </button>
+
+    </div>
+    <!-- Manga -->
+    <?php elseif($producto['tipo'] == 'manga'): ?>
+  
+    <div class="carousel-container position-relative">
+
+        <button class="carousel-btn left" id="prevBtnMangas">
+            <i class="bi bi-chevron-left"></i>
+        </button>
+
+        <div class="carousel-track" id="carouselTrackMangas">
+
+            <?php while($manga = mysqli_fetch_assoc($mangasCarrusel)): ?>
+ 
+                <div class="book-card position-relative pb-5">
+
+                    <a href="/producto?id=<?= $manga['id_producto'] ?>">
+                    <img
+                        src="<?= $manga['imagen_url'] ?>"
+                        alt="<?= $manga['nombre'] ?>"
+                    >
+                    </a>
+
+                    <h6>
+                        <?= $manga['nombre'] ?>
+                    </h6>
+
+                    <p>
+                        <?= $manga['autor'] ?>
+                    </p>
+
+                    <span>
+                        €<?= number_format($manga['precio'],2,',','.') ?>
+                    </span>
+
+                     <button class="btn-añadir position-absolute bottom-0 end-0 m-2 d-none d-xl-block" 
+                            data-id="<?= $manga['id_producto'] ?>">
+                        <i class="bi bi-plus"></i>
+                    </button>
+
+                    <button class="btn-añadir position-absolute bottom-0 end-0 bi bi-plus-lg d-xl-none d-block" data-id="<?= $manga['id_producto'] ?>"></button>
+
+                </div>
+
+            <?php endwhile; ?>
+
+        </div>
+
+        <button class="carousel-btn right" id="nextBtnMangas">
+            <i class="bi bi-chevron-right"></i>
+        </button>
+
+    </div>
+
+    <!-- Comic -->
+    <?php elseif($producto['tipo'] == 'comic'): ?>
+        
+    <div class="carousel-container position-relative">
+
+
+        <button class="carousel-btn left" id="prevBtnComics">
+            <i class="bi bi-chevron-left"></i>
+        </button>
+
+        <div class="carousel-track" id="carouselTrackComics">
+
+            <?php while($comic = mysqli_fetch_assoc($comicsCarrusel)): ?>
+ 
+                <div class="book-card position-relative pb-5">
+
+                    <a href="/producto?id=<?= $comic['id_producto'] ?>">
+                    <img
+                        src="<?= $comic['imagen_url'] ?>"
+                        alt="<?= $comic['nombre'] ?>"
+                    >
+                    </a>
+
+                    <h6>
+                        <?= $comic['nombre'] ?>
+                    </h6>
+
+                    <p>
+                        <?= $comic['autor'] ?>
+                    </p>
+
+                    <span>
+                        €<?= number_format($comic['precio'],2,',','.') ?>
+                    </span>
+                    
+                     <button class="btn-añadir position-absolute bottom-0 end-0 m-2 d-none d-xl-block" 
+                            data-id="<?= $comic['id_producto'] ?>">
+                        <i class="bi bi-plus"></i>
+                    </button>
+                    <button class="btn-añadir position-absolute bottom-0 end-0  bi bi-plus-lg d-xl-none d-block" data-id="<?= $comic['id_producto'] ?>"></button>
+                </div>
+
+            <?php endwhile; ?>
+
+        </div>
+
+         <button class="carousel-btn right" id="nextBtnComics">
+            <i class="bi bi-chevron-right"></i>
+        </button>
+      <?php endif; ?>
+
+
+
+
+
+
+
+    </main>
 
 
 <?php include 'views/footer.php'; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-<script src="js/carrusel.js"></script>
+<script src="js/carruselgaleria.js"></script>
+
+
 </body>    
 
 </html>

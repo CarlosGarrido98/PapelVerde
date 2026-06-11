@@ -221,4 +221,7 @@ public static function obtenerProductoPorId($conexion, $id)
 
 
 
+
+
+
 }
