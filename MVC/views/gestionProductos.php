@@ -56,15 +56,16 @@
             <tr>
 
                 <td>
-
+                    <a href="/producto?id=<?= $producto['id_producto'] ?>">
                     <img
+
                         src="<?= $producto['imagen_url'] ?>"
                         width="60"
                         height="80"
                         style="object-fit:cover;"
                         class="rounded shadow"
                     >
-
+                     </a>
                 </td>
 
                 <td>

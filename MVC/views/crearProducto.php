@@ -19,7 +19,7 @@
 
 
 <form action="/guardarProducto" method="POST">
-<?php include 'views/header.php'; ?>
+s
 
 <div class="container py-5">
 
@@ -29,8 +29,8 @@
              style='background-image:url("img/imgPapelVerde/bg-footer.webp")'>
 
             <h3 class="mb-0">
-                <i class="bi bi-plus-circle"></i>
-                Nuevo Producto
+                
+                Añadir Producto
             </h3>
 
         </div>
