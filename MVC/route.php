@@ -66,7 +66,6 @@ switch ($method) {
                     require_once 'views/perfil.php';
                     break;
             
-
             case '/editPerfil':
                 PerfilController::editar();
                 break;
@@ -91,7 +90,9 @@ switch ($method) {
                 CarritoController::borrarCarrito();
                 break;  
 
-
+            case '/gestion':
+                require_once 'views/gestion.php';
+                break;
             
 
             default:

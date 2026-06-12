@@ -19,57 +19,12 @@ include 'views/header.php';
     $us = $_SESSION["usuario"];
 ?>
 
-<main class="container py-5">
 
-    <div class="row justify-content-center">
+<?php if($us->isAdministrador()): require 'views/perfilAdmin.php';?>
+<?php else: require 'views/perfilUsuario.php';?>
+<?php endif; ?>
 
-        <div class="col-12 col-md-8 col-lg-6">
 
-            <div class="card shadow border-0 rounded-4">
-
-                <div class="card-body text-center p-4">
-
-                    <!-- Foto de perfil -->
-                    <img
-                        src="<?php echo $us->getImagenUrl() ?? 'img/default-avatar.png'; ?>"
-                        alt="Foto de perfil"
-                        class="rounded-circle img-fluid mb-3"
-                        style="width: 150px; height: 150px; object-fit: cover;"
-                    >
-
-                    <!-- Nombre -->
-                    <h2 class="fw-bold">
-                        Bienvenido! 
-                        <?php echo $us->getNombre() ?? 'Usuario'; ?>
-                    </h2>
-
-                    <!-- Correo -->
-                    <p class="text-muted fs-5">
-                        <?php echo $us->getEmail() ?? 'Email no disponible'; ?>
-                    </p>
-
-                    <hr>
-
-                    <!-- Botones -->
-                    <div class="d-flex justify-content-center gap-2 flex-wrap">
-
-                        <a href="/editPerfil" class="btn btn-success">
-                            Editar Perfil
-                        </a>
-
-                        <a href="/logout" class="btn btn-danger">
-                            Cerrar Sesión
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
 
 </main>
 

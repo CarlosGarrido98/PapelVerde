@@ -177,6 +177,59 @@ nav{
 }
 
 
+
+.admin-card{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    color:white;
+    min-height:180px;
+    border-radius:20px;
+    transition:.3s;
+    box-shadow:0 8px 20px rgba(0,0,0,.1);
+}
+
+.admin-card i{
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+.admin-card span{
+    font-size:1.1rem;
+    font-weight:600;
+    text-align:center;
+}
+
+.admin-card:hover{
+    transform:translateY(-6px);
+    color:white;
+    box-shadow:0 15px 30px rgba(0,0,0,.15);
+}
+
+/* Colores */
+
+.productos{
+    background:linear-gradient(135deg,#198754,#157347);
+}
+
+.usuarios{
+    background:linear-gradient(135deg,#0d6efd,#0a58ca);
+}
+
+.pedidos{
+    background:linear-gradient(135deg,#fd7e14,#e96b00);
+}
+.favoritos{
+    background:linear-gradient(135deg,#dc3545,#b02a37);
+}
+
+
+
+
+
+
 /*  RESPONSIVE  PARA EL MÓVIL */
 @media (max-width: 768px) {
 
@@ -242,5 +295,19 @@ nav{
     font-weight: bolder;
   }
  
+.admin-card{
+        min-height:120px;
+        flex-direction:row;
+        justify-content:flex-start;
+        gap:20px;
+        padding:20px;
+    }
+
+    .admin-card i{
+        margin-bottom:0;
+        font-size:2rem;
+    }
+
+
 
 }
