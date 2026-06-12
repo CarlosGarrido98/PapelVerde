@@ -112,5 +112,25 @@ public function actualizarUsuario(Usuario $usuario): bool
 
     return mysqli_stmt_execute($stmt);
 }
+
+        public static function obtenerTodos(mysqli $conexion)
+        {
+            $sql = "
+                SELECT
+                    idUsuarios,
+                    nombre,
+                    email,
+                    pais,
+                    admin,
+                    imagenURL
+                FROM usuarios
+                ORDER BY nombre
+            ";
+
+            return mysqli_query(
+                $conexion,
+                $sql
+            );
+        }
     
 }

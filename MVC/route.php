@@ -66,6 +66,9 @@ switch ($method) {
                     require_once 'views/perfil.php';
                     break;
             
+            // DGT Nuevo 
+
+
             case '/editPerfil':
                 PerfilController::editar();
                 break;
@@ -90,9 +93,29 @@ switch ($method) {
                 CarritoController::borrarCarrito();
                 break;  
 
+            
+            // Gestiones 
+
             case '/gestion':
                 require_once 'views/gestion.php';
                 break;
+
+                
+            case '/gestionUsuarios':
+            require_once 'controllers/AdminController.php';
+            AdminController::gestionUsuarios();
+            break;
+
+            case '/gestionProductos':
+            require_once 'controllers/AdminController.php';
+            AdminController::gestionProductos();
+            break;
+
+            case '/crearProducto':
+            require_once 'controllers/AdminController.php';
+            AdminController::mostrarFormularioProducto();
+            break;
+
             
 
             default:

@@ -215,6 +215,20 @@ public static function obtenerProductoPorId($conexion, $id)
 }
 
 
+public static function obtenerTodos(mysqli $conexion)
+{
+    $sql = "
+        SELECT *
+        FROM productos
+        ORDER BY id_producto
+    ";
+
+    return mysqli_query(
+        $conexion,
+        $sql
+    );
+}
+
 
 
 
