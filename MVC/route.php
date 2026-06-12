@@ -66,7 +66,16 @@ switch ($method) {
                     require_once 'views/perfil.php';
                     break;
             
-            // DGT Nuevo 
+            
+            case '/favoritos':
+                require_once 'controllers/FavoritoController.php';
+                FavoritoController::mostrarVista();
+                break;
+
+            case '/favoritos/toggle':
+                require_once 'controllers/FavoritosController.php';
+                FavoritoController::alternar();
+                break;
 
 
             case '/editPerfil':
@@ -102,22 +111,21 @@ switch ($method) {
 
                 
             case '/gestionUsuarios':
-            require_once 'controllers/AdminController.php';
-            AdminController::gestionUsuarios();
-            break;
+                require_once 'controllers/AdminController.php';
+                AdminController::gestionUsuarios();
+                break;
 
             case '/gestionProductos':
-            require_once 'controllers/AdminController.php';
-            AdminController::gestionProductos();
-            break;
+                require_once 'controllers/AdminController.php';
+                AdminController::gestionProductos();
+                break;
 
             case '/crearProducto':
-            require_once 'controllers/AdminController.php';
-            AdminController::mostrarFormularioProducto();
-            break;
+                require_once 'controllers/AdminController.php';
+                AdminController::mostrarFormularioProducto();
+                break;
 
-            
-
+        
             default:
                 require_once 'views/404.php';
                 break;
@@ -138,14 +146,14 @@ switch ($method) {
                 break;
 
             case '/actualizarPerfil':
-            PerfilController::actualizar();
-            break;
+                    PerfilController::actualizar();
+                    break;
 
             //Para Añadir Productos 
             case '/guardarProducto':
-            require_once 'controllers/AdminController.php';
-            AdminController::guardarProducto();
-            break;
+                require_once 'controllers/AdminController.php';
+                AdminController::guardarProducto();
+                break;
             
 
 
