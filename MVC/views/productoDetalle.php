@@ -84,12 +84,12 @@
             <!-- OJO TIENE QUE IR AL CARRITO TAMBIEN -->
             <div class="d-flex gap-3 mt-4">
 
-                <button class="btn btn-success btn-lg px-4">
-                    <i class="bi bi-cart-plus-fill me-2"></i>
+                <button class="btn btn-success btn-añadir btn-lg" data-id=<?= $producto['id_producto'] ?> style="width: 30%;">
+                    <i class="bi bi-cart-plus-fill  me-2"></i>
                     Añadir al carrito
                 </button>
 
-                <button class="btn btn-outline-danger btn-lg px-4">
+                <button id="btn-fav" class="btn btn-outline-danger btn-lg px-4" data-id=<?= $producto['id_producto'] ?>>
                     <i class="bi bi-heart me-2"></i>
                     Favoritos
                 </button>
@@ -279,7 +279,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 <script src="js/carruselgaleria.js"></script>
-
+<script src="js/productoDetalle.js"></script>
 
 </body>    
 

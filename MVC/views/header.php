@@ -7,11 +7,11 @@ if (session_status() === PHP_SESSION_NONE) {
 // 2. Contamos cuántas UNIDADES REALES hay en la sesión sumando sus cantidades
 $totalProductos = 0;
 if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
-    foreach ($_SESSION['carrito'] as $producto) {
-        if (is_object($producto)) {
-            $totalProductos += isset($producto->cantidad) ? $producto->cantidad : 1;
+    foreach ($_SESSION['carrito'] as $itemCarrito) {
+        if (is_object($itemCarrito)) {
+            $totalProductos += isset($itemCarrito->cantidad) ? $itemCarrito->cantidad : 1;
         } else {
-            $totalProductos += isset($producto['cantidad']) ? $producto['cantidad'] : 1;
+            $totalProductos += isset($itemCarrito['cantidad']) ?    $itemCarrito['cantidad'] : 1;
         }
     }
 }
@@ -111,13 +111,13 @@ if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
             <div class="productos-carrito-wrapper">
                 <?php if ($totalProductos > 0 && isset($_SESSION['carrito'])): ?>
                     
-                    <?php foreach ($_SESSION['carrito'] as $idLibro => $producto): 
-                        $nombre = is_object($producto) ? $producto->getNombre() : $producto['nombre'];
-                        $precio = is_object($producto) ? $producto->getPrecio() : $producto['precio'];
-                        $imagen = is_object($producto) ? $producto->getImagenUrl() : $producto['imagen_url'];
+                    <?php foreach ($_SESSION['carrito'] as $idLibro => $itemCarrito): 
+                        $nombre = is_object($itemCarrito) ? $itemCarrito->getNombre() : $itemCarrito['nombre'];
+                        $precio = is_object($itemCarrito) ? $itemCarrito->getPrecio() : $itemCarrito['precio'];
+                        $imagen = is_object($itemCarrito) ? $itemCarrito->getImagenUrl() : $itemCarrito['imagen_url'];
                         
                         // Leemos la cantidad real que tu controlador ya calculó en la sesión
-                        $cantidad = is_object($producto) ? $producto->cantidad : $producto['cantidad'];
+                        $cantidad = is_object($itemCarrito) ? $itemCarrito->cantidad : $itemCarrito['cantidad'];
                         $precioTotalProducto = $precio * $cantidad;
                     ?>
                         <div class="card mb-3 border-0 border-bottom pb-2 producto-item" data-id="<?= $idLibro; ?>">

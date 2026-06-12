@@ -121,6 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+    
     const botonesAñadir = document.querySelectorAll('.btn-añadir');
     botonesAñadir.forEach(boton => {
         boton.addEventListener('click', function() {
@@ -133,20 +135,55 @@ document.addEventListener('DOMContentLoaded', () => {
                     return response.json(); 
                 })
                 .then(data => {
+
+                    if (data.status === 'no_stock') {
+                        let modalStock = document.getElementById('modalNoStock');
+                        if (!modalStock) {
+                            const modalHTML = `
+                                <div class="modal fade" id="modalNoStock" tabindex="-1" aria-labelledby="modalStockLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content border-0 shadow">
+                                            <div class="modal-header text-white border-0" style='background-color: #235437'>
+                                                <h5 class="modal-title fw-bold" id="modalStockLabel">
+                                                    <i class="bi bi-exclamation-triangle-fill me-2"></i> Stock Límite Alcanzado
+                                                </h5>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body py-4 text-center">
+                                                <p class="fs-5 mb-1 text-dark text-stock-mensaje"></p>
+                                                <small class="text-muted text-stock-disponible"></small>
+                                            </div>
+                                            <div class="modal-footer border-0 justify-content-center">
+                                                <button type="button" class="btn btn-secondary px-4 rounded-pill" style='background-color: #235437' data-bs-dismiss="modal">Entendido</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            document.body.insertAdjacentHTML('beforeend', modalHTML);
+                            modalStock = document.getElementById('modalNoStock');
+                        }
+
+                        modalStock.querySelector('.text-stock-mensaje').textContent = data.message;
+                        modalStock.querySelector('.text-stock-disponible').textContent = `Unidades máximas en inventario: ${data.stockDisponible}`;
+
+                        const bsModal = new bootstrap.Modal(modalStock);
+                        bsModal.show();
+
+                        return;
+                    }
+
                     if (data.status === 'success' && data.producto) {
                         
-                        // 1. Quitar el aviso de carrito vacío si existía
                         if (carritoWrapper) {
                             const estadoVacio = carritoWrapper.querySelector('.carrito-vacio-estado');
                             if (estadoVacio) carritoWrapper.textContent = ''; 
                         }
 
-                        // 2. Activar botones de acción del footer
                         const btnCheckout = document.querySelector('a[href="carrito/checkout"]');
                         if (btnCheckout) btnCheckout.classList.remove('disabled');
                         if (borrarCarritoBtn) borrarCarritoBtn.classList.remove('d-none');
 
-                        // 3. Sincronizar el Badge rojo superior de la cabecera
                         let badge = document.querySelector('.badge.bg-danger');
                         if (badge) {
                             badge.textContent = data.totalProductos;
@@ -161,34 +198,26 @@ document.addEventListener('DOMContentLoaded', () => {
                             }
                         }
 
-                        // 4. Sincronizar el texto del total de productos en el footer
                         if (cajTotalProd) {
                             cajTotalProd.textContent = "Total de productos: " + data.totalProductos; 
                         }
 
-                        // ========================================================
-                        // 5. MANEJO DE TARJETAS DINÁMICAS (AGRUPACIÓN POR ID)
-                        // ========================================================
                         const tarjetaExistente = carritoWrapper.querySelector(`.producto-item[data-id="${idLibro}"]`);
 
-                        // Mapeo de variables basado en tu objeto Producto
                         const nombre = data.producto.nombre || data.producto.titulo || 'Producto';
                         const precioUnitario = parseFloat(data.producto.precio || 0);
                         const imagen = data.producto.imagen || data.producto.imagen_url || 'img/imgPapelVerde/Logotipo1.png';
                         
-                        // Leemos la cantidad que viene directamente calculada por tu PHP
                         const cantidadReal = data.producto.cantidad; 
                         const precioTotalCalculado = precioUnitario * cantidadReal;
 
                         if (tarjetaExistente) {
-                            // SI YA EXISTE EN PANTALLA: Solo actualizamos los textos internos
                             const campoCantidad = tarjetaExistente.querySelector('.producto-cantidad');
                             const campoPrecioTotal = tarjetaExistente.querySelector('.producto-precio-total');
 
                             if (campoCantidad) campoCantidad.textContent = cantidadReal;
                             if (campoPrecioTotal) campoPrecioTotal.textContent = precioTotalCalculado.toFixed(2);
                         } else {
-                            // SI NO EXISTE EN PANTALLA: Inyectamos el bloque HTML por primera vez
                             const nuevaTarjetaHTML = `
                                 <div class="card mb-3 border-0 border-bottom pb-2 producto-item" data-id="${idLibro}">
                                     <div class="row g-0 align-items-center">

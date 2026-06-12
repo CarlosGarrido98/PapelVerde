@@ -20,40 +20,56 @@ class CarritoController {
                     $_SESSION['carrito'] = [];
                 }   
 
-                // 1. Controlamos si el producto YA existe usando el ID del libro como CLAVE
+                // Convertimos el stock a un entero limpio
+                $stockDisponible = is_object($producto) ? (int)$producto->stock : (int)$producto['stock'];
+
+                // 1. Averiguamos cuánta cantidad ya tiene acumulada en el carrito
+                $cantidadActualEnCarrito = 0;
                 if (isset($_SESSION['carrito'][$id_libro])) {
-                    
-                    // Si tu modelo devuelve un OBJETO en lugar de un Array asociativo:
+                    $itemEnCarrito = $_SESSION['carrito'][$id_libro];
+                    $cantidadActualEnCarrito = is_object($itemEnCarrito) ? $itemEnCarrito->cantidad : $itemEnCarrito['cantidad'];
+                }
+
+                // Calculamos cuánto sumaría si le permitimos agregar este clic
+                $cantidadSolicitada = $cantidadActualEnCarrito + 1;
+
+                // ========================================================
+                // VALIDACIÓN DE STOCK REAL
+                // ========================================================
+                if ($cantidadSolicitada > $stockDisponible) {
+                    // Si la nueva cantidad supera al stock, detenemos el proceso y avisamos al JS
+                    header('Content-Type: application/json');
+                    echo json_encode([ 
+                        'status' => 'no_stock',
+                        'message' => 'Lo sentimos, no hay suficiente stock disponible.',
+                        'stockDisponible' => $stockDisponible
+                    ]);
+                    exit;
+                }
+
+                // 2. Si pasa la validación de stock, procedemos a guardar o sumar de forma normal
+                if (isset($_SESSION['carrito'][$id_libro])) {
                     if (is_object($_SESSION['carrito'][$id_libro])) {
-                        // Si el objeto ya tiene un atributo público o una propiedad dinámica 'cantidad'
                         $_SESSION['carrito'][$id_libro]->cantidad++;
                     } else {
-                        // Si tu modelo devuelve un ARRAY asociativo:
                         $_SESSION['carrito'][$id_libro]['cantidad']++;
                     }
-                    
-                    // Asignamos el producto actualizado para mandarlo en el json_encode
                     $producto = $_SESSION['carrito'][$id_libro];
-
                 } else {
-                    // 2. Si el producto NO existe, le creamos su primera cantidad = 1
                     if (is_object($producto)) {
                         $producto->cantidad = 1;
                     } else {
                         $producto['cantidad'] = 1;
                     }
-                    
-                    // Lo guardamos en el carrito usando el ID como clave única
                     $_SESSION['carrito'][$id_libro] = $producto;
                 }
             }
         }
 
-        // 3. Calculamos el total sumando las cantidades reales de cada producto
+        // 3. Calculamos el total de productos acumulados para el diseño global
         $totalProductosReal = 0;
         if (isset($_SESSION['carrito'])) {
             foreach ($_SESSION['carrito'] as $item) {
-                // Sumamos la propiedad cantidad dependiendo de si es objeto o array
                 $totalProductosReal += is_object($item) ? $item->cantidad : $item['cantidad'];
             }
         }
@@ -61,8 +77,8 @@ class CarritoController {
         header('Content-Type: application/json');
         echo json_encode([  
             'status' => 'success',
-            'totalProductos' => $totalProductosReal, // Enviamos el conteo real acumulado
-            'producto' => $producto // Enviamos el producto entero con su atributo 'cantidad' incluido
+            'totalProductos' => $totalProductosReal, 
+            'producto' => $producto 
         ]);
         exit;
     }
