@@ -16,19 +16,6 @@ if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papel Verde</title>
-    <link class="icon" type="image/png" href="img/imgPapelVerde/Logoico.ico">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-</head>
-
-<body>
 
     <header class="bg-light">
         <div class="container">
@@ -100,7 +87,7 @@ if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
         </div>
     </nav>
 
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="carritoLateral" aria-labelledby="carritoLateralLabel">
+    <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="carritoLateral" aria-labelledby="carritoLateralLabel">
         <div class="offcanvas-header bg-light border-bottom">
             <h5 class="offcanvas-title" id="carritoLateralLabel"><i class="bi bi-cart3 me-2"></i>Tu Carrito</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -116,7 +103,6 @@ if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
                         $precio = is_object($itemCarrito) ? $itemCarrito->getPrecio() : $itemCarrito['precio'];
                         $imagen = is_object($itemCarrito) ? $itemCarrito->getImagenUrl() : $itemCarrito['imagen_url'];
                         
-                        // Leemos la cantidad real que tu controlador ya calculó en la sesión
                         $cantidad = is_object($itemCarrito) ? $itemCarrito->cantidad : $itemCarrito['cantidad'];
                         $precioTotalProducto = $precio * $cantidad;
                     ?>
@@ -147,27 +133,61 @@ if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
                         <p class="mt-2">El carrito está vacío.</p>
                     </div>
                 <?php endif; ?>
-            </div> <div class="border-top pt-3 bg-white">
+            </div> 
+            
+            <div class="border-top pt-3 bg-white">
                 <div class="d-flex justify-content-between mb-3 fw-bold">
                     <span id="total-prod">Total de productos: <?= $totalProductos; ?></span> 
                 </div>
-                <div class="row">
+                <div class="row text-center">
+                    <?php if (isset($_SESSION["usuario"])): ?>
+                        <div class="col-6 mb-2">
+                            <a href="carrito/checkout" class="btn btn-success w-100 py-2 <?= $totalProductos === 0 ? 'disabled' : ''; ?>">Procesar Pedido</a>
+                        </div>
+                    <?php else: ?>
+                        <div class="col-6 mb-2">
+                            <a href="carrito/checkout" class="btn btn-success w-100 py-2 <?= $totalProductos === 0 ? 'disabled' : ''; ?>" data-bs-toggle="modal" data-bs-target="#authRequeridoModal">Procesar Pedido</a>
+                        </div>
+                    <?php endif; ?>
+                    
                     <div class="col-6 mb-2">
-                        <a href="carrito/checkout" class="btn btn-success w-100 py-2 <?= $totalProductos === 0 ? 'disabled' : ''; ?>">Procesar Pedido</a>
+                        <a id="borrar-carrito" class="btn btn-danger w-100 py-2 <?= $totalProductos === 0 ? 'd-none' : ''; ?>">Borrar Carrito</a>
                     </div>
-                    <div class="col-6 mb-2">
-                        <a id="borrar-carrito" class="btn btn-danger w-100 py-2 <?= $totalProductos === 0 ? 'd-none' : ''; ?>" href="#">Borrar Carrito</a>
+                    
                     </div>
-                    <div class="col-12">
-                        <button class="btn btn-outline-secondary btn-sm w-100" data-bs-dismiss="offcanvas">Seguir comprando</button>
-                    </div>
-                </div>
             </div>
 
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bundle.min.js"></script>
-    <script src="js/carrito.js"></script> 
-</body>
-</html>
+    <div class="modal fade" id="authRequeridoModal" tabindex="-1" aria-labelledby="authRequeridoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 pt-4 px-4 d-flex justify-content-end">
+                    <button type="button" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center px-5 pb-4">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-success-subtle text-success rounded-circle mb-4" style="width: 80px; height: 80px;">
+                        <i class="bi bi-person-lock fs-1" style="color: #254B36;"></i>
+                    </div>
+                    <h4 class="fw-bold text-dark mb-3" id="authRequeridoModalLabel">¿Listo para leer?</h4>
+                    <p class="text-muted fs-6 lh-base">
+                        Necesitas tener un usuario para comprar y procesar tu pedido. Inicia sesión para recuperar tu carrito guardado o crea una cuenta en unos segundos.
+                    </p>
+                </div>
+                <div class="modal-footer d-flex flex-column gap-2 border-0 px-5 pb-5">
+                    <a href="/login" class="btn btn-success w-100 py-2.5 fw-semibold shadow-sm text-white rounded-3" 
+                    style="background-color: #254B36; border-color: #254B36; font-size: 1rem;">
+                        Iniciar Sesión
+                    </a>
+                    <a href="/formulario" class="btn btn-link w-100 text-decoration-none fw-semibold pt-2" 
+                    style="color: #254B36; font-size: 0.95rem;">
+                        ¿No tienes cuenta? Regístrate aquí
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/carrito.js"></script>

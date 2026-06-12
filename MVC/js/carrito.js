@@ -8,11 +8,8 @@ const htmlCarritoVacio = `
     </div>
 `;
 
-
-
 if (carritoWrapper) {
     carritoWrapper.addEventListener('click', function(e) {
-        
         // Buscamos si el clic ocurrió en tu clase o dentro de ella
         const botonEliminar = e.target.closest('.btn-eliminar-producto');
         
@@ -121,8 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
-    
     const botonesAñadir = document.querySelectorAll('.btn-añadir');
     botonesAñadir.forEach(boton => {
         boton.addEventListener('click', function() {
@@ -180,8 +175,9 @@ document.addEventListener('DOMContentLoaded', () => {
                             if (estadoVacio) carritoWrapper.textContent = ''; 
                         }
 
+                        // 🟢 CONFIGURACIÓN CORRECTA DE BOTONES AL AÑADIR
                         const btnCheckout = document.querySelector('a[href="carrito/checkout"]');
-                        if (btnCheckout) btnCheckout.classList.remove('disabled');
+                        if (btnCheckout) btnCheckout.classList.remove('disabled'); // El botón vuelve a la vida
                         if (borrarCarritoBtn) borrarCarritoBtn.classList.remove('d-none');
 
                         let badge = document.querySelector('.badge.bg-danger');

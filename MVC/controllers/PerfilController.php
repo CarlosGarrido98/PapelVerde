@@ -7,6 +7,18 @@ class PerfilController
         require 'views/editPerfil.php';
     }
 
+    public static function mostrarFavoritos() {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        if (!isset($_SESSION['usuario'])) {
+            header('Location: /login');
+            exit;
+        }
+        require_once 'views/favoritos.php';
+    }
+    
     public static function actualizar()
     {
         session_start();

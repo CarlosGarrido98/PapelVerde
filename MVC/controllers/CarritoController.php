@@ -74,6 +74,9 @@ class CarritoController {
             }
         }
 
+        // 🟢 Sincronizamos los cambios en la base de datos
+        self::sincronizarConBaseDatos();
+
         header('Content-Type: application/json');
         echo json_encode([  
             'status' => 'success',
@@ -134,6 +137,9 @@ class CarritoController {
             }
         }
 
+        // 🟢 Sincronizamos los cambios en la base de datos
+        self::sincronizarConBaseDatos();
+
         // Forzamos la limpieza del búfer de salida por si PHP coló algún Warning previo en texto común
         if (ob_get_length()) ob_clean();
 
@@ -155,6 +161,9 @@ class CarritoController {
         // 1. Borramos el carrito
         $_SESSION['carrito'] = [];
         
+        // 🟢 Sincronizamos los cambios en la base de datos (esto limpiará la tabla del usuario)
+        self::sincronizarConBaseDatos();
+
         // 2. Avisamos que respondemos en JSON
         header('Content-Type: application/json');
         
@@ -164,6 +173,83 @@ class CarritoController {
             'message' => 'El carrito ha sido vaciado correctamente'
         ]);
         
-        exit; // Buena práctica: detenemos la ejecución para que no se cuele ningún espacio en blanco accidental
+        exit; 
+    }
+
+    public static function sincronizarConBaseDatos() {
+        // Si el usuario no ha iniciado sesión, no tocamos la base de datos
+        if (!isset($_SESSION['usuario'])) {
+            return;
+        }
+
+        global $conexion;
+        
+        // 🟢 SOLUCIÓN 1: Si 'global $conexion' viene vacío, intentamos incluir el archivo 
+        // o usar la clase de base de datos que tengas para forzar la conexión.
+        if (!isset($conexion) || $conexion === null) {
+            require_once 'config/database.php';
+            // Nota: Si en config/database.php tu conexión se asigna a otra variable (ej: $conn o una clase Database),
+            // asegúrate de mapearla aquí. Si se llama $conexion, al hacer el require_once debería revivir.
+        }
+
+        // Si aun así la conexión no existe, dejamos un registro en el log para saberlo
+        if (!$conexion) {
+            error_log("Error: No se pudo acceder a la variable de conexión \$conexion en el carrito.");
+            return;
+        }
+
+        $usuario = $_SESSION['usuario'];
+        $usuarioId = null;
+
+        // 🕵️‍♂️ Extracción ultra-flexible del ID (revisamos tanto objetos como arrays)
+        if (is_object($usuario)) {
+            if (isset($usuario->idUsuarios)) {
+                $usuarioId = $usuario->idUsuarios;
+            } elseif (isset($usuario->id)) {
+                $usuarioId = $usuario->id;
+            } elseif (isset($usuario->id_usuario)) {
+                $usuarioId = $usuario->id_usuario;
+            } elseif (method_exists($usuario, 'getIdUsuarios')) {
+                $usuarioId = $usuario->getIdUsuarios();
+            }
+        } elseif (is_array($usuario)) {
+            $usuarioId = $usuario['idUsuarios'] ?? $usuario['id'] ?? $usuario['id_usuario'] ?? null;
+        }
+
+        // Si no encontramos un ID válido, cancelamos para no romper la query
+        if (!$usuarioId) {
+            error_log("Error: No se pudo encontrar el ID del usuario en la sesión.");
+            return;
+        }
+
+        // 1. Limpiamos el carrito previo de este usuario para actualizarlo de forma limpia
+        $sqlDelete = "DELETE FROM carrito WHERE idUsuarios = ?";
+        $stmtDelete = $conexion->prepare($sqlDelete);
+        if ($stmtDelete) {
+            $stmtDelete->bind_param("i", $usuarioId);
+            $stmtDelete->execute();
+            $stmtDelete->close();
+        } else {
+            error_log("Error en el prepare de DELETE: " . $conexion->error);
+        }
+
+        // 2. Si hay productos en la sesión, los insertamos en la tabla uno a uno
+        if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
+            $sqlInsert = "INSERT INTO carrito (idUsuarios, id_producto, cantidad) VALUES (?, ?, ?)";
+            $stmtInsert = $conexion->prepare($sqlInsert);
+
+            if ($stmtInsert) {
+                foreach ($_SESSION['carrito'] as $productoId => $item) {
+                    // Detectamos si el item del carrito actual es un objeto o un array para leer la cantidad
+                    $cantidad = is_object($item) ? ($item->cantidad ?? 1) : ($item['cantidad'] ?? 1);
+
+                    $stmtInsert->bind_param("iii", $usuarioId, $productoId, $cantidad);
+                    $stmtInsert->execute();
+                }
+                $stmtInsert->close();
+            } else {
+                error_log("Error en el prepare de INSERT: " . $conexion->error);
+            }
+        }
     }
 }
