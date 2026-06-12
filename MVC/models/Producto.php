@@ -401,11 +401,78 @@ public static function obtenerProductoPorId($conexion, $id)
     }
 
     return true;
-}
+    }
+
+    public static function eliminarProducto(
+    mysqli $conexion,
+    int $id
+    )
+    {
+            // Primero borramos tablas hijas
+
+            mysqli_query(
+                $conexion,
+                "DELETE FROM libros
+                WHERE id_producto = $id"
+            );
+
+            mysqli_query(
+                $conexion,
+                "DELETE FROM comics
+                WHERE id_producto = $id"
+            );
+
+            mysqli_query(
+                $conexion,
+                "DELETE FROM mangas
+                WHERE id_producto = $id"
+            );
+
+            // Después borramos el producto
+
+            mysqli_query(
+                $conexion,
+                "DELETE FROM productos
+                WHERE id_producto = $id"
+            );
+
+            return true;
+        }
+
+
+
+        // METODO PARA ACTUALIZAR EL PRODUCTO 
+         public static function actualizarProducto(
+            mysqli $conexion,
+            array $datos
+        )
+        {
+            $id = $datos['id_producto'];
+
+            $nombre = $datos['nombre'];
+            $precio = $datos['precio'];
+            $stock =  $datos['stock'];
+            $sinopsis =  $datos['sinopsis'];
+
+            $sql = "
+                UPDATE productos
+                SET
+                    nombre = '$nombre',
+                    precio = '$precio',
+                    stock =  '$stock',
+                    sinopsis ='$sinopsis'
+                    
+                WHERE id_producto = $id
+            ";
+
+            return mysqli_query(
+                $conexion,
+                $sql
+            );
+        }                                       
 
 
     
-
 
 
     }

@@ -123,6 +123,7 @@
 
                 <td>
 
+                    <!-- Actualizar Producto -->
                     <a
                         href="/editarProducto?id=<?= $producto['id_producto'] ?>"
                         class="btn btn-sm btn-primary">
@@ -131,13 +132,93 @@
 
                     </a>
 
-                    <a
-                        href="/eliminarProducto?id=<?= $producto['id_producto'] ?>"
-                        class="btn btn-sm btn-danger">
+                    <!-- Eliminar  Producto -->    
+     
+
+                    <button
+                        class="btn btn-danger btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalEliminar<?= $producto['id_producto'] ?>">
 
                         <i class="bi bi-trash"></i>
 
-                    </a>
+                    </button>
+
+                
+
+                <!-- MODAL PARA ELIMINAR PRODUCTOS  -->
+
+                <div class="modal fade"
+                    id="modalEliminar<?= $producto['id_producto'] ?>"
+                    tabindex="-1">
+
+                    <div class="modal-dialog modal-dialog-centered">
+
+                        <div class="modal-content">
+
+                            <div class="modal-header bg-danger text-white">
+
+                                <h5 class="modal-title">
+                                    Eliminar producto
+                                </h5>
+
+                                <button
+                                    type="button"
+                                    class="btn-close btn-close-white"
+                                    data-bs-dismiss="modal">
+                                </button>
+
+                            </div>
+
+                            <div class="modal-body text-center">
+
+                                <i class="bi bi-exclamation-triangle-fill text-danger fs-1"></i>
+
+                                <p class="mt-3">
+
+                                    ¿Seguro que quieres eliminar
+
+                                    <strong>
+                                        <?= $producto['nombre'] ?>
+                                    </strong>?
+
+                                </p>
+
+                                <small class="text-muted">
+                                    Esta acción no se puede deshacer.
+                                </small>
+
+                            </div>
+
+                            <div class="modal-footer">
+
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal">
+
+                                    Cancelar
+
+                                </button>
+
+                                <a
+                                    href="/eliminarProducto?id=<?= $producto['id_producto'] ?>"
+                                    class="btn btn-danger">
+
+                                    Eliminar
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                    
 
                 </td>
 
@@ -154,7 +235,7 @@
 </main>
 <?php include 'views/footer.php'; ?>
 
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>    
 
 </html>

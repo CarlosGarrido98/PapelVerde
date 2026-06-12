@@ -125,6 +125,18 @@ switch ($method) {
                 AdminController::mostrarFormularioProducto();
                 break;
 
+
+            case '/eliminarProducto':
+                require_once 'controllers/AdminController.php';
+                AdminController::eliminarProducto();
+                break;
+
+            case '/editarProducto':
+            require_once 'controllers/AdminController.php';
+            AdminController::mostrarEditarProducto();
+            break;
+
+            
         
             default:
                 require_once 'views/404.php';
@@ -154,7 +166,13 @@ switch ($method) {
                 require_once 'controllers/AdminController.php';
                 AdminController::guardarProducto();
                 break;
+
+            case '/actualizarProducto':
+                require_once 'controllers/AdminController.php';
+                AdminController::actualizarProducto();
+                break;
             
+             
 
 
             default:

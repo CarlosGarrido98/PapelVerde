@@ -46,5 +46,50 @@ class AdminController
             exit;
         }
 
+    
+        public static function eliminarProducto()
+        {
+            global $conexion;
+
+            $id = $_GET['id'];
+
+            Producto::eliminarProducto(
+                $conexion,
+                $id
+            );
+
+            header('Location: /gestionProductos');
+            exit;
+        }
+
+
+        public static function mostrarEditarProducto()
+        {
+            global $conexion;
+
+            $id = $_GET['id'];
+
+            $producto = Producto::obtenerProductoPorId(
+                $conexion,
+                $id
+            );
+
+            require 'views/editarProducto.php';
+        }
+
+
+        public static function actualizarProducto()
+        {
+            global $conexion;
+
+            Producto::actualizarProducto(
+                $conexion,
+                $_POST
+            );
+
+            header('Location: /gestionProductos');
+            exit;
+        }
+
 
 }
