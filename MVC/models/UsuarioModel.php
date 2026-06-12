@@ -57,61 +57,61 @@ class UsuarioModel {
 
 
 
-public function actualizarUsuario(Usuario $usuario): bool
-{
-    global $conexion;
+    public function actualizarUsuario(Usuario $usuario): bool
+    {
+        global $conexion;
 
-    $sql = "UPDATE usuarios
-            SET nombre=?,
-                email=?,
-                direccion=?,
-                pais=?,
-                fecha_nacimiento=?,
-                imagenURL=?,
-                sexo=?,
-                tarjeta_credito=?,
-                activar_notificaciones=?,
-                recibir_revista_digital=?   
-            WHERE idUsuarios=?";
+        $sql = "UPDATE usuarios
+                SET nombre=?,
+                    email=?,
+                    direccion=?,
+                    pais=?,
+                    fecha_nacimiento=?,
+                    imagenURL=?,
+                    sexo=?,
+                    tarjeta_credito=?,
+                    activar_notificaciones=?,
+                    recibir_revista_digital=?   
+                WHERE idUsuarios=?";
 
-    $stmt = mysqli_prepare($conexion, $sql);
+        $stmt = mysqli_prepare($conexion, $sql);
 
-    if (!$stmt) {
-        die(mysqli_error($conexion));
+        if (!$stmt) {
+            die(mysqli_error($conexion));
+        }
+
+        $nombre = $usuario->getNombre();
+        $email = $usuario->getEmail();
+        $direccion = $usuario->getDireccion();
+        $pais = $usuario->getPais();
+        $fechaNacimiento = $usuario->getFechaNacimiento();
+        $imagenURL = $usuario->getImagenUrl();
+        $sexo = $usuario->getSexo();
+        $tarjetaCredito = $usuario->getTarjetaCredito();
+        $activarNotificaciones = $usuario->isActivarNotificaciones() ? 1 : 0;
+        $recibirRevistaDigital = $usuario->isRecibirRevistaDigital() ? 1 : 0;
+
+        $idUsuario = $usuario->getIdUsuario();
+
+
+        mysqli_stmt_bind_param(
+        $stmt,
+        "ssssssssiii",
+        $nombre,
+        $email,
+        $direccion,
+        $pais,
+        $fechaNacimiento,
+        $imagenURL,
+        $sexo,
+        $tarjetaCredito,
+        $activarNotificaciones,
+        $recibirRevistaDigital,
+        $idUsuario
+        );
+
+        return mysqli_stmt_execute($stmt);
     }
-
-    $nombre = $usuario->getNombre();
-    $email = $usuario->getEmail();
-    $direccion = $usuario->getDireccion();
-    $pais = $usuario->getPais();
-    $fechaNacimiento = $usuario->getFechaNacimiento();
-    $imagenURL = $usuario->getImagenUrl();
-    $sexo = $usuario->getSexo();
-    $tarjetaCredito = $usuario->getTarjetaCredito();
-    $activarNotificaciones = $usuario->isActivarNotificaciones() ? 1 : 0;
-    $recibirRevistaDigital = $usuario->isRecibirRevistaDigital() ? 1 : 0;
-
-    $idUsuario = $usuario->getIdUsuario();
-
-
-    mysqli_stmt_bind_param(
-    $stmt,
-    "ssssssssiii",
-    $nombre,
-    $email,
-    $direccion,
-    $pais,
-    $fechaNacimiento,
-    $imagenURL,
-    $sexo,
-    $tarjetaCredito,
-    $activarNotificaciones,
-    $recibirRevistaDigital,
-    $idUsuario
-    );
-
-    return mysqli_stmt_execute($stmt);
-}
 
         public static function obtenerTodos(mysqli $conexion)
         {

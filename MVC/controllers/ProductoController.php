@@ -31,5 +31,6 @@ class ProductoController
     $comicsCarrusel = Producto::obtenerComicsCarrusel($conexion);
 
     require 'views/productoDetalle.php';
+    
 }
 }

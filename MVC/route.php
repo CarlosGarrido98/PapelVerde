@@ -140,6 +140,12 @@ switch ($method) {
             case '/actualizarPerfil':
             PerfilController::actualizar();
             break;
+
+            //Para Añadir Productos 
+            case '/guardarProducto':
+            require_once 'controllers/AdminController.php';
+            AdminController::guardarProducto();
+            break;
             
 
 

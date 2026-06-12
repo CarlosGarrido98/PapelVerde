@@ -18,8 +18,7 @@
 <main>
 
 
-<form action="/guardarProducto" method="POST">
-s
+
 
 <div class="container py-5">
 
@@ -29,7 +28,6 @@ s
              style='background-image:url("img/imgPapelVerde/bg-footer.webp")'>
 
             <h3 class="mb-0">
-                
                 Añadir Producto
             </h3>
 
@@ -37,7 +35,7 @@ s
 
         <div class="card-body">
 
-            <form action="/guardarProducto" method="POST">
+            <form action="/guardarProducto" method="POST"  enctype="multipart/form-data">
 
                 <!-- DATOS GENERALES -->
 
@@ -82,10 +80,11 @@ s
 
                     <input
                             type="file"
-                            id="foto"
-                            name="foto"
+                            id="imagen"
+                            name="imagen"
                             class="form-control"
-                            ccept="image/*">
+                            accept="image/*">
+                            
 
                 </div>
 

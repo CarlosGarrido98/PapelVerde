@@ -215,27 +215,200 @@ public static function obtenerProductoPorId($conexion, $id)
 }
 
 
-public static function obtenerTodos(mysqli $conexion)
-{
+    public static function obtenerTodos(mysqli $conexion)
+    {
+        $sql = "
+            SELECT *
+            FROM productos
+            ORDER BY id_producto
+        ";
+
+        return mysqli_query(
+            $conexion,
+            $sql
+        );
+    }
+    
+    
+    
+    
+    public static function crearProducto(
+    mysqli $conexion,
+    array $datos
+    )
+    {
+    $nombre = $datos['nombre'];
+    $precio = $datos['precio'];
+    $stock = $datos['stock'];
+    $tipo = $datos['tipo'];
+    $sinopsis = $datos['sinopsis'];
+
+    // Imagen por defecto
+    $imagenUrl = '';
+
+    // SUBIR IMAGEN
+
+    if (!empty($_FILES['imagen']['name']))
+    {
+        switch ($tipo)
+        {
+            case 'libro':
+                $carpeta = "img/Libros/";
+                break;
+
+            case 'comic':
+                $carpeta = "img/Comics/";
+                break;
+
+            case 'manga':
+                $carpeta = "img/Mangas/";
+                break;
+
+            default:
+                $carpeta = "img/productos/";
+        }
+
+        if (!is_dir($carpeta))
+        {
+            mkdir($carpeta, 0777, true);
+        }
+
+        $nombreArchivo =
+            time() . "_" .
+            basename($_FILES['imagen']['name']);
+
+        move_uploaded_file(
+            $_FILES['imagen']['tmp_name'],
+            $carpeta . $nombreArchivo
+        );
+
+        $imagenUrl = $carpeta . $nombreArchivo;
+    }
+
+    // INSERT PRODUCTO
+
     $sql = "
-        SELECT *
-        FROM productos
-        ORDER BY id_producto
+        INSERT INTO productos
+        (
+            nombre,
+            precio,
+            stock,
+            tipo,
+            imagen_url,
+            sinopsis
+        )
+        VALUES
+        (
+            '$nombre',
+            '$precio',
+            '$stock',
+            '$tipo',
+            '$imagenUrl',
+            '$sinopsis'
+        )
     ";
 
-    return mysqli_query(
-        $conexion,
-        $sql
-    );
+    if (!mysqli_query($conexion, $sql))
+    {
+        die(
+            'Error al insertar producto: '
+            . mysqli_error($conexion)
+        );
+    }
+
+    $idProducto = mysqli_insert_id($conexion);
+
+    // LIBRO
+
+    if ($tipo == 'libro')
+    {
+        $sqlLibro = "
+            INSERT INTO libros
+            (
+                id_producto,
+                autor,
+                editorial,
+                isbn,
+                num_paginas
+            )
+            VALUES
+            (
+                $idProducto,
+                '{$datos['autor_libro']}',
+                '{$datos['editorial_libro']}',
+                '{$datos['isbn_libro']}',
+                '{$datos['num_paginas']}'
+            )
+        ";
+
+        mysqli_query($conexion, $sqlLibro);
+    }
+
+    // COMIC
+
+    elseif ($tipo == 'comic')
+    {
+        $sqlComic = "
+            INSERT INTO comics
+            (
+                id_producto,
+                autor,
+                ilustrador,
+                editorial,
+                numero,
+                isbn
+            )
+            VALUES
+            (
+                $idProducto,
+                '{$datos['autor_comic']}',
+                '{$datos['ilustrador']}',
+                '{$datos['editorial_comic']}',
+                '{$datos['numero']}',
+                '{$datos['isbn_comic']}'
+            )
+        ";
+
+        mysqli_query($conexion, $sqlComic);
+    }
+
+    // MANGA
+
+    elseif ($tipo == 'manga')
+    {
+        $sqlManga = "
+            INSERT INTO mangas
+            (
+                id_producto,
+                autor,
+                editorial,
+                volumen,
+                coleccion,
+                isbn
+            )
+            VALUES
+            (
+                $idProducto,
+                '{$datos['autor_manga']}',
+                '{$datos['editorial_manga']}',
+                '{$datos['volumen']}',
+                '{$datos['coleccion']}',
+                '{$datos['isbn_manga']}'
+            )
+        ";
+
+        mysqli_query($conexion, $sqlManga);
+    }
+
+    return true;
 }
 
 
+    
 
 
 
+    }
 
 
 
-
-
-}
