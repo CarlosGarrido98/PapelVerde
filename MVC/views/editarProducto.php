@@ -147,6 +147,8 @@
                                 <?= $producto['coleccion'] ?>
                             </p>
 
+                            
+
                             <p>
                                 <strong>ISBN:</strong>
                                 <?= $producto['manga_isbn'] ?>
@@ -226,6 +228,25 @@
                                 class="form-control"><?= $producto['sinopsis'] ?></textarea>
 
                         </div>
+
+                        <!-- Cambiar el Volumen -->
+                        <?php if($producto['tipo'] == 'manga'): ?>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Volumen
+                            </label>
+
+                            <input
+                                type="number"
+                                name="volumen"
+                                value="<?= $producto['volumen'] ?>"
+                                class="form-control">
+
+                        </div>
+
+                        <?php endif; ?>
 
                         <button
                             type="submit"

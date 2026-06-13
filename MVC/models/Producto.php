@@ -441,38 +441,59 @@ public static function obtenerProductoPorId($conexion, $id)
 
 
 
-        // METODO PARA ACTUALIZAR EL PRODUCTO 
-         public static function actualizarProducto(
-            mysqli $conexion,
-            array $datos
-        )
-        {
+    public static function actualizarProducto(
+    mysqli $conexion,
+    array $datos
+    )
+    {
+
+        
+
             $id = $datos['id_producto'];
 
             $nombre = $datos['nombre'];
             $precio = $datos['precio'];
-            $stock =  $datos['stock'];
-            $sinopsis =  $datos['sinopsis'];
+            $stock = $datos['stock'];
+            $sinopsis = $datos['sinopsis'];
+
+            // Actualizar tabla productos
 
             $sql = "
                 UPDATE productos
                 SET
                     nombre = '$nombre',
                     precio = '$precio',
-                    stock =  '$stock',
-                    sinopsis ='$sinopsis'
-                    
+                    stock = '$stock',
+                    sinopsis = '$sinopsis'
                 WHERE id_producto = $id
             ";
 
-            return mysqli_query(
+            mysqli_query(
                 $conexion,
                 $sql
             );
-        }                                       
 
+            // Si es manga actualizar volumen
 
-    
+            if ($datos['tipo'] == 'manga')
+            {
+                $volumen = $datos['volumen'];
+
+                $sqlManga = "
+                    UPDATE mangas
+                    SET
+                        volumen = '$volumen'
+                    WHERE id_producto = $id
+                ";
+
+                mysqli_query(
+                    $conexion,
+                    $sqlManga
+                );
+            }
+
+            return true;
+        }
 
 
     }
