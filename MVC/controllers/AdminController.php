@@ -92,4 +92,20 @@ class AdminController
         }
 
 
+        public static function eliminarUsuario()
+        {
+            global $conexion;
+
+            $id = $_GET['id'];
+
+            UsuarioModel::eliminarUsuario(
+                $conexion,
+                $id
+            );
+
+            header('Location: /gestionUsuarios');
+            exit;
+        }
+
+
 }

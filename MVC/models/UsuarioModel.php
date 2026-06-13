@@ -133,4 +133,20 @@ class UsuarioModel {
             );
         }
     
+
+        public static function eliminarUsuario(
+            mysqli $conexion,
+            int $id
+        )
+        {
+            $sql = "
+                DELETE FROM usuarios
+                WHERE idUsuarios = $id
+            ";
+
+            return mysqli_query(
+                $conexion,
+                $sql
+            );
+        }
 }

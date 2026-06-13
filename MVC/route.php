@@ -136,6 +136,11 @@ switch ($method) {
             AdminController::mostrarEditarProducto();
             break;
 
+            case '/eliminarUsuario':
+            require_once 'controllers/AdminController.php';
+            AdminController::eliminarUsuario();
+            break;
+
             
         
             default:
