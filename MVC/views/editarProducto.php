@@ -173,6 +173,11 @@
                             name="id_producto"
                             value="<?= $producto['id_producto'] ?>">
 
+                            <input
+                            type="hidden"
+                            name="tipo"
+                            value="<?= $producto['tipo'] ?>">
+
                         <div class="mb-3">
 
                             <label class="form-label">
