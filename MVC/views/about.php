@@ -22,7 +22,7 @@
     <div class="container">
         <h1 class="display-3 fw-bold" style="color: #254B36; ">Papel Verde</h1>
         <p class="lead">
-            Tu rincón favorito para descubrir libros, mangas y cómics.
+            El Lugar que necesitabas para leer Libros, Mangas y Cómics!
         </p>
     </div>
 </section>
@@ -41,14 +41,13 @@
             <h2 class="fw-bold mb-3" style="color: #254B36;">Nuestra Historia</h2>
 
             <p>
-                Papel Verde nació de la pasión por la lectura y el deseo
-                de crear un espacio donde cualquier persona pueda encontrar
-                historias que inspiren, emocionen y entretengan.
+                Nacemos desde la pasión por conseguir que la lectura vuelva 
+                a hacer un hábito diario. 
             </p>
 
             <p>
-                Desde novelas clásicas hasta mangas y cómics modernos,
-                buscamos ofrecer una colección diversa para todos los gustos.
+                Desdes las novelas más clasicas hasta los últimas novedades en libros , Comics y
+                Mangas.
             </p>
         </div>
 
