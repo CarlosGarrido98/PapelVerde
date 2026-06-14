@@ -1,4 +1,3 @@
-@ -0,0 +1,113 @@
 <?php
 require_once 'config/database.php';
 

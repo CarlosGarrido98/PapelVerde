@@ -88,7 +88,8 @@
 
 
                 <td>
-                        // ARREGLAR LO DEL BOTO
+                        
+                <?php if(!$usuario['admin']): ?>
 
                         <button
                             class="btn btn-danger btn-sm"
@@ -98,6 +99,15 @@
                             <i class="bi bi-trash"></i>
 
                         </button>
+
+                    <?php else: ?>
+
+                        <span class="text-muted">
+                            <!-- NO TIENE QUE HABER NADA PORQUE ES ADMIN-->
+                        </span>
+
+                    <?php endif; ?>
+
 
 
                             <div class="modal fade"
