@@ -45,6 +45,10 @@ switch ($method) {
                 require_once 'controllers/GaleriaController.php';
                 break;
 
+            case '/colores':
+                require_once 'views/paletaColores.php';
+                break;
+
             case '/producto':
             require_once 'controllers/ProductoController.php';
             ProductoController::mostrarProducto();
