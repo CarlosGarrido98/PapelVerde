@@ -21,6 +21,7 @@
 <section class="hero text-center">
     <div class="container">
         <h1 class="display-3 fw-bold" style="color: #254B36; ">Papel Verde</h1>
+        <hr>
         <p class="lead">
             El Lugar que necesitabas para leer Libros, Mangas y Cómics!
         </p>
@@ -37,6 +38,7 @@
                  alt="Papel Verde">
         </div>
 
+        
         <div class="col-md-6">
             <h2 class="fw-bold mb-3" style="color: #254B36;">Nuestra Historia</h2>
 
@@ -97,7 +99,7 @@
 
     <div class="row g-4">
 
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="icon-box shadow-sm">
                 <i class="bi bi-book"></i>
                 <h5 class="mt-3">Lectura</h5>
@@ -105,7 +107,7 @@
             </div>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="icon-box shadow-sm">
                 <i class="bi bi-people"></i>
                 <h5 class="mt-3">Comunidad</h5>
@@ -113,15 +115,8 @@
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="icon-box shadow-sm">
-                <i class="bi bi-lightbulb"></i>
-                <h5 class="mt-3">Innovación</h5>
-                <p>Buscamos nuevas formas de acercar la lectura.</p>
-            </div>
-        </div>
 
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="icon-box shadow-sm">
                 <i class="bi bi-heart"></i>
                 <h5 class="mt-3">Pasión</h5>
