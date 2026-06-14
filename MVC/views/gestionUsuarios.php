@@ -88,6 +88,8 @@
 
 
                 <td>
+                        // ARREGLAR LO DEL BOTO
+
                         <button
                             class="btn btn-danger btn-sm"
                             data-bs-toggle="modal"

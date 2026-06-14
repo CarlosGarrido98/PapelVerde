@@ -234,7 +234,7 @@
       <div class="d-flex justify-content-center align-items-center mb-3 text-center">
     
         <a href="comics" class="text-success text-decoration-none">
-            Ver todos Cómics
+            Ver todos los Cómics
         </a>
     </div>
 

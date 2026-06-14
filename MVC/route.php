@@ -150,17 +150,16 @@ switch ($method) {
                 break;
 
             case '/editarProducto':
-            require_once 'controllers/AdminController.php';
-            AdminController::mostrarEditarProducto();
-            break;
+                require_once 'controllers/AdminController.php';
+                AdminController::mostrarEditarProducto();
+                break;
 
             case '/eliminarUsuario':
-            require_once 'controllers/AdminController.php';
-            AdminController::eliminarUsuario();
-            break;
+                require_once 'controllers/AdminController.php';
+                AdminController::eliminarUsuario();
+                break;
 
             
-        
             default:
                 require_once 'views/404.php';
                 break;

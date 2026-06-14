@@ -120,6 +120,11 @@
                                 <?= $producto['comic_editorial'] ?>
                             </p>
 
+                              <p>
+                                <strong>Volumen:</strong>
+                                <?= $producto['numero'] ?>
+                            </p>
+
                             <p>
                                 <strong>ISBN:</strong>
                                 <?= $producto['comic_isbn'] ?>
@@ -252,6 +257,26 @@
                         </div>
 
                         <?php endif; ?>
+
+
+                            <?php if($producto['tipo'] == 'comic'): ?>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Volumen / Numero :
+                            </label>
+
+                            <input
+                                type="number"
+                                name="numero"
+                                value="<?= $producto['numero'] ?>"
+                                class="form-control">
+
+                        </div>
+
+                        <?php endif; ?>
+
 
                         <button
                             type="submit"

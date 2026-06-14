@@ -63,6 +63,9 @@
                 <p><strong>Autor:</strong> <?= $producto['comic_autor'] ?></p>
                 <p><strong>Ilustrador:</strong> <?= $producto['ilustrador'] ?></p>
                 <p><strong>Editorial:</strong> <?= $producto['comic_editorial'] ?></p>
+                <p><strong>Volumen / Número: </strong> <?= $producto['numero'] ?></p>
+                
+
                 <p><strong>ISBN:</strong> <?= $producto['comic_isbn'] ?></p>
 
             <?php elseif($producto['tipo'] == 'manga'): ?>

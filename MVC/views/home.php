@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papel Verde</title>
-    <link rel="icon" type="image/png" href="img/imgPapelVerde/Logoico.ico">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<meta charset="UTF-8">
+<meta name="description" content="Papel Verde, tu tienda online de libros, mangas y cómics. Descubre novedades, clásicos y colecciones exclusivas.">
+<title>Papel Verde</title>
+<link rel="icon" type="image/png" href="img/imgPapelVerde/Logoico.ico">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
 
@@ -62,7 +62,8 @@
                                             €<?= number_format($libro['precio'], 2, ',', '.') ?>
                                         </p>
 
-                                        <button class="btn-añadir d-none d-xl-block" data-id="<?= $libro['id_producto'] ?>">
+                                        <button class="btn-añadir   d-none d-xl-block "  data-id="<?= $libro['id_producto'] ?>">
+                                            
                                             Añadir <i class="bi bi-plus"></i>
                                         </button>
 

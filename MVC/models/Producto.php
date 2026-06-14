@@ -492,6 +492,24 @@ public static function obtenerProductoPorId($conexion, $id)
                 );
             }
 
+
+            if ($datos['tipo'] == 'comic')
+            {
+                $numero = $datos['numero'];
+
+                $sqlManga = "
+                    UPDATE comics
+                    SET
+                        numero = '$numero'
+                    WHERE id_producto = $id
+                ";
+
+                mysqli_query(
+                    $conexion,
+                    $sqlManga
+                );
+            }
+
             return true;
         }
 
