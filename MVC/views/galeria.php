@@ -59,6 +59,7 @@
 
                 <a href="/producto?id=<?= $libro['id_producto'] ?>">
                     <img 
+                        class="contenedor-foto"
                         src="<?= $libro['imagen_url'] ?>"
                         alt="<?= $libro['nombre'] ?>"
                     >
@@ -94,7 +95,6 @@
         </button>
 
     </div>
-        <br>
             <!-- Ver Todos los Libros -->
       <div class="d-flex justify-content-center align-items-center mb-3 text-center">
     
@@ -129,6 +129,7 @@
 
                     <a href="/producto?id=<?= $manga['id_producto'] ?>">
                     <img
+                        class="contenedor-foto"
                         src="<?= $manga['imagen_url'] ?>"
                         alt="<?= $manga['nombre'] ?>"
                     >
@@ -165,8 +166,6 @@
 
     </div>
 
-    <br>
-
       <div class="d-flex justify-content-center align-items-center mb-3 text-center">
     
         <a href="mangas" class="text-success text-decoration-none">
@@ -201,6 +200,7 @@
 
                     <a href="/producto?id=<?= $comic['id_producto'] ?>">
                     <img
+                        class="contenedor-foto"
                         src="<?= $comic['imagen_url'] ?>"
                         alt="<?= $comic['nombre'] ?>"
                     >
@@ -233,17 +233,11 @@
             <i class="bi bi-chevron-right"></i>
         </button>
 
-
     </div>
-
-    
-    <br>
-
       <div class="d-flex justify-content-center align-items-center mb-3 text-center">
     
-      
         <a href="comics" class="text-success text-decoration-none">
-            Ver todos los Cómics
+            Ver todos Cómics
         </a>
     </div>
 

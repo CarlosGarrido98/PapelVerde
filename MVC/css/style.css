@@ -115,7 +115,62 @@ footer{
   border-radius: 15px;
 }
 
+/* css/style.css */
 
+body {
+    overflow-x: hidden; /* ¡Adiós para siempre a la barra de abajo! */
+}
+
+.parabola-voladora {
+    position: fixed;
+    z-index: 99999;
+    background-size: cover;
+    background-position: center;
+    pointer-events: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    
+    /* Animación fluida de coordenadas puras */
+    transition: 
+        left 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
+        top 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
+        transform 1.2s cubic-bezier(0.25, 1, 0.5, 1),
+        opacity 1.2s ease-out;
+}
+
+/* Efecto de Onda Expansiva Suave para el botón del carrito */
+.onda-carrito-suave {
+    position: relative;
+}
+.onda-carrito-suave::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border: 2px solid #254B36; /* Tu color verde */
+    border-radius: inherit;
+    animation: pingOndaSuave 0.8s ease-out;
+    pointer-events: none;
+}
+
+@keyframes pingOndaSuave {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.8); opacity: 0; }
+}
+
+.imagen-voladora {
+    position: fixed;
+    z-index: 9999;
+    background-size: cover;
+    background-position: center;
+    pointer-events: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    
+    /* CAMBIO CLAVE: Bordes suavemente redondeados */
+    border-radius: 8px; 
+    
+    /* Transición fluida para posición, tamaño y bordes */
+    transition: all 0.6s cubic-bezier(0.2, 0, 0.3, 1);
+}
 
 .btn-añadir{
   background-color: #235437;

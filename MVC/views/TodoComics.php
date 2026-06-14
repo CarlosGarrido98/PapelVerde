@@ -33,7 +33,7 @@
 
                     <img
                         src="<?= $comic['imagen_url'] ?>"
-                        class="card-img-top"
+                        class="card-img-top contenedor-foto"
                         style="height:350px; object-fit:cover;">
 
                 </a>

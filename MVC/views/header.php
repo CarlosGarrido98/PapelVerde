@@ -117,7 +117,7 @@ if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
                                         Cantidad: <span class="producto-cantidad"><?= $cantidad; ?></span>
                                     </p>
                                     <small class="text-success fw-bold">
-                                        $<span class="producto-precio-total"><?= number_format($precioTotalProducto, 2); ?></span>
+                                        €<span class="producto-precio-total"><?= number_format($precioTotalProducto, 2); ?></span>
                                     </small>
                                 </div>
                                 <div class="col-2 text-end">
@@ -136,8 +136,11 @@ if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
             </div> 
             
             <div class="border-top pt-3 bg-white">
-                <div class="d-flex justify-content-between mb-3 fw-bold">
+                <div class="d-flex justify-content-between mb-3 fw-bold flex-row">
                     <span id="total-prod">Total de productos: <?= $totalProductos; ?></span> 
+                    <span id="precio-total-carrito" class="text-success">
+                        Precio Total: €</span>
+                    </span> 
                 </div>
                 <div class="row text-center">
                     <?php if (isset($_SESSION["usuario"])): ?>
