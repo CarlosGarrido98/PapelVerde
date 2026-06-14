@@ -63,6 +63,35 @@ class CarritoController {
                     }
                     $_SESSION['carrito'][$id_libro] = $producto;
                 }
+
+                // =================================================================
+                // 🟢 FUNCIONALIDAD EXTRA: GUARDA EN LA BBDD SI EL USUARIO ESTÁ LOGUEADO
+                // =================================================================
+                if (isset($_SESSION['usuario']) && $_SESSION['usuario'] !== null) {
+                    // Obtenemos el ID del usuario soportando tanto Objeto como Array
+                    $usuarioId = is_object($_SESSION['usuario']) 
+                        ? $_SESSION['usuario']->getIdUsuario() 
+                        : $_SESSION['usuario']['idUsuarios'];
+
+                    // Obtenemos la cantidad final exacta que acabamos de meter en la sesión
+                    $cantidadFinal = is_object($_SESSION['carrito'][$id_libro])
+                        ? $_SESSION['carrito'][$id_libro]->cantidad
+                        : $_SESSION['carrito'][$id_libro]['cantidad'];
+
+                    if ($conexion) {
+                        $sqlGuardar = "INSERT INTO carrito (idUsuarios, id_producto, cantidad) 
+                                       VALUES (?, ?, ?) 
+                                       ON DUPLICATE KEY UPDATE cantidad = ?";
+                        
+                        $stmt = $conexion->prepare($sqlGuardar);
+                        if ($stmt) {
+                            $stmt->bind_param("iiii", $usuarioId, $id_libro, $cantidadFinal, $cantidadFinal);
+                            $stmt->execute();
+                            $stmt->close();
+                        }
+                    }
+                }
+                // =================================================================
             }
         }
 
@@ -91,6 +120,9 @@ class CarritoController {
             session_start();
         }
 
+        // 💡 AJUSTE 1: Traemos la conexión global aquí también para que sincronizarConBaseDatos() la tenga disponible
+        global $conexion; 
+
         $id_libro = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         $cantidad_restante = 0;
         $precio_total_item = 0;
@@ -104,7 +136,6 @@ class CarritoController {
             $cantidad_actual = is_object($item) ? ($item->cantidad ?? 1) : ($item['cantidad'] ?? 1);
             
             // --- REVISIÓN SEGURA DE PRECIO ---
-            // Intenta leer ->precio, si no existe intenta ->getPrecio(), si no lo trata como Array
             if (is_object($item)) {
                 $precio_base = isset($item->precio) ? $item->precio : (method_exists($item, 'getPrecio') ? $item->getPrecio() : 0);
             } else {
@@ -137,7 +168,7 @@ class CarritoController {
             }
         }
 
-        // 🟢 Sincronizamos los cambios en la base de datos
+        // 🟢 Sincronizamos los cambios en la base de datos (Ahora sí tiene la variable $conexion)
         self::sincronizarConBaseDatos();
 
         // Forzamos la limpieza del búfer de salida por si PHP coló algún Warning previo en texto común
@@ -158,6 +189,9 @@ class CarritoController {
             session_start();
         }
         
+        // 💡 AJUSTE 2: Traemos la conexión global aquí también para asegurar el vaciado total
+        global $conexion;
+
         // 1. Borramos el carrito
         $_SESSION['carrito'] = [];
         
@@ -185,11 +219,8 @@ class CarritoController {
         global $conexion;
         
         // 🟢 SOLUCIÓN 1: Si 'global $conexion' viene vacío, intentamos incluir el archivo 
-        // o usar la clase de base de datos que tengas para forzar la conexión.
         if (!isset($conexion) || $conexion === null) {
             require_once 'config/database.php';
-            // Nota: Si en config/database.php tu conexión se asigna a otra variable (ej: $conn o una clase Database),
-            // asegúrate de mapearla aquí. Si se llama $conexion, al hacer el require_once debería revivir.
         }
 
         // Si aun así la conexión no existe, dejamos un registro en el log para saberlo
@@ -211,6 +242,8 @@ class CarritoController {
                 $usuarioId = $usuario->id_usuario;
             } elseif (method_exists($usuario, 'getIdUsuarios')) {
                 $usuarioId = $usuario->getIdUsuarios();
+            } elseif (method_exists($usuario, 'getIdUsuario')) { // 💡 COMPATIBILIDAD EXTRA con tu LoginController
+                $usuarioId = $usuario->getIdUsuario();
             }
         } elseif (is_array($usuario)) {
             $usuarioId = $usuario['idUsuarios'] ?? $usuario['id'] ?? $usuario['id_usuario'] ?? null;

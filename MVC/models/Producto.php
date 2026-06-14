@@ -492,24 +492,6 @@ public static function obtenerProductoPorId($conexion, $id)
                 );
             }
 
-
-            if ($datos['tipo'] == 'comic')
-            {
-                $numero = $datos['numero'];
-
-                $sqlManga = "
-                    UPDATE comics
-                    SET
-                        numero = '$numero'
-                    WHERE id_producto = $id
-                ";
-
-                mysqli_query(
-                    $conexion,
-                    $sqlManga
-                );
-            }
-
             return true;
         }
 
@@ -558,6 +540,83 @@ public static function obtenerProductoPorId($conexion, $id)
             );
         }
 
+    public static function buscarConFiltros($conexion, $q, $tipo, $precioMin, $precioMax, $orden)
+        {
+            $sql = "
+                SELECT 
+                    p.*,
+                    COALESCE(l.autor, c.autor, m.autor) AS autor,
+                    COALESCE(l.editorial, c.editorial, m.editorial) AS editorial
+                FROM productos p
+                LEFT JOIN libros l ON p.id_producto = l.id_producto
+                LEFT JOIN comics c ON p.id_producto = c.id_producto
+                LEFT JOIN mangas m ON p.id_producto = m.id_producto
+                WHERE (p.nombre LIKE ? OR p.sinopsis LIKE ? OR l.autor LIKE ? OR c.autor LIKE ? OR m.autor LIKE ?)
+            ";
+
+            // Arrays para ir construyendo los tipos y los valores dinámicos del bind_param
+            $tiposParametros = "sssss"; // Los 5 primeros son del WHERE inicial (LIKE %q%)
+            $termino = "%" . $q . "%";
+            $valoresParametros = [$termino, $termino, $termino, $termino, $termino];
+
+            // 2. Filtro por Tipo/Categoría
+            if ($tipo !== 'todos') {
+                $sql .= " AND p.tipo = ?";
+                $tiposParametros .= "s";
+                $valoresParametros[] = $tipo;
+            }
+
+            // 3. Filtros por rango de Precios
+            if ($precioMin !== null) {
+                $sql .= " AND p.precio >= ?";
+                $tiposParametros .= "d"; // 'd' para números decimales/double
+                $valoresParametros[] = $precioMin;
+            }
+            if ($precioMax !== null) {
+                $sql .= " AND p.precio <= ?";
+                $tiposParametros .= "d";
+                $valoresParametros[] = $precioMax;
+            }
+
+            // 4. Criterios de ordenamiento
+            switch ($orden) {
+                case 'precio_asc':
+                    $sql .= " ORDER BY p.precio ASC";
+                    break;
+                case 'precio_desc':
+                    $sql .= " ORDER BY p.precio DESC";
+                    break;
+                case 'nombre_asc':
+                    $sql .= " ORDER BY p.nombre ASC";
+                    break;
+                case 'relevancia':
+                default:
+                    $sql .= " ORDER BY p.id_producto DESC";
+                    break;
+            }
+
+            // 5. Preparar y ejecutar la Query en MySQLi
+            $stmt = mysqli_prepare($conexion, $sql);
+            
+            if ($stmt) {
+                // Pasamos dinámicamente los parámetros usando el operador de desempaquetado (...)
+                mysqli_stmt_bind_param($stmt, $tiposParametros, ...$valoresParametros);
+                mysqli_stmt_execute($stmt);
+                $resultado = mysqli_stmt_get_result($stmt);
+                
+                // Recolectamos todas las filas como un array asociativo
+                $productos = [];
+                while ($fila = mysqli_fetch_assoc($resultado)) {
+                    $productos[] = $fila;
+                }
+                
+                mysqli_stmt_close($stmt);
+                return $productos;
+            }
+            
+            return [];
+        }
+        
         public static function obtenerComics(mysqli $conexion)
         {
             $sql = "

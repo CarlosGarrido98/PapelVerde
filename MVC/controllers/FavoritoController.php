@@ -23,7 +23,7 @@ class FavoritoController {
             } else {
                 global $conexion;
                 require_once 'models/Producto.php';
-                $producto = Producto::agregarProducto($id_libro, $conexion); // O el método que uses para buscar un producto
+                $producto = Producto::agregarProducto($id_libro, $conexion); 
 
                 if ($producto) {
                     $_SESSION['favoritos'][$id_libro] = $producto;
@@ -45,7 +45,7 @@ class FavoritoController {
     }
 
     /**
-     * Vuelca la sesión actual en la base de datos
+     * Vuelca la sesión actual en la base de datos de forma segura
      */
     public static function sincronizarConBaseDatos() {
         if (!isset($_SESSION['usuario'])) {
@@ -59,13 +59,33 @@ class FavoritoController {
         }
 
         if (!$conexion) {
+            error_log("Error: No se pudo acceder a la variable de conexión \$conexion en favoritos.");
             return;
         }
 
         $usuario = $_SESSION['usuario'];
-        $usuarioId = (is_object($usuario) && method_exists($usuario, 'getIdUsuario')) ? $usuario->getIdUsuario() : null;
+        $usuarioId = null;
 
+        // 🕵️‍♂️ Extracción ultra-flexible idéntica a la del Carrito Controller
+        if (is_object($usuario)) {
+            if (isset($usuario->idUsuarios)) {
+                $usuarioId = $usuario->idUsuarios;
+            } elseif (isset($usuario->id)) {
+                $usuarioId = $usuario->id;
+            } elseif (isset($usuario->id_usuario)) {
+                $usuarioId = $usuario->id_usuario;
+            } elseif (method_exists($usuario, 'getIdUsuarios')) {
+                $usuarioId = $usuario->getIdUsuarios();
+            } elseif (method_exists($usuario, 'getIdUsuario')) {
+                $usuarioId = $usuario->getIdUsuario();
+            }
+        } elseif (is_array($usuario)) {
+            $usuarioId = $usuario['idUsuarios'] ?? $usuario['id'] ?? $usuario['id_usuario'] ?? null;
+        }
+
+        // Si no encontramos un ID válido, cancelamos para evitar errores de SQL
         if (!$usuarioId) {
+            error_log("Error: No se pudo encontrar el ID del usuario en la sesión desde Favoritos.");
             return;
         }
 
@@ -76,6 +96,8 @@ class FavoritoController {
             $stmtDelete->bind_param("i", $usuarioId);
             $stmtDelete->execute();
             $stmtDelete->close();
+        } else {
+            error_log("Error en prepare DELETE favoritos: " . $conexion->error);
         }
 
         // 2. Insertamos la lista actual que tiene en la sesión
@@ -89,6 +111,8 @@ class FavoritoController {
                     $stmtInsert->execute();
                 }
                 $stmtInsert->close();
+            } else {
+                error_log("Error en prepare INSERT favoritos: " . $conexion->error);
             }
         }
     }
@@ -104,10 +128,8 @@ class FavoritoController {
             exit;
         }
 
-        // Pillamos los favoritos de la sesión (si no existen, pasamos un array vacío)
         $listaFavoritos = $_SESSION['favoritos'] ?? [];
 
-        // Incluimos tu vista del perfil/favoritos (ajusta la ruta según tu estructura)
         require_once 'views/favoritos.php'; 
     }
 }

@@ -19,6 +19,7 @@ class LoginController {
             header('Location: /login');
             exit;
         }
+        
         $bUser = new UsuarioModel();
         $usuario = $bUser->buscarPorEmail($email);
         
@@ -34,15 +35,29 @@ class LoginController {
             $_SESSION['usuario'] = $usuario;
         
             // =================================================================
-            // 🟢 CARGA AUTOMÁTICA DEL CARRITO AL INICIAR SESIÓN
+            // 🟢 CONTROL DE CONEXIÓN SEGURO
             // =================================================================
             global $conexion;
-            $usuarioId = $usuario->getIdUsuario(); // 🌟 Usamos tu método nativo del modelo
+            if (!isset($conexion) || $conexion === null) {
+                require_once 'config/database.php';
+            }
 
-            if ($usuarioId && isset($conexion)) {
+            $usuarioId = $usuario->getIdUsuario(); // Usamos tu método nativo del modelo
+
+            if ($usuarioId && $conexion) {
                 require_once 'models/Producto.php';
                 
-                // Buscamos en tu tabla carrito los productos guardados de este usuario
+                // Aseguramos que las sesiones existan como arrays para no romper llamadas posteriores
+                if (!isset($_SESSION['carrito'])) {
+                    $_SESSION['carrito'] = [];
+                }
+                if (!isset($_SESSION['favoritos'])) {
+                    $_SESSION['favoritos'] = [];
+                }
+
+                // =================================================================
+                // 🟢 CARGA AUTOMÁTICA DEL CARRITO AL INICIAR SESIÓN (CON FUSIÓN)
+                // =================================================================
                 $sqlCarrito = "SELECT id_producto, cantidad FROM carrito WHERE idUsuarios = ?";
                 $stmt = $conexion->prepare($sqlCarrito);
                 if ($stmt) {
@@ -50,31 +65,41 @@ class LoginController {
                     $stmt->execute();
                     $resultado = $stmt->get_result();
 
-                    if (!isset($_SESSION['carrito'])) {
-                        $_SESSION['carrito'] = [];
-                    }
-
                     while ($fila = $resultado->fetch_assoc()) {
                         $id_prod = $fila['id_producto'];
                         $cantidadBD = (int)$fila['cantidad'];
 
-                        // Obtenemos los detalles actualizados del producto (nombre, precio, img...)
-                        $productoData = Producto::agregarProducto($id_prod, $conexion);
-
-                        if ($productoData) {
-                            if (is_object($productoData)) {
-                                $productoData->cantidad = $cantidadBD;
+                        // 💡 SOLUCIÓN INTELEGENTE: Si el producto ya existía en su sesión de invitado,
+                        // sumamos la cantidad que traía en local con la cantidad guardada en la BD.
+                        if (isset($_SESSION['carrito'][$id_prod])) {
+                            if (is_object($_SESSION['carrito'][$id_prod])) {
+                                $_SESSION['carrito'][$id_prod]->cantidad += $cantidadBD;
                             } else {
-                                $productoData['cantidad'] = $cantidadBD;
+                                $_SESSION['carrito'][$id_prod]['cantidad'] += $cantidadBD;
                             }
-                            $_SESSION['carrito'][$id_prod] = $productoData;
+                        } else {
+                            // Si no existía en la sesión, traemos sus datos de la base de datos de manera normal
+                            $productoData = Producto::agregarProducto($id_prod, $conexion);
+                            if ($productoData) {
+                                if (is_object($productoData)) {
+                                    $productoData->cantidad = $cantidadBD;
+                                } else {
+                                    $productoData['cantidad'] = $cantidadBD;
+                                }
+                                $_SESSION['carrito'][$id_prod] = $productoData;
+                            }
                         }
                     }
                     $stmt->close();
+                    
+                    // 🔄 IMPORTANTE: Como fusionamos lo que el invitado tenía con la BD, 
+                    // actualizamos la BD de inmediato para que guarde el nuevo estado combinado.
+                    require_once 'controllers/CarritoController.php';
+                    CarritoController::sincronizarConBaseDatos();
                 }
 
                 // =================================================================
-                // 💖 CARGA AUTOMÁTICA DE FAVORITOS AL INICIAR SESIÓN (¡AQUÍ VA!)
+                // 💖 CARGA AUTOMÁTICA DE FAVORITOS AL INICIAR SESIÓN (CON FUSIÓN)
                 // =================================================================
                 $sqlFavoritos = "SELECT id_producto FROM favoritos WHERE idUsuarios = ?";
                 $stmtFav = $conexion->prepare($sqlFavoritos);
@@ -83,20 +108,19 @@ class LoginController {
                     $stmtFav->execute();
                     $resultadoFav = $stmtFav->get_result();
 
-                    $_SESSION['favoritos'] = []; // Inicializamos la sección de favoritos
-
                     while ($filaFav = $resultadoFav->fetch_assoc()) {
                         $id_prod = $filaFav['id_producto'];
                         
-                        // Buscamos los detalles del libro favorito
-                        $productoData = Producto::agregarProducto($id_prod, $conexion);
-                        if ($productoData) {
-                            $_SESSION['favoritos'][$id_prod] = $productoData;
+                        // Si no está ya marcado como favorito en la sesión actual, lo agregamos
+                        if (!isset($_SESSION['favoritos'][$id_prod])) {
+                            $productoData = Producto::agregarProducto($id_prod, $conexion);
+                            if ($productoData) {
+                                $_SESSION['favoritos'][$id_prod] = $productoData;
+                            }
                         }
                     }
                     $stmtFav->close();
                 }
-                // =================================================================
             }
 
             // Redirigir al perfil

@@ -4,15 +4,66 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start(); 
 }
 
-// 2. Contamos cuántas UNIDADES REALES hay en la sesión sumando sus cantidades
+// 2. RECUPERACIÓN AUTOMÁTICA DESDE BASE DE DATOS (Si la sesión se borró o expiró)
+if (isset($_SESSION["usuario"]) && (!isset($_SESSION['carrito']) || empty($_SESSION['carrito']))) {
+    global $conexion;
+    if (!isset($conexion) || $conexion === null) {
+        require_once 'config/database.php';
+    }
+
+    if ($conexion) {
+        $usuario = $_SESSION['usuario'];
+        $usuarioId = null;
+
+        // Tu misma extracción ultra-flexible del ID que usas en el Controlador
+        if (is_object($usuario)) {
+            $usuarioId = $usuario->idUsuarios ?? $usuario->id ?? $usuario->id_usuario ?? (method_exists($usuario, 'getIdUsuarios') ? $usuario->getIdUsuarios() : null);
+        } elseif (is_array($usuario)) {
+            $usuarioId = $usuario['idUsuarios'] ?? $usuario['id'] ?? $usuario['id_usuario'] ?? null;
+        }
+
+        if ($usuarioId) {
+            // Traemos los productos del carrito cruzando con la tabla productos para obtener fotos, nombres y precios reales
+            $sqlCarrito = "
+                SELECT c.id_producto, c.cantidad, p.nombre, p.precio, p.imagen_url 
+                FROM carrito c
+                INNER JOIN productos p ON c.id_producto = p.id_producto
+                WHERE c.idUsuarios = ?
+            ";
+            $stmtC = $conexion->prepare($sqlCarrito);
+            if ($stmtC) {
+                $stmtC->bind_param("i", $usuarioId);
+                $stmtC->execute();
+                $resC = $stmtC->get_result();
+                
+                $_SESSION['carrito'] = [];
+                while ($filaC = $resC->fetch_assoc()) {
+                    // Lo guardamos como Array asociativo para que coincida con tu formato del controlador
+                    $_SESSION['carrito'][$filaC['id_producto']] = [
+                        'id_producto' => $filaC['id_producto'],
+                        'nombre'      => $filaC['nombre'],
+                        'precio'      => $filaC['precio'],
+                        'imagen_url'  => $filaC['imagen_url'],
+                        'cantidad'    => (int)$filaC['cantidad']
+                    ];
+                }
+                $stmtC->close();
+            }
+        }
+    }
+}
+
+// 3. Contamos cuántas UNIDADES REALES hay en la sesión sumando sus cantidades e inicializamos el total acumulado en euros
 $totalProductos = 0;
+$precioTotalAcumulado = 0;
+
 if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
     foreach ($_SESSION['carrito'] as $itemCarrito) {
-        if (is_object($itemCarrito)) {
-            $totalProductos += isset($itemCarrito->cantidad) ? $itemCarrito->cantidad : 1;
-        } else {
-            $totalProductos += isset($itemCarrito['cantidad']) ?    $itemCarrito['cantidad'] : 1;
-        }
+        $cant = is_object($itemCarrito) ? ($itemCarrito->cantidad ?? 1) : ($itemCarrito['cantidad'] ?? 1);
+        $prec = is_object($itemCarrito) ? ($itemCarrito->precio ?? 0) : ($itemCarrito['precio'] ?? 0);
+        
+        $totalProductos += $cant;
+        $precioTotalAcumulado += ($prec * $cant);
     }
 }
 ?>
@@ -145,11 +196,11 @@ if (isset($_SESSION['carrito']) && !empty($_SESSION['carrito'])) {
                 <div class="row text-center">
                     <?php if (isset($_SESSION["usuario"])): ?>
                         <div class="col-6 mb-2">
-                            <a href="carrito/checkout" class="btn btn-success w-100 py-2 <?= $totalProductos === 0 ? 'disabled' : ''; ?>">Procesar Pedido</a>
+                            <a href="checkout" class="btn btn-success w-100 py-2 <?= $totalProductos === 0 ? 'disabled' : ''; ?>">Procesar Pedido</a>
                         </div>
                     <?php else: ?>
                         <div class="col-6 mb-2">
-                            <a href="carrito/checkout" class="btn btn-success w-100 py-2 <?= $totalProductos === 0 ? 'disabled' : ''; ?>" data-bs-toggle="modal" data-bs-target="#authRequeridoModal">Procesar Pedido</a>
+                            <a href="checkout" class="btn btn-success w-100 py-2 <?= $totalProductos === 0 ? 'disabled' : ''; ?>" data-bs-toggle="modal" data-bs-target="#authRequeridoModal">Procesar Pedido</a>
                         </div>
                     <?php endif; ?>
                     

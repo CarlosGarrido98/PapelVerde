@@ -45,10 +45,6 @@ switch ($method) {
                 require_once 'controllers/GaleriaController.php';
                 break;
 
-            case '/colores':
-                require_once 'views/paletaColores.php';
-                break;
-
             case '/producto':
             require_once 'controllers/ProductoController.php';
             ProductoController::mostrarProducto();
@@ -77,25 +73,29 @@ switch ($method) {
             LibrosController::mostrar();
             break;
 
-              case '/mangas':
-            require_once 'controllers/MangasController.php';
-            LibrosController::mostrar();
-            break;
+            case '/mangas':
+                require_once 'controllers/MangasController.php';
+                LibrosController::mostrar();
+                break;
 
             case '/comics':
-            require_once 'controllers/ComicsController.php';
-            ComicsController::mostrar();
-            break;
+                require_once 'controllers/ComicsController.php';
+                ComicsController::mostrar();
+                break;
+                
 
-            
-            
+            case '/buscar':
+                require_once 'controllers/BuscarController.php';
+                BuscarController::index();
+                break;
+                        
             case '/favoritos':
                 require_once 'controllers/FavoritoController.php';
                 FavoritoController::mostrarVista();
                 break;
 
             case '/favoritos/toggle':
-                require_once 'controllers/FavoritosController.php';
+                require_once 'controllers/FavoritoController.php'; 
                 FavoritoController::alternar();
                 break;
 
@@ -154,16 +154,17 @@ switch ($method) {
                 break;
 
             case '/editarProducto':
-                require_once 'controllers/AdminController.php';
-                AdminController::mostrarEditarProducto();
-                break;
+            require_once 'controllers/AdminController.php';
+            AdminController::mostrarEditarProducto();
+            break;
 
             case '/eliminarUsuario':
-                require_once 'controllers/AdminController.php';
-                AdminController::eliminarUsuario();
-                break;
+            require_once 'controllers/AdminController.php';
+            AdminController::eliminarUsuario();
+            break;
 
             
+        
             default:
                 require_once 'views/404.php';
                 break;

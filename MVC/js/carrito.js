@@ -135,6 +135,7 @@ function calcularTotalCarrito(){
     cajPrecioTotal.textContent = total.toFixed(2) + " €";
 }
 
+
 // --- 4. INICIALIZACIÓN Y DELEGACIÓN GLOBAL (DOM READY) ---
 document.addEventListener('DOMContentLoaded', () => {
     calcularTotalCarrito();
@@ -318,3 +319,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+function verificarEstadoCarritoAlCargar() {
+    // Si no estamos en una interfaz que pinte el wrapper del carrito, no hacemos nada
+    if (!carritoWrapper) return;
+
+    // Evaluamos si el contenedor del carrito contiene productos renderizados por PHP
+    const tieneProductosVisibles = carritoWrapper.querySelectorAll('.producto-item').length > 0;
+    const tieneEstadoVacio = carritoWrapper.querySelector('.carrito-vacio-estado') !== null;
+
+    // Si PHP renderizó productos pero por alguna razón el texto de "vacío" se coló, lo limpiamos
+    if (tieneProductosVisibles && tieneEstadoVacio) {
+        const estadoVacio = carritoWrapper.querySelector('.carrito-vacio-estado');
+        if (estadoVacio) estadoVacio.remove();
+    }
+
+    // Ejecutamos el recuento de los subtotales para sincronizar el precio total principal al vuelo
+    calcularTotalCarrito();
+
+    // Verificamos si las variables del total necesitan un ajuste visual rápido si hay elementos
+    if (tieneProductosVisibles) {
+        const btnCheckout = document.querySelector('a[href="carrito/checkout"]');
+        if (btnCheckout) btnCheckout.classList.remove('disabled');
+
+        const borrarCarritoBtn = document.getElementById("borrar-carrito");
+        if (borrarCarritoBtn) borrarCarritoBtn.classList.remove('d-none');
+    }
+}
+
+// Ejecutar inmediatamente al cargar el script para sincronizar los cambios de sesión asíncronos
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', verificarEstadoCarritoAlCargar);
+} else {
+    verificarEstadoCarritoAlCargar();
+}
