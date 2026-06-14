@@ -94,6 +94,7 @@
         </button>
 
     </div>
+        <br>
             <!-- Ver Todos los Libros -->
       <div class="d-flex justify-content-center align-items-center mb-3 text-center">
     
@@ -164,6 +165,8 @@
 
     </div>
 
+    <br>
+
       <div class="d-flex justify-content-center align-items-center mb-3 text-center">
     
         <a href="mangas" class="text-success text-decoration-none">
@@ -230,9 +233,15 @@
             <i class="bi bi-chevron-right"></i>
         </button>
 
+
     </div>
+
+    
+    <br>
+
       <div class="d-flex justify-content-center align-items-center mb-3 text-center">
     
+      
         <a href="comics" class="text-success text-decoration-none">
             Ver todos los Cómics
         </a>

@@ -3,22 +3,41 @@
 <!-- FOOTER  -->
 
 <footer class="container-fluid p-2" style='background-image: url("img/imgPapelVerde/bg-footer.webp")' >
-    
-    <div class="row m-2">
-        <div class="col-xl-6 col-12">
-            <p class="text-bold text-light fs-5">Papel verde</p>
-            <span><i class="bi bi-geo-alt"></i>Calle de La Naturaleza, 14, Madrid, España.</span>
-            <br>
-            <span><i class="bi bi-telephone"></i>+34 123 456 789</span>
-            <br>
-            <span><i class="bi bi-envelope"></i>info@papelverde.com</span>
-        
-            <p>¡Enfocados en llevar los mejores libros a todo el mundo!</p>
-           
-        </div>
+    <div class="row m-2 align-items-center">
 
-        <div class="row col-xl-6 col-12">
-            <div class="text-end d-xl-block d-none">
+    <!-- CONTACTO -->
+    <div class="col-xl-4 col-12">
+        <p class="text-bold text-light fs-5">Papel verde</p>
+
+        <span><i class="bi bi-geo-alt"></i> Calle de La Naturaleza, 14, Madrid, España.</span>
+        <br>
+        <span><i class="bi bi-telephone"></i> +34 123 456 789</span>
+        <br>
+        <span><i class="bi bi-envelope"></i> info@papelverde.com</span>
+
+        <p>¡Enfocados en llevar los mejores libros a todo el mundo!</p>
+    </div>
+
+    <!-- MAPA DEL SITIO -->
+    <div class="col-xl-4 col-12 text-center my-3 my-xl-0">
+
+        <ul class="list-unstyled mb-0">
+
+            <li><a href="/home" class="text-light text-decoration-none">Inicio</a></li>
+            <li><a href="/libros" class="text-light text-decoration-none">Libros</a></li>
+            <li><a href="/comics" class="text-light text-decoration-none">Comics</a></li>
+            <li><a href="/mangas" class="text-light text-decoration-none">Mangas</a></li>
+            <li><a href="/galeria" class="text-light text-decoration-none">Galería</a></li>
+            <li><a href="/about" class="text-light text-decoration-none">Sobre Nosotros</a></li>
+
+        </ul>
+
+    </div>
+
+    <!-- REDES -->
+    <div class="col-xl-4 col-12">
+
+        <div class="text-end d-xl-block d-none">
                 <span class="text-light text-end fs-5"> Síguenos</span>
             </div>
             <!-- Redes sociales  -->
@@ -43,4 +62,8 @@
             <span>© 2026 Papel Verde. Todos los derechos reservados</span>
         </div>
     </div> 
+
+</div>
+
+    
 </footer>
