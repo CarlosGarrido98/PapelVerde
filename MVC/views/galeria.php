@@ -97,7 +97,7 @@
             <!-- Ver Todos los Libros -->
       <div class="d-flex justify-content-center align-items-center mb-3 text-center">
     
-        <a href="#" class="text-success text-decoration-none">
+        <a href="libros" class="text-success text-decoration-none">
             Ver todos los Libros
         </a>
     </div>
@@ -166,7 +166,7 @@
 
       <div class="d-flex justify-content-center align-items-center mb-3 text-center">
     
-        <a href="#" class="text-success text-decoration-none">
+        <a href="mangas" class="text-success text-decoration-none">
             Ver todos los Mangas
         </a>
     </div>
@@ -233,7 +233,7 @@
     </div>
       <div class="d-flex justify-content-center align-items-center mb-3 text-center">
     
-        <a href="#" class="text-success text-decoration-none">
+        <a href="comics" class="text-success text-decoration-none">
             Ver todos Cómics
         </a>
     </div>

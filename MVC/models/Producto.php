@@ -496,6 +496,77 @@ public static function obtenerProductoPorId($conexion, $id)
         }
 
 
+        // Metodo para Sacar todos los Libros
+        public static function obtenerLibros(mysqli $conexion)
+        {
+            $sql = "
+                SELECT
+                    p.*,
+                    l.autor,
+                    l.editorial,
+                    l.isbn,
+                    l.num_paginas
+                FROM productos p
+                INNER JOIN libros l
+                    ON p.id_producto = l.id_producto
+                ORDER BY p.nombre
+            ";
+
+            return mysqli_query(
+                $conexion,
+                $sql
+            );
+        }
+
+         public static function obtenerMangas(mysqli $conexion)
+        {
+            $sql = "
+                SELECT
+                    p.*,
+                    m.autor,
+                    m.editorial,
+                    m.volumen,
+                    m.coleccion,
+                    m.isbn
+                FROM productos p
+                INNER JOIN mangas m
+                    ON p.id_producto = m.id_producto
+                ORDER BY p.nombre
+            ";
+
+            return mysqli_query(
+                $conexion,
+                $sql
+            );
+        }
+
+        public static function obtenerComics(mysqli $conexion)
+        {
+            $sql = "
+                SELECT
+                    p.*,
+                    c.autor,
+                    c.ilustrador,
+                    c.editorial,
+                    c.numero,
+                    c.isbn
+                FROM productos p
+                INNER JOIN comics c
+                    ON p.id_producto = c.id_producto
+                ORDER BY p.nombre
+            ";
+
+            return mysqli_query(
+                $conexion,
+                $sql
+            );
+        }
+            
+            
+
+
+
+
     }
 
 

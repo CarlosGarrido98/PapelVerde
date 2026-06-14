@@ -65,6 +65,24 @@ switch ($method) {
             case '/perfil':
                     require_once 'views/perfil.php';
                     break;
+
+            //Vistas de Los Productos 
+
+            case '/libros':
+            require_once 'controllers/LibrosController.php';
+            LibrosController::mostrar();
+            break;
+
+              case '/mangas':
+            require_once 'controllers/MangasController.php';
+            LibrosController::mostrar();
+            break;
+
+            case '/comics':
+            require_once 'controllers/ComicsController.php';
+            ComicsController::mostrar();
+            break;
+
             
             
             case '/favoritos':
