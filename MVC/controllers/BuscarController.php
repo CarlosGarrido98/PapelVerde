@@ -7,13 +7,14 @@ require_once 'models/Producto.php'; // Tu entidad de Producto
 class BuscarController {
 
     public static function index() {
-        global $conexion; // Hacemos uso de tu variable de conexión mysqli
+
+        global $conexion; // Hacemos uso de la  conexión mysqli
 
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
-        // Capturar término de búsqueda y limpiar espacios
+        // Cogemos el término de búsqueda
         $busqueda = isset($_GET['q']) ? trim(htmlspecialchars($_GET['q'])) : '';
 
         if (empty($busqueda)) {
@@ -31,7 +32,7 @@ class BuscarController {
         $productosEncontrados = Producto::buscarConFiltros($conexion, $busqueda, $filtroTipo, $precioMin, $precioMax, $orden);
         $totalResultados = count($productosEncontrados);
 
-        // Renderizar la vista
+        // Cargar la vista
         require_once 'views/resultadosBusqueda.php';
     }
 }

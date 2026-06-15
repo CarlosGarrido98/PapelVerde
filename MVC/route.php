@@ -75,7 +75,7 @@ switch ($method) {
 
             case '/mangas':
                 require_once 'controllers/MangasController.php';
-                LibrosController::mostrar();
+                MangasController::mostrar();
                 break;
 
             case '/comics':

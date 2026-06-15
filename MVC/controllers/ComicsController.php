@@ -5,6 +5,7 @@ require_once 'models/Producto.php';
 
 class ComicsController
 {
+    //Funcion para mostrar 
     public static function mostrar()
     {
         global $conexion;
@@ -13,6 +14,7 @@ class ComicsController
             $conexion
         );
 
+        //Cargamos la vista
         require 'views/TodoComics.php';
     }
 }

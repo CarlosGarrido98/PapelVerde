@@ -1,10 +1,11 @@
 <?php
-
+//Datos de la conexión con la BDD
 $host = "localhost";
 $user = "root";
 $password = "";
 $database = "papel_verde";
 
+// Crear la conexión con MySQL
 $conexion = mysqli_connect(
     $host,
     $user,
@@ -12,6 +13,7 @@ $conexion = mysqli_connect(
     $database
 );
 
+//  Verficar la conexión
 if (!$conexion) {
     die("Error de conexión: " . mysqli_connect_error());
 }

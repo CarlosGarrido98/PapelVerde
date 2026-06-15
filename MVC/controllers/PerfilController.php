@@ -2,23 +2,28 @@
 
 class PerfilController
 {
+    // Muestra el formulario de edición del perfil
     public static function editar()
     {
         require 'views/editPerfil.php';
     }
 
-    public static function mostrarFavoritos() {
+    // Muestra la lista de favoritos del usuario
+    public static function mostrarFavoritos()
+    {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        
+
         if (!isset($_SESSION['usuario'])) {
             header('Location: /login');
             exit;
         }
+
         require_once 'views/favoritos.php';
     }
-    
+
+    // Actualiza los datos del perfil del usuario
     public static function actualizar()
     {
         session_start();
@@ -34,10 +39,8 @@ class PerfilController
         $usuario->setTarjetaCredito($_POST['tarjetaCredito']);
         $usuario->setActivarNotificaciones(isset($_POST['activarNotificaciones']));
         $usuario->setRecibirRevistaDigital(isset($_POST['recibirRevistaDigital']));
-        
 
-
-        // FOTO
+        // Procesar la imagen de perfil
         if (!empty($_FILES['foto']['name'])) {
 
             $carpeta = "img/perfiles/";
@@ -56,13 +59,14 @@ class PerfilController
             $usuario->setImagenUrl($carpeta . $nombreArchivo);
         }
 
+        // Guardar cambios en la base de datos
         $modelo = new UsuarioModel();
         $modelo->actualizarUsuario($usuario);
 
+        // Actualizar la sesión con los nuevos datos
         $_SESSION['usuario'] = $usuario;
- 
-       
-         header("Location: /perfil");
+
+        header("Location: /perfil");
         exit;
     }
 }

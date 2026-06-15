@@ -1,11 +1,11 @@
 <?php
 
 class LoginController {
-    /**
-     * Procesa los datos enviados por el usuario (Petición POST)
-     */
+    
+//Función para procesar el Login 
     public static function procesarLogin() {
-        // 1. Iniciar la sesión si no está activa
+       
+    // 1. Iniciar la sesión si no está activa
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }

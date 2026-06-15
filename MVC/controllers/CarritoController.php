@@ -33,9 +33,10 @@ class CarritoController {
                 // Calculamos cuánto sumaría si le permitimos agregar este clic
                 $cantidadSolicitada = $cantidadActualEnCarrito + 1;
 
-                // ========================================================
+               
+
                 // VALIDACIÓN DE STOCK REAL
-                // ========================================================
+               
                 if ($cantidadSolicitada > $stockDisponible) {
                     // Si la nueva cantidad supera al stock, detenemos el proceso y avisamos al JS
                     header('Content-Type: application/json');
@@ -46,6 +47,7 @@ class CarritoController {
                     ]);
                     exit;
                 }
+
 
                 // 2. Si pasa la validación de stock, procedemos a guardar o sumar de forma normal
                 if (isset($_SESSION['carrito'][$id_libro])) {
@@ -64,9 +66,9 @@ class CarritoController {
                     $_SESSION['carrito'][$id_libro] = $producto;
                 }
 
-                // =================================================================
-                // 🟢 FUNCIONALIDAD EXTRA: GUARDA EN LA BBDD SI EL USUARIO ESTÁ LOGUEADO
-                // =================================================================
+               
+               // GUARDA EN LA BBDD SI EL USUARIO ESTÁ LOGUEADO
+                
                 if (isset($_SESSION['usuario']) && $_SESSION['usuario'] !== null) {
                     // Obtenemos el ID del usuario soportando tanto Objeto como Array
                     $usuarioId = is_object($_SESSION['usuario']) 
@@ -91,9 +93,10 @@ class CarritoController {
                         }
                     }
                 }
-                // =================================================================
+               
             }
         }
+
 
         // 3. Calculamos el total de productos acumulados para el diseño global
         $totalProductosReal = 0;
@@ -103,7 +106,7 @@ class CarritoController {
             }
         }
 
-        // 🟢 Sincronizamos los cambios en la base de datos
+        // Sincronizamos los cambios en la base de datos
         self::sincronizarConBaseDatos();
 
         header('Content-Type: application/json');
@@ -115,12 +118,13 @@ class CarritoController {
         exit;
     }
 
+    // Función para borrar Productos 
     public static function borrarProducto() {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
 
-        // 💡 AJUSTE 1: Traemos la conexión global aquí también para que sincronizarConBaseDatos() la tenga disponible
+        //   1: Traemos la conexión global aquí también para que sincronizarConBaseDatos() la tenga disponible
         global $conexion; 
 
         $id_libro = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
@@ -128,8 +132,10 @@ class CarritoController {
         $precio_total_item = 0;
         $eliminado_con_exito = false;
 
+
         if ($id_libro && isset($_SESSION['carrito']) && isset($_SESSION['carrito'][$id_libro])) {
-            // Usamos una copia normal para evitar conflictos de referencias en algunas versiones de PHP
+          
+        // Usamos una copia normal para evitar conflictos de referencias en algunas versiones de PHP
             $item = $_SESSION['carrito'][$id_libro]; 
 
             // Detectamos de forma segura cómo leer la cantidad y el precio base
@@ -184,18 +190,20 @@ class CarritoController {
         exit;
     }
 
+
+    //Funcion para borrar todo el carrito 
     public static function borrarCarrito(){
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
         
-        // 💡 AJUSTE 2: Traemos la conexión global aquí también para asegurar el vaciado total
+        //   Traemos la conexión global aquí también para asegurar el vaciado total
         global $conexion;
 
         // 1. Borramos el carrito
         $_SESSION['carrito'] = [];
         
-        // 🟢 Sincronizamos los cambios en la base de datos (esto limpiará la tabla del usuario)
+        // Sincronizamos los cambios en la base de datos (esto limpiará la tabla del usuario)
         self::sincronizarConBaseDatos();
 
         // 2. Avisamos que respondemos en JSON
@@ -218,7 +226,7 @@ class CarritoController {
 
         global $conexion;
         
-        // 🟢 SOLUCIÓN 1: Si 'global $conexion' viene vacío, intentamos incluir el archivo 
+        //   1: Si 'global $conexion' viene vacío, intentamos incluir el archivo 
         if (!isset($conexion) || $conexion === null) {
             require_once 'config/database.php';
         }

@@ -5,6 +5,7 @@ require_once 'models/Producto.php';
 
 class LibrosController
 {
+    //Función para mostrar los libros
     public static function mostrar()
     {
         global $conexion;
@@ -13,6 +14,7 @@ class LibrosController
             $conexion
         );
 
+        //Cargar la vista de los libros 
         require 'views/Todolibros.php';
     }
 }

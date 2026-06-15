@@ -3,8 +3,9 @@
 require_once 'config/database.php';
 require_once 'models/Producto.php';
 
-class LibrosController
+class MangasController
 {
+    // Funcion para 
     public static function mostrar()
     {
         global $conexion;
@@ -13,6 +14,7 @@ class LibrosController
             $conexion
         );
 
+        //Cargar la Vista de los Mangas 
         require 'views/TodoMangas.php';
     }
 }
