@@ -3,52 +3,52 @@ require_once 'models/Usuario.php';
 require_once 'config/database.php';
 
 class UsuarioModel {
-    /**
-     * Busca un usuario por email usando MySQLi Orientado a Objetos
-     */
-    public function buscarPorEmail(string $email): ?Usuario {
-        global $conexion;
-        // 1. Preparar la consulta (usamos el signo '?' como marcador de posición)
-        $stmt = mysqli_prepare($conexion, "SELECT * FROM usuarios WHERE email = ? LIMIT 1");
+    
+//Buscar el usuario por correo electronico 
+public function buscarPorEmail(string $email): ?Usuario {
+    
+    global $conexion;
+    // 1. Preparar la consulta (usamos el signo '?' como marcador de posición)
+    $stmt = mysqli_prepare($conexion, "SELECT * FROM usuarios WHERE email = ? LIMIT 1");
 
-        if (!$stmt) {
-            return null;
-        }
+    if (!$stmt) {
+        return null;
+    }
 
-        // 2. Vinculamos el parámetro
-        mysqli_stmt_bind_param($stmt, "s", $email);
+    // 2. Vinculamos el parámetro
+    mysqli_stmt_bind_param($stmt, "s", $email);
         
-        // 3. Ejecutamos
-        mysqli_stmt_execute($stmt);
+    // 3. Ejecutamos
+    mysqli_stmt_execute($stmt);
         
-        // 4. Obtenemos el resultado
-        $resultado = mysqli_stmt_get_result($stmt);
-        $datos = mysqli_fetch_assoc($resultado);
+    // 4. Obtenemos el resultado
+    $resultado = mysqli_stmt_get_result($stmt);
+    $datos = mysqli_fetch_assoc($resultado);
 
-        // 5. Cerramos el statement
-        mysqli_stmt_close($stmt);
+    // 5. Cerramos el statement
+    mysqli_stmt_close($stmt);
 
-        // Si el correo no existe en la base de datos
-        if (!$datos) {
-            return null;
-        }
+    // Si el correo no existe en la base de datos
+    if (!$datos) {
+        return null;
+    }
 
-        // 6. Retornamos tu clase Usuario con los datos inyectados
-        return new Usuario(
-            $datos['idUsuarios'],
-            $datos['nombre'],
-            $datos['email'],
-            $datos['contrasena'],
-            $datos['imagenURL'],
-            (bool)$datos['admin'],
+    // 6. Retornamos tu clase Usuario con los datos inyectados
+    return new Usuario(
+        $datos['idUsuarios'],
+        $datos['nombre'],
+        $datos['email'],
+        $datos['contrasena'],
+        $datos['imagenURL'],
+        (bool)$datos['admin'],
 
-            $datos['sexo'] ?? null,
-            $datos['fecha_nacimiento'] ?? null,
-            $datos['direccion'] ?? null,
-            $datos['pais'] ?? null,
-            $datos['tarjeta_credito'] ?? null,
-            false, // Por defecto no activamos las notificaciones
-            false  // Por defecto no suscribimos a la revista digital
+        $datos['sexo'] ?? null,
+        $datos['fecha_nacimiento'] ?? null,
+        $datos['direccion'] ?? null,
+        $datos['pais'] ?? null,
+        $datos['tarjeta_credito'] ?? null,
+        false, // Por defecto no activamos las notificaciones
+        false  // Por defecto no suscribimos a la revista digital
 
 
         );
@@ -56,8 +56,8 @@ class UsuarioModel {
 
 
 
-
-    public function actualizarUsuario(Usuario $usuario): bool
+// Función para actualizar un Usuario
+public function actualizarUsuario(Usuario $usuario): bool
     {
         global $conexion;
 
@@ -113,8 +113,10 @@ class UsuarioModel {
         return mysqli_stmt_execute($stmt);
     }
 
-        public static function obtenerTodos(mysqli $conexion)
-        {
+        
+// Funcion para obtnere todos los usuarios 
+public static function obtenerTodos(mysqli $conexion)
+    {
             $sql = "
                 SELECT
                     idUsuarios,
@@ -131,14 +133,15 @@ class UsuarioModel {
                 $conexion,
                 $sql
             );
-        }
+    }
     
 
-        public static function eliminarUsuario(
+// Función para borrar un usuario
+public static function eliminarUsuario(
             mysqli $conexion,
             int $id
         )
-        {
+    {
             $sql = "
                 DELETE FROM usuarios
                 WHERE idUsuarios = $id
@@ -148,5 +151,5 @@ class UsuarioModel {
                 $conexion,
                 $sql
             );
-        }
+    }
 }

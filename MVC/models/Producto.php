@@ -2,6 +2,7 @@
 
 class Producto{
 
+//Atributos 
 private $id_producto;
 private $nombre;
 private $precio;
@@ -10,6 +11,7 @@ private $tipo;
 private $imagen_url;
 private $sinopsis;
 
+//Constructor 
 public function __construct($id_producto, $nombre, $precio, $stock, $tipo, $imagen_url, $sinopsis) {
     $this->id_producto = $id_producto;
     $this->nombre = $nombre;
@@ -20,6 +22,7 @@ public function __construct($id_producto, $nombre, $precio, $stock, $tipo, $imag
     $this->sinopsis = $sinopsis;
 }
 
+// Getters
 public function getIdProducto() {
     return $this->id_producto; 
 }
@@ -47,6 +50,8 @@ public function getImagenUrl() {
 public function getSinopsis() {
     return $this->sinopsis;
 }
+
+// Setters 
 
 public function setIdProducto($id_producto) {
     $this->id_producto = $id_producto;
@@ -80,8 +85,8 @@ public function setSinopsis($sinopsis) {
 
 
 
-    // Método para obtener las ofertas (libros con id_producto 7 y 9)
-    public static function obtenerOfertas($conexion)
+// Método para obtener las ofertas (libros con id_producto 7 y 9)
+public static function obtenerOfertas($conexion)
     {
         $sql = "
             SELECT
@@ -117,6 +122,8 @@ public function setSinopsis($sinopsis) {
 
     return mysqli_query($conexion, $sql);
 }
+
+
 // Método para obtener los mangas para el carrusel
 public static function obtenerMangasCarrusel($conexion)
 {
@@ -134,6 +141,8 @@ public static function obtenerMangasCarrusel($conexion)
     return mysqli_query($conexion, $sql);   
 
 }
+
+
 // Método para obtener los cómics para el carrusel
 public static function obtenerComicsCarrusel($conexion)
 {
@@ -152,7 +161,7 @@ public static function obtenerComicsCarrusel($conexion)
 
 }
 
-
+// Recuperar el Producto por su Id 
 public static function agregarProducto($id, $conexion){
 
     $stmt = mysqli_prepare($conexion, "SELECT * FROM productos WHERE id_producto = ?");
@@ -167,6 +176,7 @@ public static function agregarProducto($id, $conexion){
 }
 
 
+// Coger toda la información del producto
 public static function obtenerProductoPorId($conexion, $id)
 {
     $stmt = mysqli_prepare(
@@ -215,8 +225,9 @@ public static function obtenerProductoPorId($conexion, $id)
 }
 
 
-    public static function obtenerTodos(mysqli $conexion)
-    {
+// Obtener todos los productos 
+public static function obtenerTodos(mysqli $conexion)
+{
         $sql = "
             SELECT *
             FROM productos
@@ -227,228 +238,230 @@ public static function obtenerProductoPorId($conexion, $id)
             $conexion,
             $sql
         );
-    }
+}
     
     
     
-    
-    public static function crearProducto(
-    mysqli $conexion,
-    array $datos
-    )
-    {
-    $nombre = $datos['nombre'];
-    $precio = $datos['precio'];
-    $stock = $datos['stock'];
-    $tipo = $datos['tipo'];
-    $sinopsis = $datos['sinopsis'];
 
-    // Imagen por defecto
-    $imagenUrl = '';
+// Funcion para crear un producto 
+public static function crearProducto(
+        mysqli $conexion,
+        array $datos
+        )
+{
+        $nombre = $datos['nombre'];
+        $precio = $datos['precio'];
+        $stock = $datos['stock'];
+        $tipo = $datos['tipo'];
+        $sinopsis = $datos['sinopsis'];
 
-    // SUBIR IMAGEN
+        // Imagen por defecto
+        $imagenUrl = '';
 
-    if (!empty($_FILES['imagen']['name']))
-    {
-        switch ($tipo)
+        // SUBIR IMAGEN
+
+        if (!empty($_FILES['imagen']['name']))
         {
-            case 'libro':
-                $carpeta = "img/Libros/";
-                break;
+            switch ($tipo)
+            {
+                case 'libro':
+                    $carpeta = "img/Libros/";
+                    break;
 
-            case 'comic':
-                $carpeta = "img/Comics/";
-                break;
+                case 'comic':
+                    $carpeta = "img/Comics/";
+                    break;
 
-            case 'manga':
-                $carpeta = "img/Mangas/";
-                break;
+                case 'manga':
+                    $carpeta = "img/Mangas/";
+                    break;
 
-            default:
-                $carpeta = "img/productos/";
-        }
+                default:
+                    $carpeta = "img/productos/";
+            }
 
-        if (!is_dir($carpeta))
-        {
-            mkdir($carpeta, 0777, true);
-        }
+            if (!is_dir($carpeta))
+            {
+                mkdir($carpeta, 0777, true);
+            }
 
-        $nombreArchivo =
-            time() . "_" .
-            basename($_FILES['imagen']['name']);
+            $nombreArchivo =
+                time() . "_" .
+                basename($_FILES['imagen']['name']);
 
-        move_uploaded_file(
-            $_FILES['imagen']['tmp_name'],
-            $carpeta . $nombreArchivo
-        );
+            move_uploaded_file(
+                $_FILES['imagen']['tmp_name'],
+                $carpeta . $nombreArchivo
+            );
 
-        $imagenUrl = $carpeta . $nombreArchivo;
+            $imagenUrl = $carpeta . $nombreArchivo;
     }
+
 
     // INSERT PRODUCTO
 
-    $sql = "
-        INSERT INTO productos
-        (
-            nombre,
-            precio,
-            stock,
-            tipo,
-            imagen_url,
-            sinopsis
-        )
-        VALUES
-        (
-            '$nombre',
-            '$precio',
-            '$stock',
-            '$tipo',
-            '$imagenUrl',
-            '$sinopsis'
-        )
-    ";
-
-    if (!mysqli_query($conexion, $sql))
-    {
-        die(
-            'Error al insertar producto: '
-            . mysqli_error($conexion)
-        );
-    }
-
-    $idProducto = mysqli_insert_id($conexion);
-
-    // LIBRO
-
-    if ($tipo == 'libro')
-    {
-        $sqlLibro = "
-            INSERT INTO libros
+        $sql = "
+            INSERT INTO productos
             (
-                id_producto,
-                autor,
-                editorial,
-                isbn,
-                num_paginas
+                nombre,
+                precio,
+                stock,
+                tipo,
+                imagen_url,
+                sinopsis
             )
             VALUES
             (
-                $idProducto,
-                '{$datos['autor_libro']}',
-                '{$datos['editorial_libro']}',
-                '{$datos['isbn_libro']}',
-                '{$datos['num_paginas']}'
+                '$nombre',
+                '$precio',
+                '$stock',
+                '$tipo',
+                '$imagenUrl',
+                '$sinopsis'
             )
-        ";
+    ";
 
-        mysqli_query($conexion, $sqlLibro);
+        if (!mysqli_query($conexion, $sql))
+        {
+            die(
+                'Error al insertar producto: '
+                . mysqli_error($conexion)
+            );
+        }
+
+    $idProducto = mysqli_insert_id($conexion);
+
+        // LIBRO
+
+        if ($tipo == 'libro')
+        {
+            $sqlLibro = "
+                INSERT INTO libros
+                (
+                    id_producto,
+                    autor,
+                    editorial,
+                    isbn,
+                    num_paginas
+                )
+                VALUES
+                (
+                    $idProducto,
+                    '{$datos['autor_libro']}',
+                    '{$datos['editorial_libro']}',
+                    '{$datos['isbn_libro']}',
+                    '{$datos['num_paginas']}'
+                )
+            ";
+
+            mysqli_query($conexion, $sqlLibro);
     }
 
     // COMIC
 
-    elseif ($tipo == 'comic')
-    {
-        $sqlComic = "
-            INSERT INTO comics
-            (
-                id_producto,
-                autor,
-                ilustrador,
-                editorial,
-                numero,
-                isbn
-            )
-            VALUES
-            (
-                $idProducto,
-                '{$datos['autor_comic']}',
-                '{$datos['ilustrador']}',
-                '{$datos['editorial_comic']}',
-                '{$datos['numero']}',
-                '{$datos['isbn_comic']}'
-            )
-        ";
+        elseif ($tipo == 'comic')
+        {
+            $sqlComic = "
+                INSERT INTO comics
+                (
+                    id_producto,
+                    autor,
+                    ilustrador,
+                    editorial,
+                    numero,
+                    isbn
+                )
+                VALUES
+                (
+                    $idProducto,
+                    '{$datos['autor_comic']}',
+                    '{$datos['ilustrador']}',
+                    '{$datos['editorial_comic']}',
+                    '{$datos['numero']}',
+                    '{$datos['isbn_comic']}'
+                )
+            ";
 
-        mysqli_query($conexion, $sqlComic);
-    }
+            mysqli_query($conexion, $sqlComic);
+        }
 
     // MANGA
 
-    elseif ($tipo == 'manga')
-    {
-        $sqlManga = "
-            INSERT INTO mangas
-            (
-                id_producto,
-                autor,
-                editorial,
-                volumen,
-                coleccion,
-                isbn
-            )
-            VALUES
-            (
-                $idProducto,
-                '{$datos['autor_manga']}',
-                '{$datos['editorial_manga']}',
-                '{$datos['volumen']}',
-                '{$datos['coleccion']}',
-                '{$datos['isbn_manga']}'
-            )
-        ";
+        elseif ($tipo == 'manga')
+        {
+            $sqlManga = "
+                INSERT INTO mangas
+                (
+                    id_producto,
+                    autor,
+                    editorial,
+                    volumen,
+                    coleccion,
+                    isbn
+                )
+                VALUES
+                (
+                    $idProducto,
+                    '{$datos['autor_manga']}',
+                    '{$datos['editorial_manga']}',
+                    '{$datos['volumen']}',
+                    '{$datos['coleccion']}',
+                    '{$datos['isbn_manga']}'
+                )
+            ";
 
-        mysqli_query($conexion, $sqlManga);
-    }
-
-    return true;
-    }
-
-    public static function eliminarProducto(
-    mysqli $conexion,
-    int $id
-    )
-    {
-            // Primero borramos tablas hijas
-
-            mysqli_query(
-                $conexion,
-                "DELETE FROM libros
-                WHERE id_producto = $id"
-            );
-
-            mysqli_query(
-                $conexion,
-                "DELETE FROM comics
-                WHERE id_producto = $id"
-            );
-
-            mysqli_query(
-                $conexion,
-                "DELETE FROM mangas
-                WHERE id_producto = $id"
-            );
-
-            // Después borramos el producto
-
-            mysqli_query(
-                $conexion,
-                "DELETE FROM productos
-                WHERE id_producto = $id"
-            );
-
-            return true;
+            mysqli_query($conexion, $sqlManga);
         }
 
+        return true;
+}
 
 
-    public static function actualizarProducto(
+// Función para eliminar un producto de la bdd
+public static function eliminarProducto(
+        mysqli $conexion,
+        int $id
+        )
+{
+                // Primero borramos tablas hijas
+
+                mysqli_query(
+                    $conexion,
+                    "DELETE FROM libros
+                    WHERE id_producto = $id"
+                );
+
+                mysqli_query(
+                    $conexion,
+                    "DELETE FROM comics
+                    WHERE id_producto = $id"
+                );
+
+                mysqli_query(
+                    $conexion,
+                    "DELETE FROM mangas
+                    WHERE id_producto = $id"
+                );
+
+                // Después borramos el producto
+
+                mysqli_query(
+                    $conexion,
+                    "DELETE FROM productos
+                    WHERE id_producto = $id"
+                );
+
+                return true;
+}
+
+
+
+
+public static function actualizarProducto(
     mysqli $conexion,
     array $datos
     )
-    {
-
-        
-
+{
             $id = $datos['id_producto'];
 
             $nombre = $datos['nombre'];
@@ -493,12 +506,12 @@ public static function obtenerProductoPorId($conexion, $id)
             }
 
             return true;
-        }
+}
 
 
-        // Metodo para Sacar todos los Libros
-        public static function obtenerLibros(mysqli $conexion)
-        {
+// Metodo para Sacar todos los Libros
+public static function obtenerLibros(mysqli $conexion)
+{
             $sql = "
                 SELECT
                     p.*,
@@ -540,8 +553,10 @@ public static function obtenerProductoPorId($conexion, $id)
             );
         }
 
-    public static function buscarConFiltros($conexion, $q, $tipo, $precioMin, $precioMax, $orden)
-        {
+
+// Funcion para buscar 
+public static function buscarConFiltros($conexion, $q, $tipo, $precioMin, $precioMax, $orden)
+{
             $sql = "
                 SELECT 
                     p.*,
@@ -615,10 +630,12 @@ public static function obtenerProductoPorId($conexion, $id)
             }
             
             return [];
-        }
+}
         
-        public static function obtenerComics(mysqli $conexion)
-        {
+
+// Función para Obtener los datos de los comics
+public static function obtenerComics(mysqli $conexion)
+{
             $sql = "
                 SELECT
                     p.*,
@@ -637,14 +654,5 @@ public static function obtenerProductoPorId($conexion, $id)
                 $conexion,
                 $sql
             );
-        }
-            
-            
-
-
-
-
-    }
-
-
-
+}
+}
