@@ -46,9 +46,9 @@ switch ($method) {
                 break;
 
             case '/producto':
-            require_once 'controllers/ProductoController.php';
-            ProductoController::mostrarProducto();
-            break;   
+                require_once 'controllers/ProductoController.php';
+                ProductoController::mostrarProducto();
+                break;   
 
             case '/formulario':
                 require_once 'views/formulario.php';
@@ -59,19 +59,19 @@ switch ($method) {
                 break;
 
             case '/about':
-                    require_once 'views/about.php';
-                    break;
+                require_once 'views/about.php';
+                break;
 
             case '/perfil':
-                    require_once 'views/perfil.php';
-                    break;
+                require_once 'views/perfil.php';
+                break;
 
             //Vistas de Los Productos 
 
             case '/libros':
-            require_once 'controllers/LibrosController.php';
-            LibrosController::mostrar();
-            break;
+                require_once 'controllers/LibrosController.php';
+                LibrosController::mostrar();
+                break;
 
             case '/mangas':
                 require_once 'controllers/MangasController.php';
@@ -199,18 +199,16 @@ switch ($method) {
                 AdminController::actualizarProducto();
                 break;
             
-             
-
-
             default:
             echo "Error, método no permitido";
             break;
             
         }
         
-         break;
+        break;
 
         default:
-            echo "Error, método no permitido";
-            break;
+        echo "Error, método no permitido";
+        break;
+
     }

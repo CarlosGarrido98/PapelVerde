@@ -1,4 +1,9 @@
+# Activar el motor de reescritura de URLs
 RewriteEngine On
+
+# Ignorar archivos y carpetas existentes
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirigir las peticiones al controlador principal
 RewriteRule ^ index.php [QSA,L]

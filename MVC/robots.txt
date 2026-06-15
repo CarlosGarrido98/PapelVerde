@@ -1,3 +1,4 @@
+# Configuración básica para motores de búsqueda
 User-agent: * 
 Allow: /
 Crawl-delay: 10

@@ -1,7 +1,5 @@
 
-
 <!-- FOOTER  -->
-
 <footer class="container-fluid p-2" style='background-image: url("img/imgPapelVerde/bg-footer.webp")' >
     <div class="row m-2 align-items-center">
 
@@ -63,7 +61,5 @@
         </div>
     </div> 
 
-</div>
-
-    
+</div>  
 </footer>
