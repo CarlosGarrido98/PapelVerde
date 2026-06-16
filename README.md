@@ -1,69 +1,22 @@
-````md
-<div align="center">
-
-<img src="SPRINTS/SPRINT_1/img/imgPapelVerde/Logotipo.png" alt="Papel Verde Logo" width="120">
-
-# 🌱 Papel Verde
-
-### Librería sostenible de libros reutilizados y publicaciones ecológicas
-
-<p>
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white" alt="HTML5">
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white" alt="CSS3">
-  <img src="https://img.shields.io/badge/JavaScript-ES6-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript">
-  <img src="https://img.shields.io/badge/PHP-8.4-777BB4?style=flat-square&logo=php&logoColor=white" alt="PHP">
-  <img src="https://img.shields.io/badge/MySQL-8-4479A1?style=flat-square&logo=mysql&logoColor=white" alt="MySQL">
-  <img src="https://img.shields.io/badge/Bootstrap-5-7952B3?style=flat-square&logo=bootstrap&logoColor=white" alt="Bootstrap">
+<p align="center">
+  <img src="SPRINTS/SPRINT_1/img/imgPapelVerde/Logotipo.png" alt="Papel Verde Logo" width="108">
 </p>
 
-</div>
+<p align="center">
+  <img src="https://img.shields.io/badge/HTML-5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML 5">
+  <img src="https://img.shields.io/badge/CSS-3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS 3">
+  <img src="https://img.shields.io/badge/JavaScript-ES6-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript ES6">
+  <img src="https://img.shields.io/badge/PHP-8.4-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.4">
+  <img src="https://img.shields.io/badge/MySQL-8-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL 8">
+  <img src="https://img.shields.io/badge/Bootstrap-5-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap 5">
+</p>
 
----
+<h1 align="center">Papel Verde - Libreria </h1>
 
-## 📖 Sobre el proyecto
+Papel Verde es una librería dedicada a la venta de libros de segunda mano y publicaciones elaboradas con materiales reciclados. Nuestro proyecto nace con el objetivo de fomentar un modelo de negocio ecosostenible, promoviendo la reutilización de recursos y el consumo responsable dentro del mundo de la lectura.
 
-**Papel Verde** es una librería centrada en la venta de libros de segunda mano y publicaciones elaboradas con materiales reciclados.
-
-El objetivo del proyecto es promover la economía circular y el consumo responsable, ofreciendo una alternativa sostenible para los amantes de la lectura mediante la reutilización de recursos y la reducción del impacto ambiental.
-
----
-
-##  Tecnologías utilizadas
-
-| Tecnología | Versión |
-|------------|----------|
-| HTML | 5 |
-| CSS | 3 |
-| JavaScript | ES6 |
-| PHP | 8.4 |
-| MySQL | 8 |
-| Bootstrap | 5 |
-
----
-
-## 📂 Estructura del proyecto
-
-```text
-📦 Papel-Verde
-├── 📖 DOCUMENTACION
-│   └── Manuales y documentación técnica
-├── 💻 MVC
-│   └── Código fuente de la aplicación
-├── 📊 PRESENTACION
-│   └── Presentación final del proyecto
-├── 🚀 SPRINTS
-│   └── Planificación y evidencias del desarrollo
-└── 📜 LICENSE
-    └── Licencia del proyecto
-````
-
----
-
-##  Objetivos
-
-* Fomentar la reutilización de libros.
-* Impulsar prácticas de consumo sostenible.
-* Reducir el desperdicio de recursos impresos.
-* Facilitar el acceso a la lectura a precios asequibles.
+## 🚀 Tecnologías utilizadas | Tecnología | Versión | |------------|----------| | HTML | 5 | | CSS | 3 | | JavaScript | ES6 | | PHP | 8.4 | | MySQL | 8 | | Bootstrap | 5 | 
 
 
+--- ## 📂 Estructura del proyecto ```text 
+📦 Papel-Verde ├── 📖 DOCUMENTACION │ └── Manuales y documentación técnica ├── 💻 MVC │ └── Código fuente de la aplicación ├── 📊 PRESENTACION │ └── Presentación final del proyecto ├── 🚀 SPRINTS │ └── Planificación y evidencias del desarrollo └── 📜 LICENSE └── Licencia del proyecto
