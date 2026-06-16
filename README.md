@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="SPRINT_1/img/imgPapelVerde/Logotipo.png" alt="Papel Verde Logo" width="108">
+  <img src="SPRINTS/SPRINT_1/img/imgPapelVerde/Logotipo.png" alt="Papel Verde Logo" width="108">
 </p>
 
 <p align="center">
@@ -15,18 +15,43 @@
 
 Papel Verde es una librería dedicada a la venta de libros de segunda mano y publicaciones elaboradas con materiales reciclados. Nuestro proyecto nace con el objetivo de fomentar un modelo de negocio ecosostenible, promoviendo la reutilización de recursos y el consumo responsable dentro del mundo de la lectura.
 
+<table align="center">
+<tr>
+<td>
 
-## 📑 Índice
+📖 **DOCUMENTACIÓN**  
+Documentación técnica y funcional del proyecto.
 
--  Documentación
-  - `DOCUMENTACIÓN/Documentación_PapelVerde.pdf`
+</td>
+<td>
 
-- Aplicación
-  - `MVC/` → Contiene el código fuente completo de la aplicación.
+💻 **MVC**  
+Contiene el código fuente completo de la aplicación.
 
--  Presentación
-  - `PRESENTACIÓN/Presentación Papel Verde.pdf`
+</td>
+</tr>
 
--  Sprints
-  - `SPRINTS/`
+<tr>
+<td>
 
+📊 **PRESENTACIÓN**  
+Presentación final del proyecto.
+
+</td>
+<td>
+
+🚀 **SPRINTS**  
+Evidencias y planificación del desarrollo ágil.
+
+</td>
+</tr>
+
+<tr>
+<td colspan="2" align="center">
+
+📜 **LICENSE**  
+Licencia del proyecto.
+
+</td>
+</tr>
+</table>
